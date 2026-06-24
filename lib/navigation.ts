@@ -57,12 +57,16 @@ const drawingCardMap: Record<string, DrawingTemplateId> = {
   "connect:easy": "connect-easy",
   "connect:hard": "connect-hard",
   "connect:learn": "connect-learn",
+  "connect:shape-draw": "shapes-learn",
+  "connect:number-draw": "num-tracing",
   "mazes:practice": "mazes-practice",
   "mazes:easy": "mazes-practice",
   "mazes:hard": "mazes-practice",
   "colors:matching": "square-trace",
   "colors:fill": "square-trace",
   "colors:pixel-art": "square-trace",
+  "colors:practice": "connect-practice",
+  "colors:learn": "connect-learn",
 };
 
 export function getScreenForCard(categoryId: CategoryId, cardId: string): ScreenTarget {

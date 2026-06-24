@@ -13,7 +13,7 @@ export function ExerciseGuide({ exercise }: ExerciseGuideProps) {
     <svg
       className="pointer-events-none absolute inset-0 h-full w-full"
       viewBox="0 0 1000 600"
-      preserveAspectRatio="xMidYMid meet"
+      preserveAspectRatio="none"
       aria-hidden
     >
       {exercise.guides.map((guide, i) => {

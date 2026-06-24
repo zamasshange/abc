@@ -20,12 +20,11 @@ export function ActivityCardItem({ card, categoryId, cardIndex, onSelect }: Acti
     <motion.button
       type="button"
       onClick={onSelect}
-      className="flex h-full min-w-0 flex-1 flex-col overflow-hidden"
+      className="flex h-full w-[22vw] min-w-[130px] max-w-[200px] shrink-0 flex-col overflow-hidden"
       style={{
         border: `9px solid ${border}`,
         borderRadius: "18px",
         boxShadow: "0 4px 0 rgba(0,0,0,0.14)",
-        maxWidth: "24%",
       }}
       initial={{ opacity: 0, y: 16, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -41,7 +40,7 @@ export function ActivityCardItem({ card, categoryId, cardIndex, onSelect }: Acti
         style={{ backgroundColor: footer, minHeight: "22%" }}
       >
         <span
-          className="px-1 text-center text-[clamp(10px,2.8vw,15px)] font-extrabold leading-tight text-white"
+          className="px-1 text-center text-[clamp(10px,2.5vw,14px)] font-extrabold leading-tight text-white"
           style={{
             textShadow: `2px 2px 0 ${textOutline}, -1px -1px 0 ${textOutline}`,
           }}

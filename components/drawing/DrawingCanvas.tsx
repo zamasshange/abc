@@ -22,15 +22,15 @@ export function DrawingCanvas({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawingRef = useRef(false);
   const lastPointRef = useRef<Point | null>(null);
+  const dprRef = useRef(1);
 
+  /** CSS-pixel coords — ctx transform already applies devicePixelRatio */
   const getPoint = useCallback((clientX: number, clientY: number): Point => {
     const canvas = canvasRef.current!;
     const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
     return {
-      x: (clientX - rect.left) * scaleX,
-      y: (clientY - rect.top) * scaleY,
+      x: clientX - rect.left,
+      y: clientY - rect.top,
     };
   }, []);
 
@@ -39,12 +39,13 @@ export function DrawingCanvas({
     if (!canvas) return;
     const parent = canvas.parentElement;
     if (!parent) return;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = window.devicePixelRatio || 1;
+    dprRef.current = dpr;
     const w = parent.clientWidth;
     const h = parent.clientHeight;
     if (w === 0 || h === 0) return;
-    canvas.width = Math.floor(w * dpr);
-    canvas.height = Math.floor(h * dpr);
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
     canvas.style.width = `${w}px`;
     canvas.style.height = `${h}px`;
     const ctx = canvas.getContext("2d");
@@ -69,12 +70,13 @@ export function DrawingCanvas({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || clearToken < 0) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    const dpr = canvas.width / (canvas.clientWidth || 1);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    const w = canvas.clientWidth;
+    const h = canvas.clientHeight;
+    ctx.setTransform(dprRef.current, 0, 0, dprRef.current, 0, 0);
+    ctx.clearRect(0, 0, w, h);
   }, [clearToken]);
 
   const paint = useCallback(
@@ -117,7 +119,6 @@ export function DrawingCanvas({
   const onPointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
     if (disabled) return;
     e.preventDefault();
-    e.stopPropagation();
     e.currentTarget.setPointerCapture(e.pointerId);
     drawingRef.current = true;
     const pt = getPoint(e.clientX, e.clientY);
@@ -147,8 +148,8 @@ export function DrawingCanvas({
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 z-20 cursor-crosshair touch-none"
-      style={{ touchAction: "none" }}
+      className={`absolute inset-0 z-20 touch-none ${disabled ? "pointer-events-none" : ""}`}
+      style={{ touchAction: "none", cursor: "crosshair" }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endStroke}

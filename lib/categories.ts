@@ -23,6 +23,8 @@ export const categories: CategoryConfig[] = [
       { id: "matching", title: "Matching", illustration: "colors-matching" },
       { id: "fill", title: "Fill", illustration: "colors-fill" },
       { id: "pixel-art", title: "Pixel Art", illustration: "colors-pixel" },
+      { id: "practice", title: "Practice", illustration: "connect-practice" },
+      { id: "learn", title: "Learn", illustration: "connect-learn" },
     ],
   },
   {
@@ -34,6 +36,8 @@ export const categories: CategoryConfig[] = [
       { id: "easy", title: "Easy", illustration: "connect-easy" },
       { id: "hard", title: "Hard", illustration: "connect-hard" },
       { id: "learn", title: "Learn to draw", illustration: "connect-learn" },
+      { id: "shape-draw", title: "Shape Draw", illustration: "shapes-learn" },
+      { id: "number-draw", title: "Number Draw", illustration: "num-tracing" },
     ],
   },
   {
