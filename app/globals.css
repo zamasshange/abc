@@ -21,8 +21,6 @@ body {
   width: 100%;
   overflow: hidden;
   overscroll-behavior: none;
-  margin: 0;
-  padding: 0;
 }
 
 body {
@@ -33,12 +31,9 @@ body {
 }
 
 .mobile-app-shell {
-  display: flex;
   height: 100dvh;
   width: 100vw;
-  align-items: stretch;
-  justify-content: stretch;
-  background: #000;
+  overflow: hidden;
 }
 
 .portrait-only-message {
@@ -55,19 +50,16 @@ body {
 }
 
 .mobile-viewport {
-  position: relative;
   height: 100dvh;
   width: 100vw;
   overflow: hidden;
-  background: #000;
 }
 
 @media (orientation: portrait) and (min-height: 501px) {
   .portrait-only-message {
     display: flex;
   }
-
-  .mobile-viewport {
+  .mobile-app-shell .mobile-viewport {
     display: none;
   }
 }
@@ -76,12 +68,15 @@ body {
   .portrait-only-message {
     display: none;
   }
-
-  .mobile-viewport {
-    display: block;
-  }
 }
 
-.object-fill {
-  object-fit: fill;
+.worksheets-bg {
+  background-color: #7adce8;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 16px,
+    rgba(70, 170, 195, 0.45) 16px,
+    rgba(70, 170, 195, 0.45) 20px
+  );
 }
