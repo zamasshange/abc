@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "extract-assets": "python scripts/extract_assets.py"
   },
   "dependencies": {
     "framer-motion": "^12.41.0",

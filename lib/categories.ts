@@ -85,10 +85,10 @@ export const categories: CategoryConfig[] = [
     label: "Shapes",
     row: "bottom",
     cards: [
-      { id: "learn", title: "Learn", illustration: "shapes-learn" },
       { id: "practice", title: "Practice", illustration: "shapes-practice" },
       { id: "drawings", title: "Drawings", illustration: "shapes-drawings" },
       { id: "worksheets", title: "Worksheets", illustration: "shapes-worksheets" },
+      { id: "learn", title: "Ditto", illustration: "shapes-learn" },
     ],
   },
 ];

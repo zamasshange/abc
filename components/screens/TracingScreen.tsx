@@ -5,7 +5,7 @@ import type { DrawingTemplateId } from "@/lib/navigation";
 import { getExerciseForTemplate } from "@/lib/drawing/exercises";
 import { DrawingCanvas } from "@/components/drawing/DrawingCanvas";
 import { ExerciseGuide } from "@/components/drawing/ExerciseGuide";
-import { LeftToolbar, RightToolbar, getSidebarColor } from "@/components/drawing/DrawingToolbars";
+import { LeftToolbar, RightToolbar } from "@/components/drawing/DrawingToolbars";
 import { ExitDialog } from "@/components/modals/ExitDialog";
 
 type TracingScreenProps = {
@@ -30,7 +30,6 @@ function NavArrow({ direction }: { direction: "left" | "right" }) {
 
 export function TracingScreen({ templateId, onBack }: TracingScreenProps) {
   const exercise = getExerciseForTemplate(templateId);
-  const sidebarColor = getSidebarColor(templateId);
   const [strokeColor, setStrokeColor] = useState("#F44336");
   const [isEraser, setIsEraser] = useState(false);
   const [clearToken, setClearToken] = useState(0);
@@ -49,7 +48,6 @@ export function TracingScreen({ templateId, onBack }: TracingScreenProps) {
   return (
     <div className="relative flex h-full w-full overflow-hidden bg-white">
       <LeftToolbar
-        sidebarColor={sidebarColor}
         isEraser={isEraser}
         onEraserToggle={handleEraserToggle}
         onPenSelect={handlePenSelect}
@@ -75,7 +73,6 @@ export function TracingScreen({ templateId, onBack }: TracingScreenProps) {
       </div>
 
       <RightToolbar
-        sidebarColor={sidebarColor}
         selectedColor={strokeColor}
         isEraser={isEraser}
         onColorSelect={handleColorSelect}

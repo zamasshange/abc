@@ -21,6 +21,8 @@ body {
   width: 100%;
   overflow: hidden;
   overscroll-behavior: none;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -57,7 +59,7 @@ body {
   height: 100dvh;
   width: 100vw;
   overflow: hidden;
-  background: #fff;
+  background: #000;
 }
 
 @media (orientation: portrait) and (min-height: 501px) {
@@ -80,13 +82,6 @@ body {
   }
 }
 
-.worksheets-bg {
-  background-color: #7adce8;
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 16px,
-    rgba(70, 170, 195, 0.45) 16px,
-    rgba(70, 170, 195, 0.45) 20px
-  );
+.object-fill {
+  object-fit: fill;
 }

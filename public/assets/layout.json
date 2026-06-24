@@ -1,0 +1,347 @@
+{
+  "aspect": "landscape",
+  "gameAspect": 2.2268041237113403,
+  "nav": {
+    "row1": {
+      "y": 0,
+      "h": 0.112,
+      "tabs": [
+        {
+          "id": "lang",
+          "x": 0,
+          "w": 0.118,
+          "action": "language"
+        },
+        {
+          "id": "colors",
+          "x": 0.118,
+          "w": 0.196
+        },
+        {
+          "id": "connect",
+          "x": 0.314,
+          "w": 0.196
+        },
+        {
+          "id": "mazes",
+          "x": 0.51,
+          "w": 0.196
+        },
+        {
+          "id": "shop",
+          "x": 0.882,
+          "w": 0.118,
+          "action": "shop"
+        }
+      ]
+    },
+    "row2": {
+      "y": 0.112,
+      "h": 0.103,
+      "tabs": [
+        {
+          "id": "lines",
+          "x": 0,
+          "w": 0.25
+        },
+        {
+          "id": "alphabets",
+          "x": 0.25,
+          "w": 0.25
+        },
+        {
+          "id": "numbers",
+          "x": 0.5,
+          "w": 0.25
+        },
+        {
+          "id": "shapes",
+          "x": 0.75,
+          "w": 0.25
+        }
+      ]
+    }
+  },
+  "categories": {
+    "lines": {
+      "category": "lines",
+      "t": 20,
+      "w": 864,
+      "h": 388,
+      "cards": [
+        {
+          "index": 0,
+          "x": 0.028,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/lines-0.jpg"
+        },
+        {
+          "index": 1,
+          "x": 0.255,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/lines-1.jpg"
+        },
+        {
+          "index": 2,
+          "x": 0.482,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/lines-2.jpg"
+        },
+        {
+          "index": 3,
+          "x": 0.709,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/lines-3.jpg"
+        }
+      ]
+    },
+    "alphabets": {
+      "category": "alphabets",
+      "t": 96,
+      "w": 864,
+      "h": 386,
+      "cards": [
+        {
+          "index": 0,
+          "x": 0.028,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/alphabets-0.jpg"
+        },
+        {
+          "index": 1,
+          "x": 0.255,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/alphabets-1.jpg"
+        },
+        {
+          "index": 2,
+          "x": 0.482,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/alphabets-2.jpg"
+        },
+        {
+          "index": 3,
+          "x": 0.709,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/alphabets-3.jpg"
+        }
+      ]
+    },
+    "numbers": {
+      "category": "numbers",
+      "t": 100,
+      "w": 864,
+      "h": 387,
+      "cards": [
+        {
+          "index": 0,
+          "x": 0.028,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/numbers-0.jpg"
+        },
+        {
+          "index": 1,
+          "x": 0.255,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/numbers-1.jpg"
+        },
+        {
+          "index": 2,
+          "x": 0.482,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/numbers-2.jpg"
+        },
+        {
+          "index": 3,
+          "x": 0.709,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/numbers-3.jpg"
+        }
+      ]
+    },
+    "shapes": {
+      "category": "shapes",
+      "t": 104,
+      "w": 864,
+      "h": 387,
+      "cards": [
+        {
+          "index": 0,
+          "x": 0.028,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/shapes-0.jpg"
+        },
+        {
+          "index": 1,
+          "x": 0.255,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/shapes-1.jpg"
+        },
+        {
+          "index": 2,
+          "x": 0.482,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/shapes-2.jpg"
+        },
+        {
+          "index": 3,
+          "x": 0.709,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/shapes-3.jpg"
+        }
+      ]
+    },
+    "mazes": {
+      "category": "mazes",
+      "t": 92,
+      "w": 864,
+      "h": 387,
+      "cards": [
+        {
+          "index": 0,
+          "x": 0.028,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/mazes-0.jpg"
+        },
+        {
+          "index": 1,
+          "x": 0.255,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/mazes-1.jpg"
+        },
+        {
+          "index": 2,
+          "x": 0.482,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/mazes-2.jpg"
+        },
+        {
+          "index": 3,
+          "x": 0.709,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/mazes-3.jpg"
+        }
+      ]
+    },
+    "connect": {
+      "category": "connect",
+      "t": 90,
+      "w": 864,
+      "h": 386,
+      "cards": [
+        {
+          "index": 0,
+          "x": 0.028,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/connect-0.jpg"
+        },
+        {
+          "index": 1,
+          "x": 0.255,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/connect-1.jpg"
+        },
+        {
+          "index": 2,
+          "x": 0.482,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/connect-2.jpg"
+        },
+        {
+          "index": 3,
+          "x": 0.709,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/connect-3.jpg"
+        }
+      ]
+    },
+    "colors": {
+      "category": "colors",
+      "t": 86,
+      "w": 864,
+      "h": 388,
+      "cards": [
+        {
+          "index": 0,
+          "x": 0.028,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/colors-0.jpg"
+        },
+        {
+          "index": 1,
+          "x": 0.255,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/colors-1.jpg"
+        },
+        {
+          "index": 2,
+          "x": 0.482,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/colors-2.jpg"
+        },
+        {
+          "index": 3,
+          "x": 0.709,
+          "y": 0.215,
+          "w": 0.228,
+          "h": 0.745,
+          "file": "/assets/cards/colors-3.jpg"
+        }
+      ]
+    }
+  }
+}
