@@ -115,7 +115,7 @@ export function TopNav({ activeId, onSelect, onLanguagePress }: TopNavProps) {
   const bottomTabs = categories.filter((c) => c.row === "bottom");
 
   return (
-    <div className="shrink-0">
+    <div className="shrink-0" style={{ backgroundColor: theme.navPurple }}>
       <div className="flex items-stretch">
         <UtilityButton bg={theme.langBtn} label="Language" onClick={onLanguagePress}>
           <span className="text-[10px] font-extrabold text-white sm:text-xs">EN</span>

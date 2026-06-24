@@ -1,10 +1,9 @@
 export const theme = {
-  navPurple: "#B87FE8",
-  langBtn: "#5BCFFF",
+  navPurple: "#C9A8E8",
+  langBtn: "#4FC3F7",
   shopBtn: "#3DDB6E",
   bottomBar: "#1E3A5F",
   toolbarRed: "#D32F2F",
-  toolbarOrange: "#F57C00",
 
   tabs: {
     colors: { bg: "#FFB366", contentBg: "#F5C4A8", textOutline: "#D97A2A" },
@@ -14,16 +13,6 @@ export const theme = {
     alphabets: { bg: "#66E0F5", contentBg: "#66E0F5", textOutline: "#2AAED4" },
     numbers: { bg: "#FFD633", contentBg: "#FFF59D", textOutline: "#D4A800" },
     shapes: { bg: "#FF9999", contentBg: "#F2949C", textOutline: "#D95555" },
-  },
-
-  cards: {
-    colors: { border: "#9C6ADE", footer: "#9C6ADE", textOutline: "#7A4ABE" },
-    connect: { border: "#FFCC33", footer: "#FFCC33", textOutline: "#E69500" },
-    mazes: { border: "#FF66AA", footer: "#FF66AA", textOutline: "#DD4499" },
-    lines: { border: "#FF44CC", footer: "#FF44CC", textOutline: "#DD22AA" },
-    alphabets: { border: "#C87858", footer: "#C87858", textOutline: "#A05838" },
-    numbers: { border: "#4FC3F7", footer: "#4FC3F7", textOutline: "#29A8E0" },
-    shapes: { border: "#66CC66", footer: "#66CC66", textOutline: "#44AA44" },
   },
 } as const;
 

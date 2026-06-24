@@ -5,14 +5,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import { SplashScreen } from "@/components/splash/SplashScreen";
 import { HomeScreen } from "@/components/home/HomeScreen";
 import { GalleryScreen } from "@/components/screens/GalleryScreen";
-import { TracingScreen } from "@/components/screens/TracingScreen";
-import { LetterTracingScreen } from "@/components/screens/LetterTracingScreen";
-import { MazeScreen } from "@/components/screens/MazeScreen";
-import { ConnectDotsScreen } from "@/components/screens/ConnectDotsScreen";
-import { LearnToDrawScreen } from "@/components/screens/LearnToDrawScreen";
-import { MatchingScreen } from "@/components/screens/MatchingScreen";
-import { PixelArtScreen } from "@/components/screens/PixelArtScreen";
-import { FreeDrawScreen } from "@/components/screens/FreeDrawScreen";
+import {
+  LineTracingScreen,
+  MazeActivityScreen,
+  LetterTracingScreen,
+  ConnectDotsScreen,
+  LearnToDrawScreen,
+  LetterMatchScreen,
+  MatchingActivityScreen,
+  FreeDrawScreen,
+  JigsawScreen,
+} from "@/components/screens/ActivityScreens";
+import { PixelArtGridScreen } from "@/components/screens/PixelArtScreen";
 import type { AppScreen, ActivityId, ScreenTarget } from "@/lib/navigation";
 import { getScreenForGalleryCard } from "@/lib/navigation";
 import type { GalleryId } from "@/lib/galleries";
@@ -37,12 +41,14 @@ export function AppShell() {
   }, []);
 
   const handleGalleryCard = useCallback(
-    (cardId: string) => {
-      const target = getScreenForGalleryCard(galleryId, cardId, lastCategory);
+    (cardIndex: number) => {
+      const target = getScreenForGalleryCard(galleryId, cardIndex, lastCategory);
       if (target) navigate(target);
     },
     [galleryId, lastCategory, navigate],
   );
+
+  const back = () => goHome(lastCategory);
 
   return (
     <div className="mobile-app-shell">
@@ -57,53 +63,63 @@ export function AppShell() {
             <SplashScreen key="splash" onComplete={() => setScreen("home")} />
           )}
           {screen === "home" && (
-            <motion.div key="home" className="h-full w-full" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
+            <motion.div key="home" className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <HomeScreen initialCategory={lastCategory} onNavigate={navigate} />
             </motion.div>
           )}
           {screen === "gallery" && (
-            <motion.div key={`gallery-${galleryId}`} className="h-full w-full" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+            <motion.div key={`gallery-${galleryId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <GalleryScreen galleryId={galleryId} onBack={() => goHome()} onSelectCard={handleGalleryCard} />
             </motion.div>
           )}
           {screen === "line-tracing" && (
-            <motion.div key={`line-${activityId}`} className="h-full w-full" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <TracingScreen templateId={activityId} onBack={() => goHome(lastCategory)} />
+            <motion.div key={`line-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <LineTracingScreen onBack={back} />
             </motion.div>
           )}
           {screen === "letter-tracing" && (
-            <motion.div key={`letter-${activityId}`} className="h-full w-full" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <LetterTracingScreen activityId={activityId} onBack={() => goHome(lastCategory)} />
+            <motion.div key={`letter-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <LetterTracingScreen onBack={back} />
             </motion.div>
           )}
           {screen === "maze" && (
-            <motion.div key={`maze-${activityId}`} className="h-full w-full" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <MazeScreen activityId={activityId} onBack={() => goHome(lastCategory)} />
+            <motion.div key={`maze-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <MazeActivityScreen onBack={back} />
             </motion.div>
           )}
           {screen === "connect-dots" && (
-            <motion.div key={`connect-${activityId}`} className="h-full w-full" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <ConnectDotsScreen activityId={activityId} onBack={() => goHome(lastCategory)} />
+            <motion.div key={`connect-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <ConnectDotsScreen onBack={back} />
             </motion.div>
           )}
           {screen === "learn-to-draw" && (
-            <motion.div key={`learn-${activityId}`} className="h-full w-full" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <LearnToDrawScreen activityId={activityId} onBack={() => goHome(lastCategory)} />
+            <motion.div key={`learn-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <LearnToDrawScreen onBack={back} />
+            </motion.div>
+          )}
+          {screen === "letter-match" && (
+            <motion.div key={`lmatch-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <LetterMatchScreen onBack={back} />
             </motion.div>
           )}
           {screen === "matching" && (
-            <motion.div key={`match-${activityId}`} className="h-full w-full" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <MatchingScreen activityId={activityId} onBack={() => goHome(lastCategory)} />
+            <motion.div key={`match-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <MatchingActivityScreen onBack={back} />
             </motion.div>
           )}
           {screen === "pixel-art" && (
-            <motion.div key={`pixel-${activityId}`} className="h-full w-full" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <PixelArtScreen activityId={activityId} onBack={() => goHome(lastCategory)} />
+            <motion.div key={`pixel-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <PixelArtGridScreen onBack={back} />
             </motion.div>
           )}
           {screen === "free-draw" && (
-            <motion.div key={`free-${activityId}`} className="h-full w-full" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <FreeDrawScreen activityId={activityId} onBack={() => goHome(lastCategory)} />
+            <motion.div key={`free-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <FreeDrawScreen onBack={back} />
+            </motion.div>
+          )}
+          {screen === "jigsaw" && (
+            <motion.div key={`jig-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <JigsawScreen onBack={back} />
             </motion.div>
           )}
         </AnimatePresence>
