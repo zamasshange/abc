@@ -20,30 +20,34 @@ export function ActivityCardItem({ card, categoryId, index, onSelect }: Activity
     <motion.button
       type="button"
       onClick={onSelect}
-      className="flex w-[23vw] min-w-[88px] max-w-[130px] shrink-0 flex-col overflow-hidden rounded-2xl sm:min-w-[105px] sm:max-w-[150px]"
-      style={{ border: `6px solid ${border}` }}
-      initial={{ opacity: 0, y: 20, scale: 0.9 }}
+      className="flex h-[min(72vh,340px)] w-[min(24vw,155px)] min-w-[100px] max-w-[170px] shrink-0 flex-col overflow-hidden"
+      style={{
+        border: `8px solid ${border}`,
+        borderRadius: "22px",
+        boxShadow: "0 3px 0 rgba(0,0,0,0.12)",
+      }}
+      initial={{ opacity: 0, y: 16, scale: 0.94 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{
         type: "spring",
         stiffness: 320,
         damping: 24,
-        delay: index * 0.07,
+        delay: index * 0.06,
       }}
-      whileTap={{ scale: 0.92 }}
+      whileTap={{ scale: 0.94 }}
       aria-label={card.title}
     >
-      <div className="flex aspect-[1.05] items-center justify-center bg-white p-1.5 sm:p-2">
+      <div className="flex flex-[3] items-center justify-center bg-white p-2 sm:p-2.5">
         <CardIllustration id={card.illustration} />
       </div>
       <div
-        className="flex min-h-[32px] items-center justify-center px-1 py-1.5 sm:min-h-[36px]"
+        className="flex flex-1 items-center justify-center px-1 py-1"
         style={{ backgroundColor: footer }}
       >
         <span
-          className="text-center text-[10px] font-extrabold leading-tight text-white sm:text-xs"
+          className="text-center text-[11px] font-extrabold leading-tight text-white sm:text-sm"
           style={{
-            textShadow: `1.5px 1.5px 0 ${textOutline}, -1px -1px 0 ${textOutline}`,
+            textShadow: `2px 2px 0 ${textOutline}, -1px -1px 0 ${textOutline}, 0 2px 0 ${textOutline}`,
           }}
         >
           {card.title}

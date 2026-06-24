@@ -14,15 +14,18 @@ type TopNavProps = {
 function OutlinedLabel({
   children,
   outlineColor,
+  size = "sm",
 }: {
   children: string;
   outlineColor: string;
+  size?: "sm" | "md";
 }) {
+  const textSize = size === "md" ? "text-sm sm:text-base" : "text-xs sm:text-sm";
   return (
     <span
-      className="text-[11px] font-extrabold leading-none text-white sm:text-sm"
+      className={`font-extrabold leading-none text-white ${textSize}`}
       style={{
-        textShadow: `1.5px 1.5px 0 ${outlineColor}, -1px -1px 0 ${outlineColor}, 1px -1px 0 ${outlineColor}, -1px 1px 0 ${outlineColor}`,
+        textShadow: `2px 2px 0 ${outlineColor}, -1px -1px 0 ${outlineColor}, 1px -1px 0 ${outlineColor}, -1px 1px 0 ${outlineColor}, 0 2px 0 ${outlineColor}`,
       }}
     >
       {children}
@@ -45,25 +48,31 @@ function CategoryTab({
 }) {
   const tab = theme.tabs[id];
   const darker = tab.textOutline;
+  const isBottomActive = row === "bottom" && isActive;
+  const isTopActive = row === "top" && isActive;
 
   return (
     <motion.button
       type="button"
       onClick={() => onSelect(id)}
-      className="relative flex flex-1 items-center justify-center gap-1 border-r border-black/10 px-0.5 py-1.5 last:border-r-0 sm:gap-1.5 sm:py-2"
+      className="relative flex flex-1 items-center justify-center gap-1.5 px-1 sm:gap-2 sm:px-2"
       style={{
         backgroundColor: tab.bg,
-        borderRadius: row === "top" ? "12px 12px 0 0" : isActive ? "0" : "0 0 0 0",
-        boxShadow: isActive ? "none" : `inset 0 -3px 0 ${darker}`,
-        marginBottom: isActive ? -1 : 0,
-        zIndex: isActive ? 10 : 1,
+        borderRadius: row === "top" ? "14px 14px 0 0" : "0",
+        boxShadow: isActive ? "none" : `inset 0 -4px 0 ${darker}`,
+        paddingTop: row === "top" ? (isTopActive ? "8px" : "6px") : isBottomActive ? "10px" : "7px",
+        paddingBottom: isBottomActive ? "14px" : row === "top" && isTopActive ? "8px" : row === "bottom" ? "8px" : "6px",
+        marginBottom: isBottomActive ? "-6px" : 0,
+        zIndex: isActive ? 20 : 1,
       }}
-      whileTap={{ scale: 0.96 }}
+      whileTap={{ scale: 0.97 }}
       transition={{ type: "spring", stiffness: 500, damping: 28 }}
       aria-pressed={isActive}
     >
-      <TabIcon id={id} className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
-      <OutlinedLabel outlineColor={darker}>{label}</OutlinedLabel>
+      <OutlinedLabel outlineColor={darker} size={row === "bottom" ? "md" : "sm"}>
+        {label}
+      </OutlinedLabel>
+      <TabIcon id={id} className="h-6 w-6 shrink-0 sm:h-7 sm:w-7" />
     </motion.button>
   );
 }
@@ -78,20 +87,22 @@ function UtilityButton({
   label: string;
 }) {
   return (
-    <motion.button
+    <button
       type="button"
-      whileTap={{ scale: 0.9 }}
-      className="flex w-[13%] min-w-[44px] max-w-[56px] shrink-0 items-center justify-center py-1.5"
+      className="flex w-[11%] min-w-[42px] max-w-[58px] shrink-0 items-center justify-center py-1"
       style={{ backgroundColor: theme.navPurple }}
       aria-label={label}
     >
       <div
         className="flex h-9 w-9 items-center justify-center rounded-full sm:h-10 sm:w-10"
-        style={{ backgroundColor: bg, boxShadow: "inset 0 -2px 0 rgba(0,0,0,0.15)" }}
+        style={{
+          backgroundColor: bg,
+          boxShadow: "inset 0 -3px 0 rgba(0,0,0,0.18), 0 1px 0 rgba(255,255,255,0.25)",
+        }}
       >
         {children}
       </div>
-    </motion.button>
+    </button>
   );
 }
 

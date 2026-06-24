@@ -11,11 +11,11 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
     case "colors-worksheets":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          <path d="M30 70 L50 30 L70 50 L90 25" fill="none" stroke={stroke} strokeWidth="2" />
-          <polygon points="50,30 55,20 60,30" fill={stroke} />
-          <circle cx="25" cy="25" r="4" fill="none" stroke={stroke} strokeWidth="1.5" />
-          <path d="M22 25 L28 25 M25 22 L25 28" stroke={stroke} strokeWidth="1" />
-          <circle cx="85" cy="35" r="3" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <path d="M25 75 L45 35 L65 50 L90 20" fill="none" stroke={stroke} strokeWidth="2.5" strokeLinejoin="round" />
+          <polygon points="45,35 50,22 58,32" fill={stroke} />
+          <path d="M18 22 L22 18 L26 22 L22 26 Z" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <circle cx="88" cy="28" r="4" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <path d="M86 28 L90 28 M88 26 L88 30" stroke={stroke} strokeWidth="1" />
         </svg>
       );
     case "colors-matching":
@@ -140,54 +140,76 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
     case "lines-dots":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          <ellipse cx="35" cy="55" rx="15" ry="20" fill="#fff" stroke={stroke} strokeWidth="2" />
-          <circle cx="30" cy="48" r="3" fill={stroke} />
-          <circle cx="40" cy="48" r="3" fill={stroke} />
-          <circle cx="70" cy="50" r="4" fill={stroke} />
-          <circle cx="100" cy="50" r="4" fill={stroke} />
-          <line x1="74" y1="50" x2="96" y2="50" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          {/* Penguin */}
+          <ellipse cx="32" cy="58" rx="14" ry="18" fill="#fff" stroke={stroke} strokeWidth="2" />
+          <ellipse cx="32" cy="52" rx="10" ry="12" fill="#fff" stroke={stroke} strokeWidth="1.5" />
+          <circle cx="28" cy="50" r="2.5" fill={stroke} />
+          <circle cx="36" cy="50" r="2.5" fill={stroke} />
+          <polygon points="28,38 32,28 36,38" fill={stroke} />
+          <rect x="26" y="36" width="12" height="4" rx="1" fill="#fff" stroke={stroke} strokeWidth="1" />
+          <ellipse cx="32" cy="56" rx="4" ry="3" fill="#FF8866" />
+          {/* Dotted line */}
+          <circle cx="68" cy="52" r="4" fill={stroke} />
+          <circle cx="102" cy="52" r="4" fill={stroke} />
+          <line x1="72" y1="52" x2="98" y2="52" stroke={stroke} strokeWidth="2.5" strokeDasharray={dash} />
         </svg>
       );
     case "lines-line":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          <path d="M25 70 L40 45 L55 55 L70 30" fill="none" stroke={stroke} strokeWidth="2" />
-          <line x1="40" y1="30" x2="40" y2="20" stroke={stroke} strokeWidth="2" />
-          <polygon points="40,15 35,22 45,22" fill="#FF5555" />
-          <circle cx="80" cy="65" r="4" fill={stroke} />
-          <circle cx="100" cy="35" r="4" fill={stroke} />
-          <line x1="80" y1="65" x2="100" y2="35" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          {/* Mountain */}
+          <path d="M18 72 L38 38 L52 55 L68 28 L82 72 Z" fill="none" stroke={stroke} strokeWidth="2" strokeLinejoin="round" />
+          <line x1="38" y1="38" x2="38" y2="28" stroke={stroke} strokeWidth="2" />
+          <polygon points="38,22 33,30 43,30" fill="#FF4444" />
+          {/* V-shaped dotted line */}
+          <circle cx="72" cy="68" r="4" fill={stroke} />
+          <circle cx="102" cy="68" r="4" fill={stroke} />
+          <path d="M72 68 L87 38 L102 68" fill="none" stroke={stroke} strokeWidth="2.5" strokeDasharray={dash} strokeLinejoin="round" />
         </svg>
       );
     case "lines-curve":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          <rect x="20" y="55" width="25" height="5" fill="none" stroke={stroke} strokeWidth="2" />
-          <line x1="25" y1="55" x2="25" y2="40" stroke={stroke} strokeWidth="2" />
-          <line x1="40" y1="55" x2="40" y2="40" stroke={stroke} strokeWidth="2" />
-          <path d="M25 40 Q32 30 40 40" fill="none" stroke={stroke} strokeWidth="2" />
-          <circle cx="70" cy="65" r="4" fill={stroke} />
-          <circle cx="100" cy="65" r="4" fill={stroke} />
-          <path d="M70 65 Q85 35 100 65" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          {/* Chair */}
+          <rect x="18" y="58" width="28" height="5" rx="1" fill="none" stroke={stroke} strokeWidth="2" />
+          <line x1="22" y1="58" x2="22" y2="40" stroke={stroke} strokeWidth="2" />
+          <line x1="42" y1="58" x2="42" y2="40" stroke={stroke} strokeWidth="2" />
+          <path d="M22 40 Q32 28 42 40" fill="none" stroke={stroke} strokeWidth="2" />
+          <line x1="22" y1="48" x2="42" y2="48" stroke={stroke} strokeWidth="1.5" />
+          {/* Arc dotted line */}
+          <circle cx="72" cy="68" r="4" fill={stroke} />
+          <circle cx="102" cy="68" r="4" fill={stroke} />
+          <path d="M72 68 Q87 32 102 68" fill="none" stroke={stroke} strokeWidth="2.5" strokeDasharray={dash} />
         </svg>
       );
     case "lines-practice":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          <ellipse cx="35" cy="60" rx="18" ry="14" fill="#fff" stroke={stroke} strokeWidth="2" />
-          <circle cx="30" cy="55" r="3" fill={stroke} />
-          <circle cx="40" cy="55" r="3" fill={stroke} />
-          <ellipse cx="85" cy="70" rx="12" ry="5" fill="none" stroke={stroke} strokeWidth="2" />
-          <circle cx="50" cy="55" r="3" fill={stroke} />
-          <line x1="53" y1="55" x2="80" y2="68" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          {/* Dog */}
+          <ellipse cx="30" cy="58" rx="16" ry="13" fill="#fff" stroke={stroke} strokeWidth="2" />
+          <circle cx="24" cy="52" r="3" fill={stroke} />
+          <circle cx="36" cy="52" r="3" fill={stroke} />
+          <ellipse cx="18" cy="48" rx="6" ry="8" fill="#fff" stroke={stroke} strokeWidth="1.5" />
+          <ellipse cx="42" cy="48" rx="6" ry="8" fill="#fff" stroke={stroke} strokeWidth="1.5" />
+          <path d="M26 62 Q30 66 34 62" fill="none" stroke={stroke} strokeWidth="1.5" />
+          {/* Bone */}
+          <ellipse cx="95" cy="72" rx="12" ry="5" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="85" cy="72" r="5" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="105" cy="72" r="5" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="50" cy="58" r="3.5" fill={stroke} />
+          <line x1="54" y1="58" x2="82" y2="70" stroke={stroke} strokeWidth="2.5" strokeDasharray={dash} />
         </svg>
       );
     case "alpha-trace-upper":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          {[30,45,60,75].map(y => <line key={y} x1="20" y1={y} x2="100" y2={y} stroke="#FFCCCC" strokeWidth="1" strokeDasharray="3 3" />)}
-          <text x="60" y="68" textAnchor="middle" fontSize="48" fontWeight="bold" fill="none" stroke={stroke} strokeWidth="2">A</text>
-          <path d="M48 68 L60 35 L72 68 M52 55 L68 55" fill="none" stroke="#FF3333" strokeWidth="2" strokeDasharray="3 2" />
+          <line x1="15" y1="28" x2="105" y2="28" stroke="#5599DD" strokeWidth="1.5" />
+          <line x1="15" y1="48" x2="105" y2="48" stroke="#FF8888" strokeWidth="1.5" strokeDasharray="4 3" />
+          <line x1="15" y1="68" x2="105" y2="68" stroke="#5599DD" strokeWidth="1.5" />
+          <text x="60" y="66" textAnchor="middle" fontSize="44" fontWeight="bold" fill="none" stroke={stroke} strokeWidth="2.5">A</text>
+          {[[48,66],[60,38],[72,66],[52,54],[68,54]].map(([cx,cy],i) => (
+            <circle key={i} cx={cx} cy={cy} r="2.5" fill="#FF3333" />
+          ))}
         </svg>
       );
     case "alpha-trace-lower":
@@ -216,9 +238,11 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
     case "num-tracing":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          {[25,40,55,70,85].map(y => <line key={y} x1="15" y1={y} x2="105" y2={y} stroke="#FFCCCC" strokeWidth="1" strokeDasharray="4 3" />)}
-          <text x="55" y="72" textAnchor="middle" fontSize="52" fontWeight="bold" fill="none" stroke={stroke} strokeWidth="2.5">1</text>
-          <line x1="55" y1="30" x2="55" y2="75" stroke="#FF3333" strokeWidth="3" strokeDasharray="4 3" />
+          {[22,36,50,64,78].map(y => <line key={y} x1="12" y1={y} x2="108" y2={y} stroke="#FFAAAA" strokeWidth="1" strokeDasharray="4 3" />)}
+          <text x="55" y="72" textAnchor="middle" fontSize="50" fontWeight="bold" fill="none" stroke={stroke} strokeWidth="3">1</text>
+          {[[55,28],[55,45],[55,62],[55,78]].map(([cx,cy],i) => (
+            <circle key={i} cx={cx} cy={cy} r="2.5" fill="#FF3333" />
+          ))}
         </svg>
       );
     case "num-counting":

@@ -8,13 +8,13 @@ export function TabIcon({ id, className = "h-7 w-7" }: TabIconProps) {
     case "colors":
       return (
         <svg viewBox="0 0 48 48" className={className} aria-hidden>
-          <ellipse cx="24" cy="28" rx="16" ry="12" fill="#E8C49A" stroke="#5C3D1E" strokeWidth="1.5" />
-          <circle cx="16" cy="26" r="4" fill="#FF5555" />
-          <circle cx="24" cy="22" r="4" fill="#55AAFF" />
-          <circle cx="32" cy="26" r="4" fill="#FFDD55" />
-          <circle cx="24" cy="32" r="4" fill="#FF99CC" />
-          <rect x="34" y="8" width="6" height="22" rx="2" fill="#E8C49A" stroke="#5C3D1E" strokeWidth="1.5" transform="rotate(25 37 19)" />
-          <ellipse cx="38" cy="6" rx="4" ry="3" fill="#FF5555" transform="rotate(25 38 6)" />
+          <ellipse cx="22" cy="28" rx="14" ry="11" fill="#fff" stroke="#5C3D1E" strokeWidth="1.5" />
+          <circle cx="15" cy="26" r="3.5" fill="#FF5555" />
+          <circle cx="22" cy="22" r="3.5" fill="#55AAFF" />
+          <circle cx="29" cy="26" r="3.5" fill="#FFDD55" />
+          <circle cx="22" cy="32" r="3.5" fill="#2DB84D" />
+          <rect x="32" y="8" width="5" height="20" rx="2" fill="#E8C49A" stroke="#5C3D1E" strokeWidth="1.5" transform="rotate(25 34.5 18)" />
+          <ellipse cx="36" cy="6" rx="3.5" ry="2.5" fill="#FF5555" transform="rotate(25 36 6)" />
         </svg>
       );
     case "connect":
