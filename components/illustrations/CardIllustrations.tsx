@@ -1,0 +1,286 @@
+type CardIllustrationProps = {
+  id: string;
+  className?: string;
+};
+
+export function CardIllustration({ id, className = "h-full w-full" }: CardIllustrationProps) {
+  const stroke = "#1a1a1a";
+  const dash = "4 3";
+
+  switch (id) {
+    case "colors-worksheets":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M30 70 L50 30 L70 50 L90 25" fill="none" stroke={stroke} strokeWidth="2" />
+          <polygon points="50,30 55,20 60,30" fill={stroke} />
+          <circle cx="25" cy="25" r="4" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <path d="M22 25 L28 25 M25 22 L25 28" stroke={stroke} strokeWidth="1" />
+          <circle cx="85" cy="35" r="3" fill="none" stroke={stroke} strokeWidth="1.5" />
+        </svg>
+      );
+    case "colors-matching":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <ellipse cx="45" cy="55" rx="22" ry="28" fill="#C68642" stroke={stroke} strokeWidth="2" />
+          <circle cx="38" cy="45" r="4" fill={stroke} />
+          <circle cx="52" cy="45" r="4" fill={stroke} />
+          <path d="M38 58 Q45 65 52 58" fill="none" stroke={stroke} strokeWidth="2" />
+          <ellipse cx="75" cy="55" rx="22" ry="28" fill="#fff" stroke={stroke} strokeWidth="2" />
+          <circle cx="68" cy="45" r="4" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="82" cy="45" r="4" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M68 58 Q75 65 82 58" fill="none" stroke={stroke} strokeWidth="2" />
+        </svg>
+      );
+    case "colors-fill":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M35 70 Q45 30 60 35 Q75 40 70 65 Q65 80 50 75 Z" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="48" cy="50" r="8" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <text x="45" y="53" fontSize="8" fill={stroke}>1</text>
+          <text x="58" y="48" fontSize="8" fill={stroke}>2</text>
+          <circle cx="95" cy="30" r="5" fill="#FF99CC" />
+          <text x="92" y="33" fontSize="7" fill="#fff">1</text>
+          <circle cx="95" cy="45" r="5" fill="#FF5599" />
+          <text x="92" y="48" fontSize="7" fill="#fff">2</text>
+          <circle cx="95" cy="60" r="5" fill="#99EEFF" />
+          <text x="92" y="63" fontSize="7" fill="#fff">3</text>
+        </svg>
+      );
+    case "colors-pixel":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          {Array.from({ length: 8 }).map((_, row) =>
+            Array.from({ length: 8 }).map((_, col) => {
+              const colors = ["#1a1a1a", "#fff", "#FF99CC", "#1a1a1a", "#fff", "#FF99CC", "#1a1a1a", "#fff"];
+              const c = colors[(row + col) % colors.length];
+              return <rect key={`${row}-${col}`} x={30 + col * 8} y={20 + row * 8} width="7" height="7" fill={c} stroke="#ccc" strokeWidth="0.3" />;
+            })
+          )}
+          <ellipse cx="54" cy="28" rx="6" ry="4" fill="#FF99CC" />
+        </svg>
+      );
+    case "connect-practice":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          {[[20,70],[35,55],[50,60],[65,45],[80,50],[95,35]].map(([x,y], i) => (
+            <g key={i}>
+              <circle cx={x} cy={y} r="3" fill={stroke} />
+              <text x={x-3} y={y-6} fontSize="7" fill={stroke}>{i+1}</text>
+            </g>
+          ))}
+          <path d="M20 70 L35 55 L50 60 L65 45 L80 50 L95 35" fill="none" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+          <rect x="15" y="72" width="30" height="12" rx="2" fill="none" stroke={stroke} strokeWidth="1.5" />
+        </svg>
+      );
+    case "connect-easy":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <circle cx="60" cy="50" r="25" fill="none" stroke={stroke} strokeWidth="2" />
+          {[[60,25],[75,35],[80,50],[75,65],[60,75],[45,65],[40,50],[45,35]].map(([x,y], i) => (
+            <g key={i}><circle cx={x} cy={y} r="3" fill={stroke} /><text x={x-3} y={y-5} fontSize="6" fill={stroke}>{i+1}</text></g>
+          ))}
+        </svg>
+      );
+    case "connect-hard":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <circle cx="60" cy="50" r="30" fill="none" stroke={stroke} strokeWidth="1.5" />
+          {Array.from({length:9}).map((_, i) => {
+            const a = (i/9)*Math.PI*2 - Math.PI/2;
+            const x = 60 + Math.cos(a)*30;
+            const y = 50 + Math.sin(a)*30;
+            return <g key={i}><circle cx={x} cy={y} r="2.5" fill={stroke} /><text x={x-3} y={y-5} fontSize="6" fill={stroke}>{i+1}</text></g>;
+          })}
+        </svg>
+      );
+    case "connect-learn":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M30 60 Q30 30 55 30 Q80 30 80 55 Q80 75 55 75 Q30 75 30 60" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M55 30 Q80 30 80 55" fill="none" stroke="#FF5555" strokeWidth="2" strokeDasharray={dash} />
+          <path d="M30 45 L45 35" stroke="#FF5555" strokeWidth="2" fill="none" />
+        </svg>
+      );
+    case "mazes-practice":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <circle cx="60" cy="50" r="35" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="60" cy="50" r="22" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <circle cx="60" cy="50" r="10" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <text x="57" y="53" fontSize="10">🥕</text>
+          <text x="22" y="78" fontSize="12">🐰</text>
+        </svg>
+      );
+    case "mazes-easy":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <polygon points="60,15 95,50 80,85 40,85 25,50" fill="none" stroke={stroke} strokeWidth="2" />
+          <polygon points="60,30 80,50 70,70 50,70 40,50" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <text x="57" y="53" fontSize="10">🌸</text>
+          <text x="18" y="55" fontSize="12">🐝</text>
+        </svg>
+      );
+    case "mazes-hard":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M60 20 C85 20 95 40 90 55 C85 75 60 85 40 75 C20 65 25 35 45 25 C50 22 55 20 60 20 Z" fill="none" stroke={stroke} strokeWidth="2" />
+          <text x="55" y="50" fontSize="10">🍎</text>
+          <text x="20" y="70" fontSize="12">🐌</text>
+        </svg>
+      );
+    case "mazes-worksheets":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <rect x="25" y="20" width="70" height="60" fill="none" stroke={stroke} strokeWidth="2" />
+          <polygon points="35,35 45,50 35,65" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <rect x="55" y="35" width="15" height="15" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <text x="28" y="30" fontSize="10">🦀</text>
+        </svg>
+      );
+    case "lines-dots":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <ellipse cx="35" cy="55" rx="15" ry="20" fill="#fff" stroke={stroke} strokeWidth="2" />
+          <circle cx="30" cy="48" r="3" fill={stroke} />
+          <circle cx="40" cy="48" r="3" fill={stroke} />
+          <circle cx="70" cy="50" r="4" fill={stroke} />
+          <circle cx="100" cy="50" r="4" fill={stroke} />
+          <line x1="74" y1="50" x2="96" y2="50" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+        </svg>
+      );
+    case "lines-line":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M25 70 L40 45 L55 55 L70 30" fill="none" stroke={stroke} strokeWidth="2" />
+          <line x1="40" y1="30" x2="40" y2="20" stroke={stroke} strokeWidth="2" />
+          <polygon points="40,15 35,22 45,22" fill="#FF5555" />
+          <circle cx="80" cy="65" r="4" fill={stroke} />
+          <circle cx="100" cy="35" r="4" fill={stroke} />
+          <line x1="80" y1="65" x2="100" y2="35" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+        </svg>
+      );
+    case "lines-curve":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <rect x="20" y="55" width="25" height="5" fill="none" stroke={stroke} strokeWidth="2" />
+          <line x1="25" y1="55" x2="25" y2="40" stroke={stroke} strokeWidth="2" />
+          <line x1="40" y1="55" x2="40" y2="40" stroke={stroke} strokeWidth="2" />
+          <path d="M25 40 Q32 30 40 40" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="70" cy="65" r="4" fill={stroke} />
+          <circle cx="100" cy="65" r="4" fill={stroke} />
+          <path d="M70 65 Q85 35 100 65" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+        </svg>
+      );
+    case "lines-practice":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <ellipse cx="35" cy="60" rx="18" ry="14" fill="#fff" stroke={stroke} strokeWidth="2" />
+          <circle cx="30" cy="55" r="3" fill={stroke} />
+          <circle cx="40" cy="55" r="3" fill={stroke} />
+          <ellipse cx="85" cy="70" rx="12" ry="5" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="50" cy="55" r="3" fill={stroke} />
+          <line x1="53" y1="55" x2="80" y2="68" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+        </svg>
+      );
+    case "alpha-trace-upper":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          {[30,45,60,75].map(y => <line key={y} x1="20" y1={y} x2="100" y2={y} stroke="#FFCCCC" strokeWidth="1" strokeDasharray="3 3" />)}
+          <text x="60" y="68" textAnchor="middle" fontSize="48" fontWeight="bold" fill="none" stroke={stroke} strokeWidth="2">A</text>
+          <path d="M48 68 L60 35 L72 68 M52 55 L68 55" fill="none" stroke="#FF3333" strokeWidth="2" strokeDasharray="3 2" />
+        </svg>
+      );
+    case "alpha-trace-lower":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          {[30,45,60,75].map(y => <line key={y} x1="20" y1={y} x2="100" y2={y} stroke="#FFCCCC" strokeWidth="1" strokeDasharray="3 3" />)}
+          <text x="60" y="72" textAnchor="middle" fontSize="48" fontWeight="bold" fill="none" stroke={stroke} strokeWidth="2">a</text>
+          <circle cx="60" cy="55" r="18" fill="none" stroke="#FF3333" strokeWidth="2" strokeDasharray="3 2" />
+        </svg>
+      );
+    case "alpha-upper":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="35" y="68" textAnchor="middle" fontSize="48" fontWeight="bold" fill={stroke}>A</text>
+          <circle cx="80" cy="55" r="14" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M80 42 Q80 35 80 42" fill="none" stroke="#2DB84D" strokeWidth="2" />
+        </svg>
+      );
+    case "alpha-lower":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="35" y="72" textAnchor="middle" fontSize="48" fontWeight="bold" fill={stroke}>a</text>
+          <circle cx="80" cy="55" r="14" fill="none" stroke={stroke} strokeWidth="2" />
+        </svg>
+      );
+    case "num-tracing":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          {[25,40,55,70,85].map(y => <line key={y} x1="15" y1={y} x2="105" y2={y} stroke="#FFCCCC" strokeWidth="1" strokeDasharray="4 3" />)}
+          <text x="55" y="72" textAnchor="middle" fontSize="52" fontWeight="bold" fill="none" stroke={stroke} strokeWidth="2.5">1</text>
+          <line x1="55" y1="30" x2="55" y2="75" stroke="#FF3333" strokeWidth="3" strokeDasharray="4 3" />
+        </svg>
+      );
+    case "num-counting":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="30" y="68" textAnchor="middle" fontSize="52" fontWeight="bold" fill={stroke}>2</text>
+          <circle cx="75" cy="50" r="8" fill="none" stroke={stroke} strokeWidth="2" />
+          <line x1="75" y1="42" x2="75" y2="35" stroke={stroke} strokeWidth="2" />
+          <circle cx="90" cy="55" r="8" fill="none" stroke={stroke} strokeWidth="2" />
+          <line x1="90" y1="47" x2="90" y2="40" stroke={stroke} strokeWidth="2" />
+        </svg>
+      );
+    case "num-practice":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <rect x="15" y="25" width="40" height="50" fill="none" stroke="#999" strokeWidth="2" strokeDasharray={dash} />
+          <text x="35" y="65" textAnchor="middle" fontSize="40" fill="none" stroke="#999" strokeWidth="2" strokeDasharray={dash}>4</text>
+          {[0,1,2,3].map(i => (
+            <path key={i} d={`M${65+i*12} 70 Q${68+i*12} 50 ${71+i*12} 70`} fill="none" stroke={stroke} strokeWidth="1.5" />
+          ))}
+        </svg>
+      );
+    case "num-spelling":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="25" y="60" fontSize="36" fill="#999" fontWeight="bold">1</text>
+          <text x="50" y="62" fontSize="28" fill="none" stroke="#999" strokeWidth="2" strokeDasharray={dash}>one</text>
+        </svg>
+      );
+    case "shapes-learn":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <circle cx="40" cy="45" r="18" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          <polygon points="80,25 95,65 65,65" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+        </svg>
+      );
+    case "shapes-practice":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <polygon points="40,30 55,65 25,65" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          <polygon points="80,35 95,55 80,75 65,55" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+        </svg>
+      );
+    case "shapes-drawings":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M30 70 L50 50 L70 55 L90 40" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          <path d="M25 75 Q40 65 55 75 T85 75" fill="none" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+          <circle cx="75" cy="25" r="8" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+        </svg>
+      );
+    case "shapes-worksheets":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <rect x="40" y="25" width="40" height="50" rx="5" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M48 40 Q55 35 62 40" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <circle cx="52" cy="48" r="2" fill={stroke} />
+          <circle cx="68" cy="48" r="2" fill={stroke} />
+          <path d="M52 55 Q60 62 68 55" fill="none" stroke={stroke} strokeWidth="1.5" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
