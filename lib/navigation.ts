@@ -1,6 +1,19 @@
 import type { CategoryId } from "./theme";
+import type { GalleryId } from "./galleries";
+import { getGallery } from "./galleries";
 
-export type AppScreen = "splash" | "home" | "worksheets" | "tracing";
+export type AppScreen =
+  | "splash"
+  | "home"
+  | "gallery"
+  | "line-tracing"
+  | "letter-tracing"
+  | "maze"
+  | "connect-dots"
+  | "learn-to-draw"
+  | "matching"
+  | "pixel-art"
+  | "free-draw";
 
 export type DrawingTemplateId =
   | "lines-dots"
@@ -23,56 +36,116 @@ export type DrawingTemplateId =
   | "connect-hard"
   | "connect-learn"
   | "mazes-practice"
-  | "square-trace";
+  | "mazes-easy"
+  | "mazes-hard"
+  | "mazes-numbers"
+  | "mazes-match"
+  | "mazes-shapes"
+  | "pixel-orange"
+  | "pixel-tree"
+  | "pixel-whale"
+  | "colors-pair"
+  | "colors-create"
+  | "colors-how-to-draw";
+
+export type ActivityId = DrawingTemplateId;
 
 export type ScreenTarget = {
   screen: AppScreen;
   categoryId?: CategoryId;
-  templateId?: DrawingTemplateId;
+  activityId?: ActivityId;
+  galleryId?: GalleryId;
 };
 
-const worksheetsCards = new Set([
-  "colors:worksheets",
-  "mazes:worksheets",
-  "shapes:worksheets",
-]);
+type CardRoute = ScreenTarget;
 
-const drawingCardMap: Record<string, DrawingTemplateId> = {
-  "lines:dots": "lines-dots",
-  "lines:line": "lines-line",
-  "lines:curve": "lines-curve",
-  "lines:practice": "lines-practice",
-  "alphabets:trace-upper": "alpha-trace-upper",
-  "alphabets:trace-lower": "alpha-trace-lower",
-  "alphabets:uppercase": "alpha-upper",
-  "alphabets:lowercase": "alpha-lower",
-  "numbers:tracing": "num-tracing",
-  "numbers:counting": "num-counting",
-  "numbers:practice": "num-practice",
-  "numbers:spelling": "num-spelling",
-  "shapes:learn": "shapes-learn",
-  "shapes:practice": "shapes-practice",
-  "shapes:drawings": "shapes-drawings",
-  "connect:practice": "connect-practice",
-  "connect:easy": "connect-easy",
-  "connect:hard": "connect-hard",
-  "connect:learn": "connect-learn",
-  "connect:shape-draw": "shapes-learn",
-  "connect:number-draw": "num-tracing",
-  "mazes:practice": "mazes-practice",
-  "mazes:easy": "mazes-practice",
-  "mazes:hard": "mazes-practice",
-  "colors:matching": "square-trace",
-  "colors:fill": "square-trace",
-  "colors:pixel-art": "square-trace",
-  "colors:practice": "connect-practice",
-  "colors:learn": "connect-learn",
+const cardRoutes: Record<string, CardRoute> = {
+  // Lines — gallery then line tracing
+  "lines:dots": { screen: "line-tracing", activityId: "lines-dots", categoryId: "lines" },
+  "lines:line": { screen: "line-tracing", activityId: "lines-line", categoryId: "lines" },
+  "lines:curve": { screen: "line-tracing", activityId: "lines-curve", categoryId: "lines" },
+  "lines:practice": { screen: "line-tracing", activityId: "lines-practice", categoryId: "lines" },
+  "lines:worksheets": { screen: "gallery", galleryId: "lines-worksheets", categoryId: "lines" },
+
+  // Alphabets — letter tracing on lined paper
+  "alphabets:trace-upper": { screen: "letter-tracing", activityId: "alpha-trace-upper", categoryId: "alphabets" },
+  "alphabets:trace-lower": { screen: "letter-tracing", activityId: "alpha-trace-lower", categoryId: "alphabets" },
+  "alphabets:uppercase": { screen: "gallery", galleryId: "alphabet-worksheets", categoryId: "alphabets" },
+  "alphabets:lowercase": { screen: "letter-tracing", activityId: "alpha-trace-lower", categoryId: "alphabets" },
+
+  // Numbers
+  "numbers:tracing": { screen: "letter-tracing", activityId: "num-tracing", categoryId: "numbers" },
+  "numbers:counting": { screen: "matching", activityId: "num-counting", categoryId: "numbers" },
+  "numbers:practice": { screen: "line-tracing", activityId: "num-practice", categoryId: "numbers" },
+  "numbers:spelling": { screen: "letter-tracing", activityId: "num-spelling", categoryId: "numbers" },
+
+  // Shapes
+  "shapes:learn": { screen: "learn-to-draw", activityId: "shapes-learn", categoryId: "shapes" },
+  "shapes:practice": { screen: "free-draw", activityId: "shapes-practice", categoryId: "shapes" },
+  "shapes:drawings": { screen: "free-draw", activityId: "shapes-drawings", categoryId: "shapes" },
+  "shapes:worksheets": { screen: "gallery", galleryId: "shapes-worksheets", categoryId: "shapes" },
+
+  // Connect
+  "connect:practice": { screen: "gallery", galleryId: "connect-worksheets", categoryId: "connect" },
+  "connect:easy": { screen: "connect-dots", activityId: "connect-easy", categoryId: "connect" },
+  "connect:hard": { screen: "connect-dots", activityId: "connect-hard", categoryId: "connect" },
+  "connect:learn": { screen: "learn-to-draw", activityId: "connect-learn", categoryId: "connect" },
+  "connect:shape-draw": { screen: "learn-to-draw", activityId: "shapes-learn", categoryId: "connect" },
+  "connect:number-draw": { screen: "letter-tracing", activityId: "num-tracing", categoryId: "connect" },
+
+  // Mazes — each card is a different maze theme
+  "mazes:worksheets": { screen: "gallery", galleryId: "mazes-worksheets", categoryId: "mazes" },
+  "mazes:numbers": { screen: "maze", activityId: "mazes-numbers", categoryId: "mazes" },
+  "mazes:match": { screen: "maze", activityId: "mazes-match", categoryId: "mazes" },
+  "mazes:shapes": { screen: "maze", activityId: "mazes-shapes", categoryId: "mazes" },
+  "mazes:practice": { screen: "maze", activityId: "mazes-practice", categoryId: "mazes" },
+  "mazes:easy": { screen: "maze", activityId: "mazes-easy", categoryId: "mazes" },
+  "mazes:hard": { screen: "maze", activityId: "mazes-hard", categoryId: "mazes" },
+
+  // Colors — each activity has its own screen type
+  "colors:worksheets": { screen: "gallery", galleryId: "printables", categoryId: "colors" },
+  "colors:pixel-art": { screen: "gallery", galleryId: "pixel-art-pick", categoryId: "colors" },
+  "colors:how-to-draw": { screen: "learn-to-draw", activityId: "colors-how-to-draw", categoryId: "colors" },
+  "colors:create": { screen: "free-draw", activityId: "colors-create", categoryId: "colors" },
+  "colors:pair": { screen: "matching", activityId: "colors-pair", categoryId: "colors" },
+  "colors:matching": { screen: "matching", activityId: "colors-pair", categoryId: "colors" },
+  "colors:fill": { screen: "pixel-art", activityId: "pixel-orange", categoryId: "colors" },
+  "colors:practice": { screen: "gallery", galleryId: "connect-worksheets", categoryId: "colors" },
+  "colors:learn": { screen: "learn-to-draw", activityId: "connect-learn", categoryId: "colors" },
 };
 
 export function getScreenForCard(categoryId: CategoryId, cardId: string): ScreenTarget {
   const key = `${categoryId}:${cardId}`;
-  if (worksheetsCards.has(key)) return { screen: "worksheets", categoryId };
-  const templateId = drawingCardMap[key];
-  if (templateId) return { screen: "tracing", categoryId, templateId };
-  return { screen: "home", categoryId };
+  return cardRoutes[key] ?? { screen: "home", categoryId };
+}
+
+export function getScreenForGalleryCard(
+  galleryId: GalleryId,
+  cardId: string,
+  categoryId: CategoryId,
+): ScreenTarget | null {
+  const gallery = getGallery(galleryId);
+  const card = gallery.cards.find((c) => c.id === cardId);
+  if (!card?.activityId) return null;
+
+  const activityId = card.activityId as ActivityId;
+  if (galleryId === "connect-worksheets" || galleryId === "printables") {
+    return { screen: "connect-dots", activityId, categoryId };
+  }
+  if (galleryId === "pixel-art-pick") {
+    return { screen: "pixel-art", activityId, categoryId };
+  }
+  if (galleryId === "mazes-worksheets") {
+    return { screen: "maze", activityId, categoryId };
+  }
+  if (galleryId === "alphabet-worksheets") {
+    return { screen: "letter-tracing", activityId, categoryId };
+  }
+  if (galleryId === "shapes-worksheets" && !card.locked) {
+    return { screen: "learn-to-draw", activityId, categoryId };
+  }
+  if (galleryId === "lines-worksheets") {
+    return { screen: "line-tracing", activityId, categoryId };
+  }
+  return null;
 }

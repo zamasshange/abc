@@ -6,14 +6,14 @@ import type { CategoryId } from "@/lib/theme";
 import { theme } from "@/lib/theme";
 import { getCategory } from "@/lib/categories";
 import { getScreenForCard } from "@/lib/navigation";
-import type { AppScreen, DrawingTemplateId } from "@/lib/navigation";
+import type { ScreenTarget } from "@/lib/navigation";
 import { TopNav } from "./TopNav";
 import { ActivityCardItem } from "./ActivityCard";
 import { LanguageDialog } from "@/components/modals/LanguageDialog";
 
 type HomeScreenProps = {
   initialCategory?: CategoryId;
-  onNavigate: (screen: AppScreen, categoryId?: CategoryId, templateId?: DrawingTemplateId) => void;
+  onNavigate: (target: ScreenTarget) => void;
 };
 
 export function HomeScreen({ initialCategory = "lines", onNavigate }: HomeScreenProps) {
@@ -53,9 +53,7 @@ export function HomeScreen({ initialCategory = "lines", onNavigate }: HomeScreen
                   cardIndex={index}
                   onSelect={() => {
                     const target = getScreenForCard(activeId, card.id);
-                    if (target.screen !== "home" && target.categoryId) {
-                      onNavigate(target.screen, target.categoryId, target.templateId);
-                    }
+                    if (target.screen !== "home") onNavigate(target);
                   }}
                 />
               ))}
