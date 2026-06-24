@@ -13,22 +13,31 @@ function ToolbarButton({
   children,
   label,
   wide,
+  selected,
   onClick,
 }: {
   bg: string;
   children: React.ReactNode;
   label: string;
   wide?: boolean;
+  selected?: boolean;
   onClick?: () => void;
 }) {
   return (
     <motion.button
       type="button"
       onClick={onClick}
-      whileTap={{ scale: 0.92 }}
-      className={`flex items-center justify-center border-[3px] border-white ${wide ? "h-11 w-16 rounded-xl sm:h-12 sm:w-20" : "h-10 w-10 rounded-full sm:h-11 sm:w-11"}`}
-      style={{ backgroundColor: bg, boxShadow: "0 3px 0 rgba(0,0,0,0.2)" }}
+      whileTap={{ scale: 0.9 }}
+      className={`flex items-center justify-center border-[3px] ${wide ? "h-11 w-[4.5rem] rounded-xl sm:h-12 sm:w-20" : "h-10 w-10 rounded-full sm:h-11 sm:w-11"}`}
+      style={{
+        backgroundColor: bg,
+        borderColor: selected ? "#fff" : "rgba(255,255,255,0.85)",
+        boxShadow: selected
+          ? "0 0 0 2px rgba(0,0,0,0.15), 0 4px 0 rgba(0,0,0,0.25)"
+          : "0 4px 0 rgba(0,0,0,0.2)",
+      }}
       aria-label={label}
+      aria-pressed={selected}
     >
       {children}
     </motion.button>
@@ -37,39 +46,48 @@ function ToolbarButton({
 
 function WorksheetPreview({ type }: { type: "horizontal" | "vertical" | "diagonal" }) {
   const dot = (cx: number, cy: number) => (
-    <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="5" fill="#1a1a1a" />
+    <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="7" fill="#1a1a1a" />
   );
-  const dash = "5 4";
+  const dash = "6 5";
 
   return (
-    <div className="flex aspect-square w-[26vw] max-w-[140px] min-w-[90px] items-center justify-center rounded-sm border-[3px] border-[#2D8B4E] bg-white p-3 sm:max-w-[160px]">
+    <motion.div
+      className="flex aspect-square w-[28vw] max-w-[180px] min-w-[100px] items-center justify-center rounded-sm border-[4px] border-[#2D8B4E] bg-white p-3 sm:max-w-[200px]"
+      whileTap={{ scale: 0.96 }}
+    >
       <svg viewBox="0 0 80 80" className="h-full w-full" aria-hidden>
         {type === "horizontal" && (
           <>
-            {dot(15, 30)}{dot(65, 30)}
-            <line x1="20" y1="30" x2="60" y2="30" stroke="#999" strokeWidth="2" strokeDasharray={dash} />
-            {dot(15, 55)}{dot(65, 55)}
-            <line x1="20" y1="55" x2="60" y2="55" stroke="#999" strokeWidth="2" strokeDasharray={dash} />
+            {dot(12, 28)}
+            {dot(68, 28)}
+            <line x1="19" y1="28" x2="61" y2="28" stroke="#999" strokeWidth="2.5" strokeDasharray={dash} />
+            {dot(12, 52)}
+            {dot(68, 52)}
+            <line x1="19" y1="52" x2="61" y2="52" stroke="#999" strokeWidth="2.5" strokeDasharray={dash} />
           </>
         )}
         {type === "vertical" && (
           <>
-            {dot(30, 15)}{dot(30, 65)}
-            <line x1="30" y1="20" x2="30" y2="60" stroke="#999" strokeWidth="2" strokeDasharray={dash} />
-            {dot(55, 15)}{dot(55, 65)}
-            <line x1="55" y1="20" x2="55" y2="60" stroke="#999" strokeWidth="2" strokeDasharray={dash} />
+            {dot(28, 12)}
+            {dot(28, 68)}
+            <line x1="28" y1="19" x2="28" y2="61" stroke="#999" strokeWidth="2.5" strokeDasharray={dash} />
+            {dot(52, 12)}
+            {dot(52, 68)}
+            <line x1="52" y1="19" x2="52" y2="61" stroke="#999" strokeWidth="2.5" strokeDasharray={dash} />
           </>
         )}
         {type === "diagonal" && (
           <>
-            {dot(15, 60)}{dot(60, 15)}
-            <line x1="20" y1="55" x2="55" y2="20" stroke="#999" strokeWidth="2" strokeDasharray={dash} />
-            {dot(20, 65)}{dot(65, 20)}
-            <line x1="25" y1="60" x2="60" y2="25" stroke="#999" strokeWidth="2" strokeDasharray={dash} />
+            {dot(12, 62)}
+            {dot(62, 12)}
+            <line x1="18" y1="56" x2="56" y2="18" stroke="#999" strokeWidth="2.5" strokeDasharray={dash} />
+            {dot(18, 68)}
+            {dot(68, 18)}
+            <line x1="24" y1="62" x2="62" y2="24" stroke="#999" strokeWidth="2.5" strokeDasharray={dash} />
           </>
         )}
       </svg>
-    </div>
+    </motion.div>
   );
 }
 
@@ -77,7 +95,7 @@ export function WorksheetsScreen({ onBack, onStartTracing }: WorksheetsScreenPro
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 1800);
+    const t = setTimeout(() => setLoading(false), 2200);
     return () => clearTimeout(t);
   }, []);
 
@@ -87,7 +105,7 @@ export function WorksheetsScreen({ onBack, onStartTracing }: WorksheetsScreenPro
         <div className="flex gap-1.5 sm:gap-2">
           <ToolbarButton bg="#E91E8C" label="Back" onClick={onBack}>
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden>
-              <path d="M15 18L9 12L15 6" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M15 18L9 12L15 6" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
             </svg>
           </ToolbarButton>
           <ToolbarButton bg="#E91E8C" label="Music">
@@ -98,7 +116,7 @@ export function WorksheetsScreen({ onBack, onStartTracing }: WorksheetsScreenPro
         </div>
 
         <div className="flex gap-1.5 sm:gap-2">
-          <ToolbarButton bg="#D946A8" label="Draw" wide>
+          <ToolbarButton bg="#E91E8C" label="Draw" wide selected>
             <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden>
               <rect x="4" y="4" width="12" height="12" rx="1" stroke="#fff" strokeWidth="2" />
               <path d="M14 10l6-6" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
@@ -134,7 +152,7 @@ export function WorksheetsScreen({ onBack, onStartTracing }: WorksheetsScreenPro
         </div>
       </div>
 
-      <div className="relative flex flex-1 items-center justify-center gap-2 px-2 sm:gap-4">
+      <div className="relative flex min-h-0 flex-1 items-center justify-center gap-2 px-2 sm:gap-4">
         <WorksheetPreview type="horizontal" />
         <div className="relative">
           <WorksheetPreview type="vertical" />
@@ -143,10 +161,9 @@ export function WorksheetsScreen({ onBack, onStartTracing }: WorksheetsScreenPro
               className="absolute inset-0 flex items-center justify-center"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
             >
-              <div className="mx-2 flex max-w-[200px] items-center gap-2 rounded-xl bg-white px-3 py-2 shadow-lg sm:max-w-[240px] sm:px-4 sm:py-3">
-                <div className="text-lg">🖍️</div>
+              <div className="mx-2 flex max-w-[220px] items-center gap-2 rounded-xl bg-white px-3 py-2.5 shadow-lg sm:px-4 sm:py-3">
+                <span className="text-lg">🖍️</span>
                 <p className="text-[10px] font-semibold leading-tight text-gray-600 sm:text-xs">
                   Please wait! Downloading more worksheets...
                 </p>
@@ -162,7 +179,7 @@ export function WorksheetsScreen({ onBack, onStartTracing }: WorksheetsScreenPro
           type="button"
           whileTap={{ scale: 0.95 }}
           onClick={onStartTracing}
-          className="rounded-2xl border-[3px] border-[#689F38] bg-[#AED581] px-6 py-2.5 text-sm font-extrabold text-white sm:px-10 sm:py-3 sm:text-base"
+          className="rounded-2xl border-[3px] border-[#689F38] bg-[#AED581] px-8 py-2.5 text-sm font-extrabold text-white sm:px-12 sm:py-3 sm:text-base"
           style={{ textShadow: "1px 1px 0 #689F38", boxShadow: "0 4px 0 #689F38" }}
         >
           Download And Print

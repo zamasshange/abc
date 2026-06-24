@@ -3,7 +3,8 @@ export const theme = {
   langBtn: "#5BCFFF",
   shopBtn: "#3DDB6E",
   bottomBar: "#1E3A5F",
-  toolbarYellow: "#FFE566",
+  toolbarRed: "#D32F2F",
+  toolbarOrange: "#F57C00",
 
   tabs: {
     colors: { bg: "#FFB366", contentBg: "#F5C4A8", textOutline: "#D97A2A" },
@@ -17,7 +18,7 @@ export const theme = {
 
   cards: {
     colors: { border: "#9C6ADE", footer: "#9C6ADE", textOutline: "#7A4ABE" },
-    connect: { border: "#FFB74D", footer: "#FFCC33", textOutline: "#E69500" },
+    connect: { border: "#FFCC33", footer: "#FFCC33", textOutline: "#E69500" },
     mazes: { border: "#FF66AA", footer: "#FF66AA", textOutline: "#DD4499" },
     lines: { border: "#FF44CC", footer: "#FF44CC", textOutline: "#DD22AA" },
     alphabets: { border: "#C87858", footer: "#C87858", textOutline: "#A05838" },

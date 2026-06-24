@@ -61,7 +61,10 @@ export function AppShell() {
             >
               <WorksheetsScreen
                 onBack={() => goHome()}
-                onStartTracing={() => setScreen("tracing")}
+                onStartTracing={() => {
+                  setTracingTemplate("lines-dots");
+                  setScreen("tracing");
+                }}
               />
             </motion.div>
           )}

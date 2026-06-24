@@ -9,6 +9,7 @@ import { TabIcon, ShopIcon } from "@/components/icons/TabIcons";
 type TopNavProps = {
   activeId: CategoryId;
   onSelect: (id: CategoryId) => void;
+  onLanguagePress?: () => void;
 };
 
 function OutlinedLabel({
@@ -81,14 +82,17 @@ function UtilityButton({
   children,
   bg,
   label,
+  onClick,
 }: {
   children: React.ReactNode;
   bg: string;
   label: string;
+  onClick?: () => void;
 }) {
   return (
     <button
       type="button"
+      onClick={onClick}
       className="flex w-[11%] min-w-[42px] max-w-[58px] shrink-0 items-center justify-center py-1"
       style={{ backgroundColor: theme.navPurple }}
       aria-label={label}
@@ -106,14 +110,14 @@ function UtilityButton({
   );
 }
 
-export function TopNav({ activeId, onSelect }: TopNavProps) {
+export function TopNav({ activeId, onSelect, onLanguagePress }: TopNavProps) {
   const topTabs = categories.filter((c) => c.row === "top");
   const bottomTabs = categories.filter((c) => c.row === "bottom");
 
   return (
     <div className="shrink-0">
       <div className="flex items-stretch">
-        <UtilityButton bg={theme.langBtn} label="Language">
+        <UtilityButton bg={theme.langBtn} label="Language" onClick={onLanguagePress}>
           <span className="text-[10px] font-extrabold text-white sm:text-xs">EN</span>
         </UtilityButton>
 

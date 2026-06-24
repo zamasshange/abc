@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import type { ActivityCard } from "@/lib/categories";
 import type { CategoryId } from "@/lib/theme";
 import { theme } from "@/lib/theme";
+import { getCardImage } from "@/lib/cardAssets";
 import { CardIllustration } from "@/components/illustrations/CardIllustrations";
 
 type ActivityCardProps = {
@@ -15,37 +17,51 @@ type ActivityCardProps = {
 
 export function ActivityCardItem({ card, categoryId, index, onSelect }: ActivityCardProps) {
   const { border, footer, textOutline } = theme.cards[categoryId];
+  const cardImage = getCardImage(card.illustration);
 
   return (
     <motion.button
       type="button"
       onClick={onSelect}
-      className="flex h-[min(72vh,340px)] w-[min(24vw,155px)] min-w-[100px] max-w-[170px] shrink-0 flex-col overflow-hidden"
+      className="flex h-full w-[23%] min-w-[108px] max-w-[200px] shrink-0 flex-col overflow-hidden"
       style={{
-        border: `8px solid ${border}`,
-        borderRadius: "22px",
-        boxShadow: "0 3px 0 rgba(0,0,0,0.12)",
+        border: `9px solid ${border}`,
+        borderRadius: "20px",
+        boxShadow: "0 4px 0 rgba(0,0,0,0.15)",
       }}
-      initial={{ opacity: 0, y: 16, scale: 0.94 }}
+      initial={{ opacity: 0, y: 24, scale: 0.92 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{
         type: "spring",
-        stiffness: 320,
-        damping: 24,
-        delay: index * 0.06,
+        stiffness: 300,
+        damping: 22,
+        delay: index * 0.05,
       }}
-      whileTap={{ scale: 0.94 }}
+      whileTap={{ scale: 0.93 }}
       aria-label={card.title}
     >
-      <div className="flex flex-[3] items-center justify-center bg-white p-2 sm:p-2.5">
-        <CardIllustration id={card.illustration} />
+      <div className="relative flex min-h-0 flex-[3] items-center justify-center overflow-hidden bg-white">
+        {cardImage ? (
+          <Image
+            src={cardImage}
+            alt=""
+            fill
+            className="object-cover object-top"
+            sizes="200px"
+            priority={index < 2}
+          />
+        ) : (
+          <div className="p-2">
+            <CardIllustration id={card.illustration} />
+          </div>
+        )}
       </div>
       <div
-        className="flex flex-1 items-center justify-center px-1 py-1"
-        style={{ backgroundColor: footer }}
+        className="flex shrink-0 items-center justify-center px-1 py-2"
+        style={{ backgroundColor: footer, minHeight: "28%" }}
       >
         <span
-          className="text-center text-[11px] font-extrabold leading-tight text-white sm:text-sm"
+          className="text-center text-xs font-extrabold leading-tight text-white sm:text-sm"
           style={{
             textShadow: `2px 2px 0 ${textOutline}, -1px -1px 0 ${textOutline}, 0 2px 0 ${textOutline}`,
           }}
