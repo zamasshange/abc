@@ -74,27 +74,27 @@ export function AppShell() {
           )}
           {screen === "line-tracing" && (
             <motion.div key={`line-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <LineTracingScreen onBack={back} />
+              <LineTracingScreen activityId={activityId} onBack={back} />
             </motion.div>
           )}
           {screen === "letter-tracing" && (
             <motion.div key={`letter-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <LetterTracingScreen onBack={back} />
+              <LetterTracingScreen activityId={activityId} onBack={back} />
             </motion.div>
           )}
           {screen === "maze" && (
             <motion.div key={`maze-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <MazeActivityScreen onBack={back} />
+              <MazeActivityScreen activityId={activityId} onBack={back} />
             </motion.div>
           )}
           {screen === "connect-dots" && (
             <motion.div key={`connect-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <ConnectDotsScreen onBack={back} />
+              <ConnectDotsScreen activityId={activityId} onBack={back} />
             </motion.div>
           )}
           {screen === "learn-to-draw" && (
             <motion.div key={`learn-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <LearnToDrawScreen onBack={back} />
+              <LearnToDrawScreen activityId={activityId} onBack={back} />
             </motion.div>
           )}
           {screen === "letter-match" && (
@@ -104,17 +104,17 @@ export function AppShell() {
           )}
           {screen === "matching" && (
             <motion.div key={`match-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <MatchingActivityScreen onBack={back} />
+              <MatchingActivityScreen activityId={activityId} onBack={back} />
             </motion.div>
           )}
           {screen === "pixel-art" && (
             <motion.div key={`pixel-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <PixelArtGridScreen onBack={back} />
+              <PixelArtGridScreen activityId={activityId} onBack={back} />
             </motion.div>
           )}
           {screen === "free-draw" && (
             <motion.div key={`free-${activityId}`} className="h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <FreeDrawScreen onBack={back} />
+              <FreeDrawScreen activityId={activityId} onBack={back} />
             </motion.div>
           )}
           {screen === "jigsaw" && (

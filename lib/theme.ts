@@ -14,6 +14,16 @@ export const theme = {
     numbers: { bg: "#FFD633", contentBg: "#FFF59D", textOutline: "#D4A800" },
     shapes: { bg: "#FF9999", contentBg: "#F2949C", textOutline: "#D95555" },
   },
+
+  cards: {
+    colors: { border: "#9C6ADE", footer: "#9C6ADE", textOutline: "#7A4ABE" },
+    connect: { border: "#FFCC33", footer: "#FFCC33", textOutline: "#CC9900" },
+    mazes: { border: "#FF66AA", footer: "#FF66AA", textOutline: "#DD4499" },
+    lines: { border: "#FF44CC", footer: "#FF44CC", textOutline: "#DD22AA" },
+    alphabets: { border: "#C87858", footer: "#C87858", textOutline: "#A05838" },
+    numbers: { border: "#4FC3F7", footer: "#4FC3F7", textOutline: "#29A8E0" },
+    shapes: { border: "#66CC66", footer: "#66CC66", textOutline: "#44AA44" },
+  },
 } as const;
 
 export type CategoryId = keyof typeof theme.tabs;

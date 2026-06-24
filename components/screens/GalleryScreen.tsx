@@ -1,8 +1,10 @@
 "use client";
 
-import Image from "next/image";
+import { motion } from "framer-motion";
 import type { GalleryId } from "@/lib/galleries";
 import { getGallery } from "@/lib/galleries";
+import { GalleryToolbar } from "@/components/shared/GalleryToolbar";
+import { GalleryCardArt } from "./GalleryCardArt";
 
 type GalleryScreenProps = {
   galleryId: GalleryId;
@@ -10,77 +12,53 @@ type GalleryScreenProps = {
   onSelectCard: (cardIndex: number) => void;
 };
 
-function HitZone({
-  zone,
-  label,
-  onClick,
-  disabled,
-}: {
-  zone: { x: number; y: number; w: number; h: number };
-  label: string;
-  onClick?: () => void;
-  disabled?: boolean;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className="absolute z-10 touch-manipulation"
-      style={{
-        left: `${zone.x * 100}%`,
-        top: `${zone.y * 100}%`,
-        width: `${zone.w * 100}%`,
-        height: `${zone.h * 100}%`,
-      }}
-      aria-label={label}
-    />
-  );
-}
-
 export function GalleryScreen({ galleryId, onBack, onSelectCard }: GalleryScreenProps) {
   const gallery = getGallery(galleryId);
   const firstOpen = gallery.cards.findIndex((c) => !c.locked);
 
   return (
-    <div className="relative h-full w-full overflow-hidden bg-black">
-      <Image
-        src={gallery.image}
-        alt=""
-        fill
-        className="object-cover object-center"
-        priority
-        sizes="100vw"
+    <div className="worksheets-bg relative flex h-full w-full flex-col overflow-hidden">
+      <GalleryToolbar
+        onBack={onBack}
+        onPlay={() => firstOpen >= 0 && onSelectCard(firstOpen)}
+        showCenterTabs={gallery.showCenterTabs}
       />
 
-      <HitZone zone={gallery.zones.back} label="Back" onClick={onBack} />
-      <HitZone
-        zone={gallery.zones.play}
-        label="Play"
-        onClick={() => firstOpen >= 0 && onSelectCard(firstOpen)}
-      />
-
-      {gallery.zones.download && (
-        <HitZone
-          zone={gallery.zones.download}
-          label="Download"
-          onClick={() => firstOpen >= 0 && onSelectCard(firstOpen)}
-        />
-      )}
-
-      {gallery.zones.cardSlots.map((slot, i) => {
-        const card = gallery.cards[i];
-        if (!card) return null;
-        return (
-          <HitZone
+      <div className="flex min-h-0 flex-1 items-center gap-2 overflow-x-auto px-3 py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {gallery.cards.map((card, i) => (
+          <motion.button
             key={i}
-            zone={slot}
-            label={`Card ${i + 1}`}
-            disabled={card.locked}
+            type="button"
+            whileTap={card.locked ? undefined : { scale: 0.95 }}
             onClick={() => !card.locked && onSelectCard(i)}
-          />
-        );
-      })}
+            className="relative shrink-0"
+            disabled={card.locked}
+          >
+            <GalleryCardArt galleryId={galleryId} cardIndex={i} />
+            {card.locked && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-black/40">
+                  <span className="text-3xl">🔒</span>
+                </div>
+              </div>
+            )}
+          </motion.button>
+        ))}
+      </div>
+
+      {gallery.showDownload && (
+        <div className="flex shrink-0 justify-center px-3 pb-3">
+          <motion.button
+            type="button"
+            whileTap={{ scale: 0.95 }}
+            onClick={() => firstOpen >= 0 && onSelectCard(firstOpen)}
+            className="rounded-2xl border-[3px] border-[#689F38] bg-[#AED581] px-10 py-2.5 text-sm font-extrabold text-white"
+            style={{ textShadow: "1px 1px 0 #689F38", boxShadow: "0 4px 0 #689F38" }}
+          >
+            Download And Print
+          </motion.button>
+        </div>
+      )}
     </div>
   );
 }

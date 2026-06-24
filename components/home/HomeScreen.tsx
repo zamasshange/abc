@@ -50,7 +50,7 @@ export function HomeScreen({ initialCategory = "lines", onNavigate }: HomeScreen
                   key={card.id}
                   card={card}
                   categoryId={activeId}
-                  cardIndex={card.cardIndex}
+                  cardIndex={index}
                   onSelect={() => {
                     const target = getScreenForCard(activeId, card.id);
                     if (target.screen !== "home") onNavigate(target);

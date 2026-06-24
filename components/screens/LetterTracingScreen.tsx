@@ -4,12 +4,8 @@ import type { ActivityId } from "@/lib/navigation";
 import { DrawingShell } from "@/components/shared/DrawingShell";
 
 const letters: Record<string, { char: string; lower?: boolean }> = {
-  "alpha-trace-upper": { char: "A" },
-  "alpha-trace-lower": { char: "a", lower: true },
-  "alpha-upper": { char: "B" },
-  "alpha-lower": { char: "b", lower: true },
-  "num-tracing": { char: "3" },
-  "num-spelling": { char: "5" },
+  "alpha-cursive": { char: "a", lower: true },
+  "num-spelling": { char: "1" },
 };
 
 type LetterTracingScreenProps = {

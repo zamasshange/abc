@@ -301,7 +301,121 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
           <path d="M48 40 Q55 35 62 40" fill="none" stroke={stroke} strokeWidth="1.5" />
           <circle cx="52" cy="48" r="2" fill={stroke} />
           <circle cx="68" cy="48" r="2" fill={stroke} />
-          <path d="M52 55 Q60 62 68 55" fill="none" stroke={stroke} strokeWidth="1.5" />
+        </svg>
+      );
+    case "colors-how-to-draw":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <circle cx="40" cy="35" r="16" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="65" cy="35" r="16" fill="none" stroke={stroke} strokeWidth="2" />
+          <polygon points="52,48 42,72 62,72" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="48" cy="58" r="2.5" fill={stroke} />
+          <circle cx="56" cy="58" r="2.5" fill={stroke} />
+        </svg>
+      );
+    case "colors-create":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M60 25 Q75 35 70 55 Q65 75 50 70 Q35 65 40 45 Q45 30 60 25" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M45 50 Q50 40 55 50" fill="none" stroke="#FF9800" strokeWidth="2" strokeDasharray={dash} />
+          <line x1="48" y1="62" x2="42" y2="78" stroke={stroke} strokeWidth="2" />
+          <line x1="55" y1="62" x2="50" y2="80" stroke={stroke} strokeWidth="2" />
+          <line x1="62" y1="62" x2="68" y2="78" stroke={stroke} strokeWidth="2" />
+        </svg>
+      );
+    case "colors-pair":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M30 35 Q30 20 40 20 Q50 20 50 35 L50 70 Q50 85 40 85 Q30 85 30 70 Z" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M70 35 Q70 20 80 20 Q90 20 90 35 L90 70 Q90 85 80 85 Q70 85 70 70 Z" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="38" cy="40" r="3" fill="#FF99CC" />
+          <circle cx="78" cy="40" r="3" fill="#FF99CC" />
+        </svg>
+      );
+    case "mazes-numbers":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <ellipse cx="60" cy="50" rx="35" ry="28" fill="none" stroke={stroke} strokeWidth="2" />
+          <text x="55" y="55" fontSize="20" fontWeight="bold">1</text>
+          <text x="22" y="78" fontSize="10">🍒</text>
+          <text x="88" y="35" fontSize="10">🍌</text>
+        </svg>
+      );
+    case "mazes-match":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <ellipse cx="60" cy="50" rx="35" ry="28" fill="none" stroke={stroke} strokeWidth="2" />
+          <text x="30" y="55" fontSize="14" fontWeight="bold">C</text>
+          <text x="85" y="40" fontSize="12">⭐</text>
+          <text x="85" y="65" fontSize="12">🐟</text>
+        </svg>
+      );
+    case "mazes-shapes":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <ellipse cx="60" cy="50" rx="35" ry="28" fill="none" stroke={stroke} strokeWidth="2" />
+          <rect x="82" y="38" width="14" height="14" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <polygon points="25,65 35,45 45,65" fill="none" stroke={stroke} strokeWidth="1.5" />
+        </svg>
+      );
+    case "alpha-cursive":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          {[32, 48, 64, 80].map((y) => <line key={y} x1="15" y1={y} x2="105" y2={y} stroke="#FFAAAA" strokeWidth="1" />)}
+          <text x="35" y="68" fontSize="36" fill={stroke} fontStyle="italic">a</text>
+          <text x="65" y="68" fontSize="36" fill="none" stroke="#999" strokeWidth="1.5" strokeDasharray={dash} fontStyle="italic">a</text>
+        </svg>
+      );
+    case "alpha-letter-match":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="30" y="40" fontSize="22" fontWeight="bold">B</text>
+          <text x="30" y="72" fontSize="22" fontWeight="bold">A</text>
+          <text x="80" y="40" fontSize="22" fontWeight="bold">a</text>
+          <text x="80" y="72" fontSize="22" fontWeight="bold">b</text>
+          <line x1="38" y1="38" x2="72" y2="70" stroke="#999" strokeWidth="1.5" strokeDasharray={dash} />
+        </svg>
+      );
+    case "alpha-match":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="25" y="45" fontSize="24" fontWeight="bold">A</text>
+          <text x="25" y="78" fontSize="24" fontWeight="bold">B</text>
+          <circle cx="80" cy="42" r="12" fill="none" stroke={stroke} strokeWidth="2" />
+          <ellipse cx="80" cy="72" rx="10" ry="12" fill="none" stroke={stroke} strokeWidth="2" />
+        </svg>
+      );
+    case "alpha-jigsaw":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="60" y="68" textAnchor="middle" fontSize="52" fontWeight="bold" fill="#999">A</text>
+          <line x1="60" y1="25" x2="60" y2="80" stroke="#bbb" strokeWidth="2" />
+          <line x1="35" y1="52" x2="85" y2="52" stroke="#bbb" strokeWidth="2" />
+        </svg>
+      );
+    case "num-worksheets":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="20" y="40" fontSize="16">1 2 ___</text>
+          <text x="20" y="65" fontSize="16">8 ___ 10</text>
+        </svg>
+      );
+    case "num-match":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="25" y="38" fontSize="28" fontWeight="bold">2</text>
+          <text x="55" y="38" fontSize="28" fontWeight="bold">1</text>
+          <text x="80" y="55" fontSize="14">🍭🍭</text>
+          <text x="80" y="75" fontSize="14">🍭</text>
+          <line x1="40" y1="42" x2="75" y2="52" stroke="#999" strokeWidth="1.5" strokeDasharray={dash} />
+        </svg>
+      );
+    case "num-jigsaw":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="60" y="68" textAnchor="middle" fontSize="52" fontWeight="bold" fill="#999">1</text>
+          <line x1="60" y1="25" x2="60" y2="80" stroke="#bbb" strokeWidth="2" />
+          <line x1="35" y1="52" x2="85" y2="52" stroke="#bbb" strokeWidth="2" />
         </svg>
       );
     default:
