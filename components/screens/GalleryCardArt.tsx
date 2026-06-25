@@ -6,9 +6,26 @@ type Props = {
 };
 
 export function GalleryCardArt({ galleryId, cardIndex }: Props) {
-  const border = "border-[4px] border-[#2D8B4E]";
-  const size = "aspect-square w-[26vw] max-w-[170px] min-w-[90px]";
+  const border = "border-[3px] border-[#2D8B4E] rounded-sm";
+  const size = "aspect-square h-[72%] max-h-[200px] w-auto min-w-[120px]";
 
+  if (galleryId === "how-to-draw-pick") {
+    const ids = ["mouse", "truck", "rocket"];
+    return (
+      <div className={`flex ${size} items-center justify-center bg-white p-2 ${border}`}>
+        <HowToDrawPreview id={ids[cardIndex] ?? "mouse"} />
+      </div>
+    );
+  }
+
+  if (galleryId === "colors-matching") {
+    const ids = ["balloon", "sailboat", "butterfly"];
+    return (
+      <div className={`flex ${size} items-center justify-center bg-white p-1 ${border}`}>
+        <MatchingPreview id={ids[cardIndex] ?? "balloon"} />
+      </div>
+    );
+  }
   if (galleryId === "pixel-art-pick") {
     const ids = ["orange", "tree", "whale"];
     return (
@@ -193,6 +210,61 @@ function PixelPreview({ id }: { id: string }) {
         <div key={i} className="aspect-square w-[10px]" style={{ backgroundColor: colors[cell] }} />
       ))}
     </div>
+  );
+}
+
+function MatchingPreview({ id }: { id: string }) {
+  if (id === "balloon") {
+    return (
+      <svg viewBox="0 0 80 80" className="h-full w-full" aria-hidden>
+        <ellipse cx="28" cy="35" rx="18" ry="22" fill="#4CAF50" />
+        <ellipse cx="52" cy="35" rx="18" ry="22" fill="none" stroke="#111" strokeWidth="1.5" />
+        <path d="M28 57 L28 68 M52 57 L52 68" stroke="#111" strokeWidth="1.5" />
+      </svg>
+    );
+  }
+  if (id === "sailboat") {
+    return (
+      <svg viewBox="0 0 80 80" className="h-full w-full" aria-hidden>
+        <polygon points="20,50 35,25 35,50" fill="#F44336" />
+        <polygon points="45,50 60,25 60,50" fill="none" stroke="#111" strokeWidth="1.5" />
+        <path d="M15 50 H65" stroke="#111" strokeWidth="1.5" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 80 80" className="h-full w-full" aria-hidden>
+      <ellipse cx="28" cy="40" rx="16" ry="12" fill="#FF9800" />
+      <ellipse cx="52" cy="40" rx="16" ry="12" fill="none" stroke="#111" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+function HowToDrawPreview({ id }: { id: string }) {
+  if (id === "truck") {
+    return (
+      <svg viewBox="0 0 80 80" className="h-full w-full" aria-hidden>
+        <rect x="15" y="35" width="35" height="20" rx="2" fill="none" stroke="#111" strokeWidth="1.5" />
+        <rect x="50" y="40" width="18" height="15" fill="none" stroke="#111" strokeWidth="1.5" />
+        <circle cx="25" cy="58" r="6" fill="none" stroke="#111" strokeWidth="1.5" />
+        <circle cx="55" cy="58" r="6" fill="none" stroke="#111" strokeWidth="1.5" />
+      </svg>
+    );
+  }
+  if (id === "rocket") {
+    return (
+      <svg viewBox="0 0 80 80" className="h-full w-full" aria-hidden>
+        <polygon points="40,15 50,45 30,45" fill="none" stroke="#111" strokeWidth="1.5" />
+        <rect x="32" y="45" width="16" height="25" fill="none" stroke="#111" strokeWidth="1.5" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 80 80" className="h-full w-full" aria-hidden>
+      <circle cx="30" cy="35" r="12" fill="none" stroke="#111" strokeWidth="1.5" />
+      <circle cx="50" cy="35" r="10" fill="none" stroke="#111" strokeWidth="1.5" />
+      <ellipse cx="40" cy="55" rx="18" ry="12" fill="none" stroke="#111" strokeWidth="1.5" />
+    </svg>
   );
 }
 

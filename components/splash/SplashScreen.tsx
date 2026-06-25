@@ -93,7 +93,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
 
   return (
     <motion.div
-      className="relative flex h-full w-full flex-col items-center justify-center bg-[#b8b8b8] cursor-pointer"
+      className="relative flex h-full w-full flex-col items-center justify-center bg-white cursor-pointer"
       onClick={finish}
       role="button"
       tabIndex={0}

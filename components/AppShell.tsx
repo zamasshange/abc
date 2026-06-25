@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { MobileGameViewport } from "@/components/MobileGameViewport";
 import { SplashScreen } from "@/components/splash/SplashScreen";
 import { HomeScreen } from "@/components/home/HomeScreen";
 import { GalleryScreen } from "@/components/screens/GalleryScreen";
@@ -58,7 +59,8 @@ export function AppShell() {
       </div>
 
       <div className="mobile-viewport">
-        <AnimatePresence mode="wait">
+        <MobileGameViewport>
+          <AnimatePresence mode="wait">
           {screen === "splash" && (
             <SplashScreen key="splash" onComplete={() => setScreen("home")} />
           )}
@@ -123,6 +125,7 @@ export function AppShell() {
             </motion.div>
           )}
         </AnimatePresence>
+        </MobileGameViewport>
       </div>
     </div>
   );

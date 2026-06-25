@@ -37,6 +37,8 @@ export type ActivityId =
   | "connect-easy"
   | "connect-hard"
   | "connect-learn"
+  | "connect-shape-draw"
+  | "connect-number-draw"
   | "mazes-practice"
   | "mazes-easy"
   | "mazes-hard"
@@ -84,6 +86,8 @@ const cardRoutes: Record<string, ScreenTarget> = {
   "connect:easy": { screen: "connect-dots", activityId: "connect-easy", categoryId: "connect" },
   "connect:hard": { screen: "connect-dots", activityId: "connect-hard", categoryId: "connect" },
   "connect:learn": { screen: "learn-to-draw", activityId: "connect-learn", categoryId: "connect" },
+  "connect:shape-draw": { screen: "learn-to-draw", activityId: "connect-shape-draw", categoryId: "connect" },
+  "connect:number-draw": { screen: "learn-to-draw", activityId: "connect-number-draw", categoryId: "connect" },
 
   "mazes:practice": { screen: "maze", activityId: "mazes-practice", categoryId: "mazes" },
   "mazes:easy": { screen: "maze", activityId: "mazes-easy", categoryId: "mazes" },
@@ -94,10 +98,10 @@ const cardRoutes: Record<string, ScreenTarget> = {
   "mazes:shapes": { screen: "maze", activityId: "mazes-shapes", categoryId: "mazes" },
 
   "colors:worksheets": { screen: "gallery", galleryId: "colors-worksheets", categoryId: "colors" },
-  "colors:matching": { screen: "matching", activityId: "colors-matching", categoryId: "colors" },
-  "colors:fill": { screen: "pixel-art", activityId: "colors-fill", categoryId: "colors" },
+  "colors:matching": { screen: "gallery", galleryId: "colors-matching", categoryId: "colors" },
+  "colors:fill": { screen: "matching", activityId: "colors-fill", categoryId: "colors" },
   "colors:pixel-art": { screen: "gallery", galleryId: "pixel-art-pick", categoryId: "colors" },
-  "colors:how-to-draw": { screen: "learn-to-draw", activityId: "colors-how-to-draw", categoryId: "colors" },
+  "colors:how-to-draw": { screen: "gallery", galleryId: "how-to-draw-pick", categoryId: "colors" },
   "colors:create": { screen: "free-draw", activityId: "colors-create", categoryId: "colors" },
   "colors:pair": { screen: "matching", activityId: "colors-pair", categoryId: "colors" },
 };
@@ -125,6 +129,8 @@ export function getScreenForGalleryCard(
   if (galleryId === "shapes-worksheets") return { screen: "learn-to-draw", activityId: "shapes-learn", categoryId };
   if (galleryId === "lines-worksheets") return { screen: "line-tracing", activityId: "lines-line", categoryId };
   if (galleryId === "colors-worksheets") return { screen: "matching", activityId: "colors-matching", categoryId };
+  if (galleryId === "colors-matching") return { screen: "matching", activityId: "colors-matching", categoryId };
+  if (galleryId === "how-to-draw-pick") return { screen: "learn-to-draw", activityId: "colors-how-to-draw", categoryId };
   return null;
 }
 

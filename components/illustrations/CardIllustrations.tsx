@@ -6,11 +6,16 @@ type CardIllustrationProps = {
 export function CardIllustration({ id, className = "h-full w-full" }: CardIllustrationProps) {
   const stroke = "#1a1a1a";
   const dash = "4 3";
+  const svgProps = {
+    className,
+    preserveAspectRatio: "xMidYMid meet" as const,
+    "aria-hidden": true as const,
+  };
 
   switch (id) {
     case "colors-worksheets":
       return (
-        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+        <svg viewBox="0 0 120 100" {...svgProps}>
           <path d="M25 75 L45 35 L65 50 L90 20" fill="none" stroke={stroke} strokeWidth="2.5" strokeLinejoin="round" />
           <polygon points="45,35 50,22 58,32" fill={stroke} />
           <path d="M18 22 L22 18 L26 22 L22 26 Z" fill="none" stroke={stroke} strokeWidth="1.5" />

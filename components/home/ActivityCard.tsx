@@ -1,53 +1,48 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ActivityCard } from "@/lib/categories";
+import { getCardImagePath } from "@/lib/cardArt";
+import { CARD_H, CARD_W } from "@/lib/device";
 import type { CategoryId } from "@/lib/theme";
-import { theme } from "@/lib/theme";
-import { CardIllustration } from "@/components/illustrations/CardIllustrations";
 
 type ActivityCardProps = {
-  card: ActivityCard;
   categoryId: CategoryId;
   cardIndex: number;
+  title: string;
+  style?: React.CSSProperties;
   onSelect: () => void;
 };
 
-export function ActivityCardItem({ card, categoryId, cardIndex, onSelect }: ActivityCardProps) {
-  const { border, footer, textOutline } = theme.cards[categoryId];
+export function ActivityCard({
+  categoryId,
+  cardIndex,
+  title,
+  style,
+  onSelect,
+}: ActivityCardProps) {
+  const src = getCardImagePath(categoryId, cardIndex);
 
   return (
     <motion.button
       type="button"
-      onClick={onSelect}
-      className="flex h-full w-[22vw] min-w-[128px] max-w-[200px] shrink-0 flex-col overflow-hidden"
-      style={{
-        border: `8px solid ${border}`,
-        borderRadius: "20px",
-        boxShadow: "0 3px 0 rgba(0,0,0,0.12)",
-      }}
-      initial={{ opacity: 0, y: 12 }}
+      aria-label={title}
+      className="shrink-0 border-0 bg-transparent p-0 active:scale-[0.98]"
+      style={{ width: CARD_W, height: CARD_H, ...style }}
+      initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: cardIndex * 0.03, duration: 0.2 }}
-      whileTap={{ scale: 0.96 }}
-      aria-label={card.title}
+      transition={{ duration: 0.2, delay: cardIndex * 0.03 }}
+      onClick={onSelect}
     >
-      <div className="flex min-h-0 flex-[7] items-center justify-center bg-white p-[8%]">
-        <CardIllustration id={card.illustration} className="h-full w-full max-h-full" />
-      </div>
-      <div
-        className="flex shrink-0 items-center justify-center py-[6%]"
-        style={{ backgroundColor: footer, minHeight: "24%" }}
-      >
-        <span
-          className="px-1 text-center text-[clamp(9px,2.2vw,13px)] font-extrabold leading-tight text-white"
-          style={{
-            textShadow: `2px 2px 0 ${textOutline}, -1px -1px 0 ${textOutline}`,
-          }}
-        >
-          {card.title}
-        </span>
-      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={title}
+        width={CARD_W}
+        height={CARD_H}
+        draggable={false}
+        className="block h-full w-full"
+        style={{ objectFit: "fill" }}
+      />
     </motion.button>
   );
 }

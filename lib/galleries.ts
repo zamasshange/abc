@@ -7,7 +7,9 @@ export type GalleryId =
   | "printables"
   | "mazes-worksheets"
   | "colors-worksheets"
-  | "numbers-worksheets";
+  | "numbers-worksheets"
+  | "colors-matching"
+  | "how-to-draw-pick";
 
 export type GalleryCard = {
   activityId?: string;
@@ -21,6 +23,7 @@ export type GalleryConfig = {
   cards: GalleryCard[];
 };
 
+/** Gallery layouts aligned with app/abcdoc.pdf */
 export const galleries: Record<GalleryId, GalleryConfig> = {
   "lines-worksheets": {
     id: "lines-worksheets",
@@ -43,6 +46,7 @@ export const galleries: Record<GalleryId, GalleryConfig> = {
   },
   "shapes-worksheets": {
     id: "shapes-worksheets",
+    showDownload: true,
     cards: [
       { activityId: "shapes-learn", locked: true },
       { activityId: "shapes-practice", locked: true },
@@ -54,7 +58,7 @@ export const galleries: Record<GalleryId, GalleryConfig> = {
     showDownload: true,
     showCenterTabs: true,
     cards: [
-      { activityId: "connect-easy", locked: true },
+      { activityId: "connect-easy" },
       { activityId: "connect-easy", locked: true },
       { activityId: "connect-hard", locked: true },
     ],
@@ -72,8 +76,8 @@ export const galleries: Record<GalleryId, GalleryConfig> = {
     showDownload: true,
     cards: [
       { activityId: "connect-learn" },
-      { activityId: "connect-learn" },
-      { activityId: "connect-learn" },
+      { activityId: "connect-learn", locked: true },
+      { activityId: "connect-learn", locked: true },
     ],
   },
   "mazes-worksheets": {
@@ -82,7 +86,7 @@ export const galleries: Record<GalleryId, GalleryConfig> = {
     cards: [
       { activityId: "mazes-practice" },
       { activityId: "mazes-easy" },
-      { activityId: "mazes-hard" },
+      { activityId: "mazes-hard", locked: true },
     ],
   },
   "colors-worksheets": {
@@ -92,7 +96,25 @@ export const galleries: Record<GalleryId, GalleryConfig> = {
     cards: [
       { activityId: "colors-matching" },
       { activityId: "colors-matching" },
+      { activityId: "colors-matching", locked: true },
+    ],
+  },
+  "colors-matching": {
+    id: "colors-matching",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: [
       { activityId: "colors-matching" },
+      { activityId: "colors-matching" },
+      { activityId: "colors-matching" },
+    ],
+  },
+  "how-to-draw-pick": {
+    id: "how-to-draw-pick",
+    cards: [
+      { activityId: "colors-how-to-draw" },
+      { activityId: "colors-how-to-draw" },
+      { activityId: "colors-how-to-draw" },
     ],
   },
   "numbers-worksheets": {
@@ -101,7 +123,7 @@ export const galleries: Record<GalleryId, GalleryConfig> = {
     cards: [
       { activityId: "num-spelling" },
       { activityId: "num-spelling" },
-      { activityId: "num-spelling" },
+      { activityId: "num-spelling", locked: true },
     ],
   },
 };
