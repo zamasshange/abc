@@ -40,14 +40,21 @@ ABCDOC_COLORS_HOME = ROOT / "app" / "abcdoc_pages" / "page_02.png"
 
 # Activity card only — strip column header above each card in the slot crop
 CARD_ART_TOP = 0.367
-CARD_OUT_SIZE = (338, 346)
 
 
 def crop_card_art(slot_im: Image.Image) -> Image.Image:
     w, h = slot_im.size
     top = int(h * CARD_ART_TOP)
-    art = slot_im.crop((0, top, w, h))
-    return art.resize(CARD_OUT_SIZE, Image.LANCZOS)
+    return slot_im.crop((0, top, w, h))
+
+
+def save_card(card: Image.Image, dest: Path) -> None:
+    card.save(dest, quality=96)
+    w2, h2 = card.size[0] * 2, card.size[1] * 2
+    card.resize((w2, h2), Image.LANCZOS).save(
+        dest.with_name(f"{dest.stem}@2x{dest.suffix}"),
+        quality=94,
+    )
 
 
 def normalize_card(im: Image.Image) -> Image.Image:
@@ -117,7 +124,7 @@ def crop_from_video_screen(category: str, indices: list[int]) -> int:
         if slot >= len(CARD_SLOTS):
             break
         card = crop_card_art(crop_slot(im, slot))
-        card.save(OUT_CARDS / f"{category}-{out_idx}.jpg", quality=96)
+        save_card(card, OUT_CARDS / f"{category}-{out_idx}.jpg")
         saved += 1
     return saved
 
@@ -142,7 +149,7 @@ def main() -> None:
                     continue
                 card = crop_card_art(crop_slot(im, slot))
                 dest = OUT_CARDS / f"{category}-{out_idx}.jpg"
-                card.save(dest, quality=96)
+                save_card(card, dest)
                 print("saved", dest.name, card.size)
 
         if category == "colors":
@@ -182,7 +189,7 @@ def extract_colors_first_batch(border_fn) -> None:
     panel.save(OUT_SCREENS / "home-colors.jpg", quality=92)
     for out_idx, slot in enumerate(range(4)):
         card = crop_card_art(crop_slot(panel, slot))
-        card.save(OUT_CARDS / f"colors-{out_idx}.jpg", quality=96)
+        save_card(card, OUT_CARDS / f"colors-{out_idx}.jpg")
         print("saved colors-", out_idx, card.size, "from abcdoc panel")
 
 

@@ -65,21 +65,29 @@ body {
 
 /* Fixed logical game canvas — scales uniformly on phone/tablet landscape */
 .game-viewport-host {
-  display: flex;
+  position: relative;
   height: 100%;
   width: 100%;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  background: #000;
+  background: #c6e06d;
 }
 
 .game-canvas {
-  position: relative;
-  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
   overflow: hidden;
-  transform-origin: center center;
+  transform-origin: top left;
   will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card-image {
+  object-fit: contain;
+  object-position: top center;
+  image-rendering: auto;
+  -webkit-user-drag: none;
 }
 
 .touch-pan-x {

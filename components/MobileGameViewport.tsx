@@ -8,14 +8,23 @@ type MobileGameViewportProps = {
 };
 
 export function MobileGameViewport({ children }: MobileGameViewportProps) {
-  const [scale, setScale] = useState(1);
+  const [layout, setLayout] = useState({ scale: 1, offsetX: 0, offsetY: 0 });
 
   const fit = useCallback(() => {
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
+    const vv = window.visualViewport;
+    const vw = vv?.width ?? window.innerWidth;
+    const vh = vv?.height ?? window.innerHeight;
     const sx = vw / GAME_WIDTH;
     const sy = vh / GAME_HEIGHT;
-    setScale(Math.min(sx, sy));
+    // Cover: fill the screen — no black letterbox bars
+    const scale = Math.max(sx, sy);
+    const scaledW = GAME_WIDTH * scale;
+    const scaledH = GAME_HEIGHT * scale;
+    setLayout({
+      scale,
+      offsetX: (vw - scaledW) / 2,
+      offsetY: (vh - scaledH) / 2,
+    });
   }, []);
 
   useEffect(() => {
@@ -24,12 +33,16 @@ export function MobileGameViewport({ children }: MobileGameViewportProps) {
     window.addEventListener("orientationchange", fit);
     const vv = window.visualViewport;
     vv?.addEventListener("resize", fit);
+    vv?.addEventListener("scroll", fit);
     return () => {
       window.removeEventListener("resize", fit);
       window.removeEventListener("orientationchange", fit);
       vv?.removeEventListener("resize", fit);
+      vv?.removeEventListener("scroll", fit);
     };
   }, [fit]);
+
+  const { scale, offsetX, offsetY } = layout;
 
   return (
     <div className="game-viewport-host">
@@ -38,6 +51,8 @@ export function MobileGameViewport({ children }: MobileGameViewportProps) {
         style={{
           width: GAME_WIDTH,
           height: GAME_HEIGHT,
+          left: offsetX,
+          top: offsetY,
           transform: `scale(${scale})`,
         }}
       >

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { getCardImagePath } from "@/lib/cardArt";
+import { getCardImagePath, getCardImageSrcSet } from "@/lib/cardArt";
 import { CARD_H, CARD_W } from "@/lib/device";
 import type { CategoryId } from "@/lib/theme";
 
@@ -26,7 +26,7 @@ export function ActivityCard({
     <motion.button
       type="button"
       aria-label={title}
-      className="shrink-0 border-0 bg-transparent p-0 active:scale-[0.98]"
+      className="card-image-btn shrink-0 border-0 bg-transparent p-0 active:scale-[0.98]"
       style={{ width: CARD_W, height: CARD_H, ...style }}
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
@@ -36,12 +36,12 @@ export function ActivityCard({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
+        srcSet={getCardImageSrcSet(categoryId, cardIndex)}
         alt={title}
         width={CARD_W}
         height={CARD_H}
         draggable={false}
-        className="block h-full w-full"
-        style={{ objectFit: "fill" }}
+        className="card-image block h-full w-full"
       />
     </motion.button>
   );
