@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { getCardArtPath, getCardArtSrcSet } from "@/lib/cardArt";
-import { CARD_FOOTER_H, CARD_H, CARD_W } from "@/lib/device";
+import { CARD_BORDER, CARD_FOOTER_H, CARD_H, CARD_RADIUS, CARD_W } from "@/lib/device";
+import { getCardImagePath, getCardImageSrcSet } from "@/lib/cardArt";
 import { theme, type CategoryId } from "@/lib/theme";
 
 type ActivityCardProps = {
@@ -20,9 +20,10 @@ export function ActivityCard({
   style,
   onSelect,
 }: ActivityCardProps) {
-  const cardTheme = theme.cards[categoryId];
-  const artSrc = getCardArtPath(categoryId, cardIndex);
-  const artH = CARD_H - CARD_FOOTER_H;
+  const colors = theme.cards[categoryId];
+  const src = getCardImagePath(categoryId, cardIndex);
+  const artH = CARD_H - CARD_FOOTER_H - CARD_BORDER * 2;
+  const footerFont = Math.round(36 * (CARD_W / 338));
 
   return (
     <motion.button
@@ -38,33 +39,40 @@ export function ActivityCard({
       <div
         className="flex h-full w-full flex-col overflow-hidden"
         style={{
-          borderRadius: Math.round(28 * (CARD_W / 338)),
-          border: `${Math.round(10 * (CARD_W / 338))}px solid ${cardTheme.border}`,
-          backgroundColor: "#fff",
+          borderRadius: CARD_RADIUS,
+          border: `${CARD_BORDER}px solid ${colors.border}`,
+          backgroundColor: "#ffffff",
+          boxSizing: "border-box",
         }}
       >
-        <div className="relative flex-1 overflow-hidden bg-white" style={{ minHeight: artH }}>
+        <div
+          className="relative shrink-0 overflow-hidden bg-white"
+          style={{ height: artH, width: "100%" }}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={artSrc}
-            srcSet={getCardArtSrcSet(categoryId, cardIndex)}
+            src={src}
+            srcSet={getCardImageSrcSet(categoryId, cardIndex)}
             alt=""
+            width={CARD_W - CARD_BORDER * 2}
+            height={artH}
             draggable={false}
-            className="card-art block h-full w-full"
+            className="card-illustration block"
+            style={{ width: "100%", height: "100%" }}
           />
         </div>
         <div
           className="flex shrink-0 items-center justify-center"
           style={{
             height: CARD_FOOTER_H,
-            backgroundColor: cardTheme.footer,
+            backgroundColor: colors.footer,
           }}
         >
           <span
             className="font-extrabold leading-none text-white"
             style={{
-              fontSize: Math.round(34 * (CARD_W / 338)),
-              textShadow: `2px 2px 0 ${cardTheme.textOutline}, -1px -1px 0 ${cardTheme.textOutline}`,
+              fontSize: footerFont,
+              textShadow: `2px 2px 0 ${colors.textOutline}, -1px -1px 0 ${colors.textOutline}`,
             }}
           >
             {title}

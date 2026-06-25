@@ -95,11 +95,12 @@ body {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.card-art {
+.card-illustration {
   object-fit: contain;
   object-position: center center;
   image-rendering: auto;
   -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 .activity-card {

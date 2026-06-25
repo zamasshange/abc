@@ -58,27 +58,11 @@ CARD_ART_TOP = 0.367
 
 # Display size at 1600×720 reference canvas
 TARGET_CARD_W = 338
-TARGET_CARD_H = 526
+TARGET_CARD_BORDER = 10
+TARGET_CARD_FOOTER = round(TARGET_CARD_W * 0.2)
+TARGET_CARD_H = 527  # reference y695 − y168
 FOOTER_RATIO = 0.22
-TARGET_ART_H = TARGET_CARD_H - round(TARGET_CARD_W * FOOTER_RATIO)
-
-
-def crop_card_raw(slot_im: Image.Image) -> Image.Image:
-    w, h = slot_im.size
-    top = int(h * CARD_ART_TOP)
-    return slot_im.crop((0, top, w, h))
-
-
-def crop_card_art(slot_im: Image.Image) -> Image.Image:
-    raw = crop_card_raw(slot_im)
-    return raw.resize((TARGET_CARD_W, TARGET_CARD_H), Image.LANCZOS)
-
-
-def extract_art_only(raw: Image.Image) -> Image.Image:
-    w, h = raw.size
-    footer_h = max(1, int(h * FOOTER_RATIO))
-    art = raw.crop((0, 0, w, h - footer_h))
-    return art.resize((TARGET_CARD_W, TARGET_ART_H), Image.LANCZOS)
+ILLUSTRATION_RATIO = 0.72
 
 
 def save_card(card: Image.Image, dest: Path) -> None:
@@ -90,15 +74,31 @@ def save_card(card: Image.Image, dest: Path) -> None:
     )
 
 
+def crop_card_raw(slot_im: Image.Image) -> Image.Image:
+    w, h = slot_im.size
+    top = int(h * CARD_ART_TOP)
+    return slot_im.crop((0, top, w, h))
+
+
+def extract_illustration(raw: Image.Image) -> Image.Image:
+    """White art area only — pink border + footer rendered in CSS."""
+    w, h = raw.size
+    footer_h = max(1, int(h * FOOTER_RATIO))
+    chrome_h = h - footer_h
+    illust_h = max(1, int(chrome_h * ILLUSTRATION_RATIO))
+    illust = raw.crop((0, 0, w, illust_h))
+    inner_w = TARGET_CARD_W - TARGET_CARD_BORDER * 2
+    art_h = TARGET_CARD_H - TARGET_CARD_FOOTER - TARGET_CARD_BORDER * 2
+    return illust.resize((inner_w, art_h), Image.LANCZOS)
+
+
 def save_card_bundle(raw: Image.Image, category: str, idx: int) -> None:
-    full = raw.resize((TARGET_CARD_W, TARGET_CARD_H), Image.LANCZOS)
-    art = extract_art_only(raw)
-    save_card(full, OUT_CARDS / f"{category}-{idx}.jpg")
-    save_card(art, OUT_CARDS / f"{category}-{idx}-art.jpg")
+    illust = extract_illustration(raw)
+    save_card(illust, OUT_CARDS / f"{category}-{idx}.jpg")
 
 
 def normalize_card(im: Image.Image) -> Image.Image:
-    return crop_card_art(im)
+    return extract_illustration(crop_card_raw(im))
 
 
 BORDER_DETECTORS = {
@@ -210,7 +210,8 @@ def main() -> None:
                     continue
                 raw = crop_card_raw(crop_slot(im, slot))
                 save_card_bundle(raw, category, out_idx)
-                print("saved", dest.name, card.size)
+                dest = OUT_CARDS / f"{category}-{out_idx}.jpg"
+                print("saved", dest.name, Image.open(dest).size)
 
         if category == "colors":
             extract_colors_first_batch(border_fn)
@@ -250,7 +251,8 @@ def extract_colors_first_batch(border_fn) -> None:
     for out_idx, slot in enumerate(range(4)):
         raw = crop_card_raw(crop_slot(panel, slot))
         save_card_bundle(raw, "colors", out_idx)
-        print("saved colors-", out_idx, card.size, "from abcdoc panel")
+        dest = OUT_CARDS / f"colors-{out_idx}.jpg"
+        print("saved", dest.name, Image.open(dest).size, "from abcdoc panel")
 
 
 if __name__ == "__main__":
