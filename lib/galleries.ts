@@ -1,3 +1,5 @@
+import { UPPERCASE } from "./alphabet";
+
 export type GalleryId =
   | "lines-worksheets"
   | "alphabet-worksheets"
@@ -35,11 +37,11 @@ export const galleries: Record<GalleryId, GalleryConfig> = {
   "alphabet-worksheets": {
     id: "alphabet-worksheets",
     showDownload: true,
-    cards: [
-      { id: "a", label: "A", activityId: "alpha-trace-upper" },
-      { id: "b", label: "B", activityId: "alpha-trace-upper" },
-      { id: "c", label: "C", activityId: "alpha-trace-upper" },
-    ],
+    cards: UPPERCASE.map((letter) => ({
+      id: letter.toLowerCase(),
+      label: letter,
+      activityId: "alpha-trace-upper",
+    })),
   },
   "shapes-worksheets": {
     id: "shapes-worksheets",

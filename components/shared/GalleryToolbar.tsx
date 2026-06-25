@@ -13,7 +13,10 @@ function Btn({ bg, children, label, wide, selected, onClick }: {
   );
 }
 
-export function GalleryToolbar({ onBack, onPlay, showCenterTabs }: { onBack: () => void; onPlay?: () => void; showCenterTabs?: boolean }) {
+export function GalleryToolbar({ onBack, onPlay, showCenterTabs, activeTab = "draw", onTabChange }: {
+  onBack: () => void; onPlay?: () => void; showCenterTabs?: boolean;
+  activeTab?: "draw" | "notebook"; onTabChange?: (t: "draw" | "notebook") => void;
+}) {
   return (
     <div className="flex shrink-0 items-center justify-between px-2 py-1.5">
       <div className="flex gap-1.5">
@@ -26,10 +29,10 @@ export function GalleryToolbar({ onBack, onPlay, showCenterTabs }: { onBack: () 
       </div>
       {showCenterTabs ? (
         <div className="flex gap-1.5">
-          <Btn bg="#E91E8C" label="Draw" wide selected>
+          <Btn bg="#E91E8C" label="Draw" wide selected={activeTab === "draw"} onClick={() => onTabChange?.("draw")}>
             <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none"><rect x="4" y="4" width="12" height="12" rx="1" stroke="#fff" strokeWidth="2" /><path d="M14 10l6-6" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" /></svg>
           </Btn>
-          <Btn bg="#42A5F5" label="Notebook" wide>
+          <Btn bg="#42A5F5" label="Notebook" wide selected={activeTab === "notebook"} onClick={() => onTabChange?.("notebook")}>
             <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none"><rect x="5" y="3" width="14" height="18" rx="2" stroke="#fff" strokeWidth="2" /><line x1="9" y1="3" x2="9" y2="21" stroke="#fff" strokeWidth="1.5" strokeDasharray="2 2" /></svg>
           </Btn>
         </div>

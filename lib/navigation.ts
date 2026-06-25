@@ -54,6 +54,7 @@ export type ScreenTarget = {
   categoryId?: CategoryId;
   activityId?: ActivityId;
   galleryId?: GalleryId;
+  pageId?: string;
 };
 
 const routes: Record<string, ScreenTarget> = {
@@ -121,7 +122,9 @@ export function getScreenForGalleryCard(
   }
   if (galleryId === "pixel-art-pick") return { screen: "pixel-art", activityId, categoryId };
   if (galleryId === "mazes-worksheets") return { screen: "maze", activityId, categoryId };
-  if (galleryId === "alphabet-worksheets") return { screen: "letter-tracing", activityId, categoryId };
+  if (galleryId === "alphabet-worksheets") {
+    return { screen: "letter-tracing", activityId, categoryId, pageId: cardId };
+  }
   if (galleryId === "shapes-worksheets" && !card.locked) {
     return { screen: "learn-to-draw", activityId, categoryId };
   }

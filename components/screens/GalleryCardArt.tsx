@@ -8,11 +8,19 @@ export function GalleryCardArt({ galleryId, cardId, label }: { galleryId: string
     </div>
   );
   if (galleryId === "alphabet-worksheets") {
-    const letter = label ?? "A";
     return (
-      <div className={`flex aspect-square w-[26vw] max-w-[170px] min-w-[90px] flex-col items-center bg-white p-2 ${border}`}>
-        <div className="flex items-center gap-2"><span className="text-2xl font-black">{letter}</span><span className="text-xl">{{ A: "🍎", B: "⚽", C: "🚗" }[letter] ?? "⭐"}</span></div>
-        <div className="mt-2 w-full border-t border-gray-300 pt-1"><div className="flex justify-around">{[0,1,2,3].map((i) => <span key={i} className="text-sm font-bold text-gray-400" style={{ fontFamily: "cursive" }}>{letter}</span>)}</div></div>
+      <div className={`flex aspect-square w-[22vw] max-w-[150px] min-w-[80px] flex-col items-center bg-white p-2 ${border}`}>
+        <div className="flex items-center gap-2">
+          <span className="text-2xl font-black">{label ?? "A"}</span>
+          <span className="text-xl">{({ A: "🍎", B: "⚽", C: "🚗" } as Record<string, string>)[label ?? "A"] ?? "⭐"}</span>
+        </div>
+        <div className="mt-2 w-full border-t border-gray-300 pt-1">
+          <div className="flex justify-around">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <span key={i} className="text-sm font-bold text-gray-400" style={{ fontFamily: "cursive" }}>{label ?? "A"}</span>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

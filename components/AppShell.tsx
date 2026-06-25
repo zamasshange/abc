@@ -23,6 +23,7 @@ export function AppShell() {
   const [lastCategory, setLastCategory] = useState<CategoryId>("lines");
   const [activityId, setActivityId] = useState<ActivityId>("lines-dots");
   const [galleryId, setGalleryId] = useState<GalleryId>("printables");
+  const [pageId, setPageId] = useState<string | undefined>();
 
   const goHome = useCallback((category?: CategoryId) => {
     if (category) setLastCategory(category);
@@ -33,12 +34,13 @@ export function AppShell() {
     if (target.categoryId) setLastCategory(target.categoryId);
     if (target.activityId) setActivityId(target.activityId);
     if (target.galleryId) setGalleryId(target.galleryId);
+    setPageId(target.pageId);
     setScreen(target.screen);
   }, []);
 
   const handleGalleryCard = useCallback((cardId: string) => {
     const target = getScreenForGalleryCard(galleryId, cardId, lastCategory);
-    if (target) navigate(target);
+    if (target) navigate({ ...target, pageId: target.pageId ?? cardId });
   }, [galleryId, lastCategory, navigate]);
 
   const wrap = (key: string, children: React.ReactNode) => (
@@ -59,7 +61,7 @@ export function AppShell() {
           {screen === "home" && wrap("home", <HomeScreen initialCategory={lastCategory} onNavigate={navigate} />)}
           {screen === "gallery" && wrap(`gallery-${galleryId}`, <GalleryScreen galleryId={galleryId} onBack={() => goHome()} onSelectCard={handleGalleryCard} />)}
           {screen === "line-tracing" && wrap(`line-${activityId}`, <TracingScreen templateId={activityId} onBack={() => goHome(lastCategory)} />)}
-          {screen === "letter-tracing" && wrap(`letter-${activityId}`, <LetterTracingScreen activityId={activityId} onBack={() => goHome(lastCategory)} />)}
+          {screen === "letter-tracing" && wrap(`letter-${activityId}-${pageId}`, <LetterTracingScreen activityId={activityId} pageId={pageId} onBack={() => goHome(lastCategory)} />)}
           {screen === "maze" && wrap(`maze-${activityId}`, <MazeScreen activityId={activityId} onBack={() => goHome(lastCategory)} />)}
           {screen === "connect-dots" && wrap(`connect-${activityId}`, <ConnectDotsScreen activityId={activityId} onBack={() => goHome(lastCategory)} />)}
           {screen === "learn-to-draw" && wrap(`learn-${activityId}`, <LearnToDrawScreen activityId={activityId} onBack={() => goHome(lastCategory)} />)}
