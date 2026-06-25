@@ -3,6 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --gunjan-nav-purple: #c49ae8;
+  --gunjan-cyan: #55d8ea;
+  --gunjan-toolbar-red: #d32f2f;
 }
 
 @theme inline {
@@ -24,9 +27,9 @@ body {
 }
 
 body {
-  background: #000;
+  background: #111;
   color: var(--foreground);
-  font-family: var(--font-fredoka), "Fredoka", "Varela Round", sans-serif;
+  font-family: var(--font-fredoka), "Fredoka", "Varela Round", "Nunito", sans-serif;
   user-select: none;
 }
 
@@ -70,13 +73,33 @@ body {
   }
 }
 
+/* GunjanApps worksheet / gallery cyan wave background */
 .worksheets-bg {
-  background-color: #7adce8;
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 16px,
-    rgba(70, 170, 195, 0.45) 16px,
-    rgba(70, 170, 195, 0.45) 20px
-  );
+  background-color: #55d8ea;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 14px,
+      rgba(255, 255, 255, 0.22) 14px,
+      rgba(255, 255, 255, 0.22) 18px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      #4ecde0 0px,
+      #4ecde0 28px,
+      #55d8ea 28px,
+      #55d8ea 56px
+    );
+}
+
+.gunjan-btn-3d {
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.22), 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.gunjan-download-btn {
+  background: linear-gradient(180deg, #b8e986 0%, #9ccc65 100%);
+  border: 3px solid #689f38;
+  box-shadow: 0 5px 0 #558b2f;
+  text-shadow: 1px 1px 0 #558b2f;
 }

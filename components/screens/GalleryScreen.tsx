@@ -31,8 +31,7 @@ export function GalleryScreen({ galleryId, onBack, onSelectCard, onPlay }: {
       {gallery.showDownload && (
         <div className="flex shrink-0 justify-center px-3 pb-3">
           <motion.button type="button" whileTap={{ scale: 0.95 }} onClick={() => first && onSelectCard(first.id)}
-            className="rounded-2xl border-[3px] border-[#689F38] bg-[#AED581] px-10 py-2.5 text-sm font-extrabold text-white"
-            style={{ textShadow: "1px 1px 0 #689F38", boxShadow: "0 4px 0 #689F38" }}>Download And Print</motion.button>
+            className="rounded-2xl gunjan-download-btn px-10 py-2.5 text-sm font-extrabold text-white">Download And Print</motion.button>
         </div>
       )}
     </div>

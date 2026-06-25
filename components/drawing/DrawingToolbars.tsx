@@ -59,7 +59,7 @@ function ToolBtn({
 }
 
 const barClass =
-  "flex h-full w-[13%] min-w-[54px] max-w-[76px] shrink-0 flex-col items-center justify-evenly py-2";
+  "flex h-full w-[12.5%] min-w-[52px] max-w-[72px] shrink-0 flex-col items-center justify-evenly py-1.5";
 
 export function LeftToolbar({
   isEraser,
