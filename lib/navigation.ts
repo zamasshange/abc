@@ -95,7 +95,7 @@ const routes: Record<string, ScreenTarget> = {
   "numbers:tracing": { screen: "gallery", galleryId: "numbers-trace", categoryId: "numbers" },
   "numbers:counting": { screen: "gallery", galleryId: "numbers-counting", categoryId: "numbers" },
   "numbers:practice": { screen: "gallery", galleryId: "numbers-practice", categoryId: "numbers" },
-  "numbers:spelling": { screen: "letter-tracing", activityId: "num-spelling", categoryId: "numbers" },
+  "numbers:spelling": { screen: "gallery", galleryId: "numbers-spelling", categoryId: "numbers" },
   "numbers:worksheets": { screen: "gallery", galleryId: "numbers-worksheets", categoryId: "numbers" },
   "numbers:match": { screen: "matching", activityId: "num-match", categoryId: "numbers" },
   "numbers:jigsaw": { screen: "matching", activityId: "num-jigsaw", categoryId: "numbers" },
@@ -171,6 +171,9 @@ export function getScreenForGalleryCard(
   }
   if (galleryId === "numbers-counting" && !card.locked) {
     return { screen: "letter-tracing", activityId: "num-counting", categoryId, pageId: cardId };
+  }
+  if (galleryId === "numbers-spelling" && !card.locked) {
+    return { screen: "letter-tracing", activityId: "num-spelling", categoryId, pageId: cardId };
   }
   if (galleryId === "numbers-practice" && !card.locked) {
     const practice = getNumPracticeCard(cardId);

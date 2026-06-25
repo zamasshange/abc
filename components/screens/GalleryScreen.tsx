@@ -44,7 +44,8 @@ export function GalleryScreen({
     galleryId === "alphabet-cursive-lower" ||
     galleryId === "numbers-trace" ||
     galleryId === "numbers-counting" ||
-    galleryId === "numbers-practice";
+    galleryId === "numbers-practice" ||
+    galleryId === "numbers-spelling";
 
   const updateScrollHint = useCallback(() => {
     const el = scrollRef.current;

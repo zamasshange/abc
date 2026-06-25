@@ -463,8 +463,18 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
     case "num-spelling":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          <text x="25" y="60" fontSize="36" fill="#999" fontWeight="bold">1</text>
-          <text x="50" y="62" fontSize="28" fill="none" stroke="#999" strokeWidth="2" strokeDasharray={dash}>one</text>
+          <line x1="8" y1="22" x2="112" y2="22" stroke="#6BB6FF" strokeWidth="1" />
+          <line x1="8" y1="32" x2="112" y2="32" stroke="#E53935" strokeWidth="0.8" strokeDasharray={dash} />
+          <line x1="8" y1="42" x2="112" y2="42" stroke="#6BB6FF" strokeWidth="1" />
+          <text x="18" y="38" fontSize="22" fill="#999" fontWeight="bold">1</text>
+          <text x="38" y="38" fontSize="20" fill="none" stroke="#999" strokeWidth="1.5" strokeDasharray={dash}>1</text>
+          <text x="58" y="38" fontSize="14" fill="none" stroke="#999" strokeWidth="1.5" strokeDasharray={dash}>one</text>
+          <line x1="8" y1="58" x2="112" y2="58" stroke="#6BB6FF" strokeWidth="1" />
+          <line x1="8" y1="68" x2="112" y2="68" stroke="#E53935" strokeWidth="0.8" strokeDasharray={dash} />
+          <line x1="8" y1="78" x2="112" y2="78" stroke="#6BB6FF" strokeWidth="1" />
+          <text x="18" y="74" fontSize="20" fill="none" stroke="#ccc" strokeWidth="1.2" strokeDasharray={dash}>1</text>
+          <text x="38" y="74" fontSize="18" fill="none" stroke="#ccc" strokeWidth="1.2" strokeDasharray={dash}>1</text>
+          <text x="58" y="74" fontSize="13" fill="none" stroke="#ccc" strokeWidth="1.2" strokeDasharray={dash}>one</text>
         </svg>
       );
     case "num-worksheets":

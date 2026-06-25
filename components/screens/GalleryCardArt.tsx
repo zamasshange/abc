@@ -10,6 +10,7 @@ import { AlphabetCursiveGalleryArt } from "@/components/illustrations/AlphabetCu
 import { NumbersPracticeGalleryArt } from "@/components/illustrations/NumbersPracticeGalleryArt";
 import { NumbersTraceGalleryArt } from "@/components/illustrations/NumbersTraceGalleryArt";
 import { NumbersCountingGalleryArt } from "@/components/illustrations/NumbersCountingGalleryArt";
+import { NumbersSpellingGalleryArt } from "@/components/illustrations/NumbersSpellingGalleryArt";
 
 const GREEN_BORDER = "border-[3px] border-[#1B6B3A]";
 
@@ -58,6 +59,9 @@ export function GalleryCardArt({ galleryId, cardId, label }: { galleryId: string
   }
   if (galleryId === "numbers-practice") {
     return <NumbersPracticeGalleryArt cardId={cardId} />;
+  }
+  if (galleryId === "numbers-spelling") {
+    return <NumbersSpellingGalleryArt cardId={cardId} />;
   }
   const border = GREEN_BORDER;
   if (galleryId === "pixel-art-pick") return <div className={`flex aspect-square w-[26vw] max-w-[170px] min-w-[90px] items-center justify-center bg-white p-1 ${border}`}><PixelPreview id={cardId} /></div>;

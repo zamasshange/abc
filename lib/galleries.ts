@@ -11,6 +11,7 @@ import { ALPHABET_CURSIVE_LOWER_CARDS, ALPHABET_CURSIVE_UPPER_CARDS } from "./al
 import { NUMBERS_PRACTICE_CARDS } from "./numbers-practice-gallery";
 import { NUMBERS_TRACE_CARD_IDS } from "./numbers-trace-gallery";
 import { NUMBERS_COUNTING_CARDS } from "./numbers-counting-gallery";
+import { NUMBERS_SPELLING_CARDS } from "./numbers-spelling-gallery";
 
 export type GalleryId =
   | "lines-dots"
@@ -29,6 +30,7 @@ export type GalleryId =
   | "numbers-trace"
   | "numbers-counting"
   | "numbers-practice"
+  | "numbers-spelling"
   | "numbers-worksheets"
   | "shapes-worksheets"
   | "connect-worksheets"
@@ -230,6 +232,19 @@ export const galleries: Record<GalleryId, GalleryConfig> = {
         id,
         label: exercises.map((e) => String(e.count)).join(" · "),
         activityId: "num-practice",
+        locked,
+      })),
+    ),
+  },
+  "numbers-spelling": {
+    id: "numbers-spelling",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: sortUnlockedFirst(
+      NUMBERS_SPELLING_CARDS.map(({ id, locked }) => ({
+        id,
+        label: id,
+        activityId: "num-spelling",
         locked,
       })),
     ),
