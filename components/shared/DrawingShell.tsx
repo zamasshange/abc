@@ -4,7 +4,6 @@ import { useState, useCallback } from "react";
 import { LeftToolbar, RightToolbar } from "@/components/drawing/DrawingToolbars";
 import { DrawingCanvas } from "@/components/drawing/DrawingCanvas";
 import { ExitDialog } from "@/components/modals/ExitDialog";
-import { AdBar } from "@/components/shared/AdBar";
 
 export function DrawingShell({ children, onBack, showCanvas = true, header }: {
   children?: React.ReactNode; onBack: () => void; showCanvas?: boolean; header?: React.ReactNode;
@@ -40,7 +39,6 @@ export function DrawingShell({ children, onBack, showCanvas = true, header }: {
           onDone={onBack}
         />
       </div>
-      <AdBar />
       <ExitDialog open={showExit} onCancel={() => setShowExit(false)} onConfirm={onBack} />
     </div>
   );

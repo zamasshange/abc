@@ -5,9 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 type LanguageDialogProps = {
   open: boolean;
   onClose: () => void;
+  onParentDashboard?: () => void;
 };
 
-export function LanguageDialog({ open, onClose }: LanguageDialogProps) {
+export function LanguageDialog({ open, onClose, onParentDashboard }: LanguageDialogProps) {
   return (
     <AnimatePresence>
       {open && (
@@ -34,7 +35,7 @@ export function LanguageDialog({ open, onClose }: LanguageDialogProps) {
               <input type="checkbox" defaultChecked className="h-5 w-5 accent-green-500" />
               <span className="font-semibold">UK</span>
             </label>
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-3">
               <motion.button
                 type="button"
                 whileTap={{ scale: 0.9 }}
@@ -47,6 +48,15 @@ export function LanguageDialog({ open, onClose }: LanguageDialogProps) {
                   <path d="M5 13l4 4L19 7" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" />
                 </svg>
               </motion.button>
+              {onParentDashboard && (
+                <button
+                  type="button"
+                  onClick={() => { onClose(); onParentDashboard(); }}
+                  className="text-xs font-bold text-[#9C6ADE] underline"
+                >
+                  Parent Progress
+                </button>
+              )}
             </div>
           </motion.div>
         </motion.div>

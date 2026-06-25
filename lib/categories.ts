@@ -4,6 +4,8 @@ export type ActivityCard = {
   id: string;
   title: string;
   illustration: string;
+  /** Green download badge on card art (batch 1 reference) */
+  downloadBadge?: boolean;
 };
 
 export type CategoryConfig = {
@@ -13,18 +15,20 @@ export type CategoryConfig = {
   cards: ActivityCard[];
 };
 
-/** Category/card layout from GunjanApps ABC Preschool (Play Store screenshots + abc_preschool1) */
+/** Card layout from batch 1 reference (`app/abc_preschool`) */
 export const categories: CategoryConfig[] = [
   {
     id: "colors",
     label: "Colors",
     row: "top",
     cards: [
+      { id: "worksheets", title: "Worksheets", illustration: "colors-worksheets" },
+      { id: "matching", title: "Matching", illustration: "colors-matching" },
+      { id: "fill", title: "Fill", illustration: "colors-fill" },
       { id: "pixel-art", title: "Pixel Art", illustration: "colors-pixel" },
-      { id: "how-to-draw", title: "How to Draw", illustration: "colors-how-to-draw" },
+      { id: "how-to-draw", title: "How to Draw", illustration: "colors-how-to-draw", downloadBadge: true },
       { id: "create", title: "Create", illustration: "colors-create" },
       { id: "pair", title: "Pair", illustration: "colors-pair" },
-      { id: "worksheets", title: "Worksheets", illustration: "colors-worksheets" },
     ],
   },
   {
@@ -35,9 +39,11 @@ export const categories: CategoryConfig[] = [
       { id: "practice", title: "Practice", illustration: "connect-practice" },
       { id: "easy", title: "Easy", illustration: "connect-easy" },
       { id: "hard", title: "Hard", illustration: "connect-hard" },
-      { id: "learn", title: "Learn to draw", illustration: "connect-learn" },
-      { id: "shape-draw", title: "Shape Draw", illustration: "shapes-learn" },
-      { id: "number-draw", title: "Number Draw", illustration: "num-tracing" },
+      { id: "learn", title: "Learn to draw", illustration: "connect-learn", downloadBadge: true },
+      { id: "ditto", title: "Ditto", illustration: "connect-ditto" },
+      { id: "match", title: "Match", illustration: "connect-match" },
+      { id: "jigsaw", title: "Jigsaw", illustration: "connect-jigsaw" },
+      { id: "tracing", title: "Tracing", illustration: "connect-tracing" },
     ],
   },
   {
@@ -45,6 +51,9 @@ export const categories: CategoryConfig[] = [
     label: "Mazes",
     row: "top",
     cards: [
+      { id: "practice", title: "Practice", illustration: "mazes-practice" },
+      { id: "easy", title: "Easy", illustration: "mazes-easy" },
+      { id: "hard", title: "Hard", illustration: "mazes-hard" },
       { id: "worksheets", title: "Worksheets", illustration: "mazes-worksheets" },
       { id: "numbers", title: "Numbers", illustration: "mazes-numbers" },
       { id: "match", title: "Match", illustration: "mazes-match" },
@@ -71,6 +80,13 @@ export const categories: CategoryConfig[] = [
       { id: "trace-lower", title: "Trace A - Z", illustration: "alpha-trace-lower" },
       { id: "uppercase", title: "Uppercase", illustration: "alpha-upper" },
       { id: "lowercase", title: "Lowercase", illustration: "alpha-lower" },
+      { id: "practice", title: "Practice", illustration: "alpha-practice" },
+      { id: "worksheets", title: "Worksheets", illustration: "alpha-worksheets" },
+      { id: "cursive-upper", title: "Cursive A - Z", illustration: "alpha-cursive-upper" },
+      { id: "cursive-lower", title: "Cursive a - z", illustration: "alpha-cursive-lower" },
+      { id: "letter-match", title: "Letter Match", illustration: "alpha-letter-match" },
+      { id: "match", title: "Match", illustration: "alpha-match" },
+      { id: "jigsaw", title: "Jigsaw", illustration: "alpha-jigsaw" },
     ],
   },
   {
@@ -82,6 +98,9 @@ export const categories: CategoryConfig[] = [
       { id: "counting", title: "Counting", illustration: "num-counting" },
       { id: "practice", title: "Practice", illustration: "num-practice" },
       { id: "spelling", title: "Spelling", illustration: "num-spelling" },
+      { id: "worksheets", title: "Worksheets", illustration: "num-worksheets" },
+      { id: "match", title: "Match", illustration: "num-match" },
+      { id: "jigsaw", title: "Jigsaw", illustration: "num-jigsaw" },
     ],
   },
   {

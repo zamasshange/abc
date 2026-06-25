@@ -10,6 +10,7 @@ import type { ScreenTarget } from "@/lib/navigation";
 import { TopNav } from "./TopNav";
 import { ActivityCardItem } from "./ActivityCard";
 import { LanguageDialog } from "@/components/modals/LanguageDialog";
+import { ParentDashboard } from "@/components/screens/ParentDashboard";
 
 type HomeScreenProps = {
   initialCategory?: CategoryId;
@@ -19,6 +20,7 @@ type HomeScreenProps = {
 export function HomeScreen({ initialCategory = "lines", onNavigate }: HomeScreenProps) {
   const [activeId, setActiveId] = useState<CategoryId>(initialCategory);
   const [langOpen, setLangOpen] = useState(false);
+  const [parentOpen, setParentOpen] = useState(false);
   const category = getCategory(activeId);
   const contentBg = theme.tabs[activeId].contentBg;
 
@@ -64,7 +66,12 @@ export function HomeScreen({ initialCategory = "lines", onNavigate }: HomeScreen
 
       <div className="h-[3px] shrink-0" style={{ backgroundColor: theme.bottomBar }} />
 
-      <LanguageDialog open={langOpen} onClose={() => setLangOpen(false)} />
+      <LanguageDialog
+        open={langOpen}
+        onClose={() => setLangOpen(false)}
+        onParentDashboard={() => setParentOpen(true)}
+      />
+      <ParentDashboard open={parentOpen} onClose={() => setParentOpen(false)} />
     </div>
   );
 }

@@ -34,6 +34,17 @@ export function ActivityCardItem({ card, categoryId, cardIndex, onSelect }: Acti
     >
       <div className="relative flex min-h-0 flex-[7] items-center justify-center bg-white p-[6%]">
         <CardIllustration id={card.illustration} className="h-full w-full max-h-full" />
+        {card.downloadBadge && (
+          <div
+            className="absolute right-[6%] top-[6%] flex h-[22%] min-h-[22px] w-[22%] min-w-[22px] max-w-[32px] items-center justify-center rounded-full border-2 border-white"
+            style={{ backgroundColor: "#4CAF50" }}
+            aria-hidden
+          >
+            <svg viewBox="0 0 24 24" className="h-[55%] w-[55%]" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round">
+              <path d="M12 5v10M8 11l4 4 4-4M6 19h12" />
+            </svg>
+          </div>
+        )}
       </div>
       <div
         className="flex shrink-0 items-center justify-center px-1 py-[5%]"

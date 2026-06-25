@@ -72,8 +72,6 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
           <line x1="38" y1="58" x2="28" y2="62" stroke={stroke} strokeWidth="1.5" />
           <line x1="72" y1="54" x2="82" y2="50" stroke={stroke} strokeWidth="1.5" />
           <line x1="72" y1="58" x2="82" y2="62" stroke={stroke} strokeWidth="1.5" />
-          <circle cx="98" cy="18" r="10" fill="#4CAF50" stroke="#fff" strokeWidth="2" />
-          <path d="M95 18 L98 21 L103 15" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
         </svg>
       );
     case "colors-create":
@@ -141,6 +139,43 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
           <path d="M30 60 Q30 30 55 30 Q80 30 80 55 Q80 75 55 75 Q30 75 30 60" fill="none" stroke={stroke} strokeWidth="2" />
           <path d="M55 30 Q80 30 80 55" fill="none" stroke="#FF5555" strokeWidth="2" strokeDasharray={dash} />
           <path d="M30 45 L45 35" stroke="#FF5555" strokeWidth="2" fill="none" />
+        </svg>
+      );
+    case "connect-ditto":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M22 70 L42 35 L58 55 L78 28" fill="none" stroke={stroke} strokeWidth="2" />
+          <polygon points="42,35 48,24 55,34" fill={stroke} />
+          <path d="M62 70 L82 35 L98 55" fill="none" stroke="#FFCC00" strokeWidth="2" />
+          <polygon points="82,35 88,24 95,34" fill="#FF5555" />
+          <line x1="20" y1="78" x2="100" y2="78" stroke="#99CCFF" strokeWidth="1" strokeDasharray="3 2" />
+        </svg>
+      );
+    case "connect-match":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <rect x="18" y="28" width="18" height="18" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="27" cy="62" r="10" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="82" cy="32" r="10" fill="none" stroke={stroke} strokeWidth="2" />
+          <rect x="72" y="58" width="18" height="18" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M36 37 L72 58" fill="none" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+        </svg>
+      );
+    case "connect-jigsaw":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <rect x="28" y="22" width="32" height="32" fill="none" stroke={stroke} strokeWidth="2" />
+          <rect x="60" y="22" width="32" height="32" fill="none" stroke={stroke} strokeWidth="2" />
+          <rect x="28" y="54" width="32" height="32" fill="none" stroke={stroke} strokeWidth="2" />
+          <rect x="60" y="54" width="32" height="32" fill="#999" stroke={stroke} strokeWidth="2" />
+          <polygon points="44,38 52,48 36,48" fill="#666" />
+        </svg>
+      );
+    case "connect-tracing":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <polygon points="60,18 95,82 25,82" fill="none" stroke={stroke} strokeWidth="2.5" />
+          <polygon points="60,32 82,72 38,72" fill="none" stroke="#FF3333" strokeWidth="2" strokeDasharray={dash} />
         </svg>
       );
     case "mazes-practice":
@@ -308,6 +343,73 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
           <circle cx="80" cy="55" r="14" fill="none" stroke={stroke} strokeWidth="2" />
         </svg>
       );
+    case "alpha-practice":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          {[30,45,60,75].map(y => <line key={y} x1="15" y1={y} x2="105" y2={y} stroke="#99CCFF" strokeWidth="1" strokeDasharray="3 3" />)}
+          <text x="38" y="62" fontSize="32" fill="none" stroke="#999" strokeWidth="2" strokeDasharray={dash}>A</text>
+          <text x="72" y="68" fontSize="28" fill="none" stroke="#999" strokeWidth="2" strokeDasharray={dash}>a</text>
+        </svg>
+      );
+    case "alpha-worksheets":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="28" y="42" fontSize="22" fontWeight="bold" fill={stroke}>A</text>
+          <text x="55" y="42" fontSize="22" fontWeight="bold" fill={stroke}>B</text>
+          <line x1="78" y1="38" x2="95" y2="38" stroke={stroke} strokeWidth="2" />
+          <text x="28" y="72" fontSize="22" fontWeight="bold" fill={stroke}>X</text>
+          <line x1="52" y1="68" x2="72" y2="68" stroke={stroke} strokeWidth="2" />
+          <text x="82" y="72" fontSize="22" fontWeight="bold" fill={stroke}>Z</text>
+        </svg>
+      );
+    case "alpha-cursive-upper":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <line x1="15" y1="30" x2="105" y2="30" stroke="#5599DD" strokeWidth="1.5" />
+          <line x1="15" y1="50" x2="105" y2="50" stroke="#FF8888" strokeWidth="1.5" strokeDasharray="4 3" />
+          <line x1="15" y1="70" x2="105" y2="70" stroke="#5599DD" strokeWidth="1.5" />
+          <text x="42" y="68" fontSize="36" fontStyle="italic" fontWeight="bold" fill={stroke}>a</text>
+          <text x="68" y="68" fontSize="36" fontStyle="italic" fill="none" stroke="#999" strokeWidth="2" strokeDasharray={dash}>a</text>
+        </svg>
+      );
+    case "alpha-cursive-lower":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          {[30,45,60,75].map(y => <line key={y} x1="15" y1={y} x2="105" y2={y} stroke="#FFCCCC" strokeWidth="1" strokeDasharray="3 3" />)}
+          <text x="42" y="72" fontSize="36" fontStyle="italic" fontWeight="bold" fill={stroke}>a</text>
+          <text x="72" y="72" fontSize="36" fontStyle="italic" fill="none" stroke="#999" strokeWidth="2" strokeDasharray={dash}>a</text>
+        </svg>
+      );
+    case "alpha-letter-match":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="28" y="42" fontSize="22" fontWeight="bold" fill={stroke}>B</text>
+          <text x="28" y="72" fontSize="22" fontWeight="bold" fill={stroke}>A</text>
+          <text x="78" y="42" fontSize="22" fill={stroke}>a</text>
+          <text x="78" y="72" fontSize="22" fill={stroke}>b</text>
+          <path d="M38 68 L72 44" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+          <path d="M38 38 L72 68" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+        </svg>
+      );
+    case "alpha-match":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="28" y="42" fontSize="22" fontWeight="bold" fill={stroke}>A</text>
+          <text x="28" y="72" fontSize="22" fontWeight="bold" fill={stroke}>B</text>
+          <circle cx="82" cy="38" r="12" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M72 68 Q78 58 88 62" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M38 42 L72 38" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+          <path d="M38 68 L72 62" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+        </svg>
+      );
+    case "alpha-jigsaw":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <line x1="60" y1="20" x2="60" y2="80" stroke="#ccc" strokeWidth="1" />
+          <line x1="30" y1="50" x2="90" y2="50" stroke="#ccc" strokeWidth="1" />
+          <text x="60" y="62" textAnchor="middle" fontSize="44" fontWeight="bold" fill="#999">A</text>
+        </svg>
+      );
     case "num-tracing":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
@@ -343,6 +445,40 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
           <text x="25" y="60" fontSize="36" fill="#999" fontWeight="bold">1</text>
           <text x="50" y="62" fontSize="28" fill="none" stroke="#999" strokeWidth="2" strokeDasharray={dash}>one</text>
+        </svg>
+      );
+    case "num-worksheets":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="22" y="42" fontSize="18" fontWeight="bold" fill={stroke}>1</text>
+          <text x="42" y="42" fontSize="18" fontWeight="bold" fill={stroke}>2</text>
+          <line x1="62" y1="38" x2="82" y2="38" stroke={stroke} strokeWidth="2" />
+          <text x="22" y="72" fontSize="18" fontWeight="bold" fill={stroke}>8</text>
+          <line x1="42" y1="68" x2="62" y2="68" stroke={stroke} strokeWidth="2" />
+          <text x="72" y="72" fontSize="18" fontWeight="bold" fill={stroke}>10</text>
+        </svg>
+      );
+    case "num-match":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <text x="28" y="38" fontSize="20" fontWeight="bold" fill={stroke}>2</text>
+          <text x="28" y="58" fontSize="20" fontWeight="bold" fill={stroke}>1</text>
+          <circle cx="28" cy="48" r="1.5" fill={stroke} />
+          <circle cx="32" cy="48" r="1.5" fill={stroke} />
+          <circle cx="82" cy="38" r="8" fill="none" stroke={stroke} strokeWidth="2" />
+          <line x1="82" y1="30" x2="82" y2="24" stroke={stroke} strokeWidth="2" />
+          <circle cx="82" cy="62" r="5" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <circle cx="88" cy="62" r="5" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <path d="M38 55 L72 60" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+        </svg>
+      );
+    case "num-jigsaw":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <line x1="60" y1="22" x2="60" y2="78" stroke="#ccc" strokeWidth="1" />
+          <line x1="32" y1="50" x2="88" y2="50" stroke="#ccc" strokeWidth="1" />
+          <text x="60" y="64" textAnchor="middle" fontSize="44" fontWeight="bold" fill="#999">1</text>
+          <rect x="62" y="52" width="24" height="24" fill="#bbb" stroke={stroke} strokeWidth="1" />
         </svg>
       );
     case "shapes-learn":

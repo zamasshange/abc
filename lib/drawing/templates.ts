@@ -10,6 +10,7 @@ export type TemplateDot = {
   cy: number;
   r?: number;
   color?: string;
+  number?: number;
 };
 
 export type DrawingTemplate = {
@@ -152,13 +153,13 @@ export const drawingTemplates: Record<string, DrawingTemplate> = {
       { d: "M 80 200 L 120 160 L 160 180 L 200 140 L 240 160 L 280 120 L 320 100", dashed: true, color: "#1a1a1a", width: 3 },
     ],
     dots: [
-      { cx: 80, cy: 200, r: 6 },
-      { cx: 120, cy: 160, r: 6 },
-      { cx: 160, cy: 180, r: 6 },
-      { cx: 200, cy: 140, r: 6 },
-      { cx: 240, cy: 160, r: 6 },
-      { cx: 280, cy: 120, r: 6 },
-      { cx: 320, cy: 100, r: 6 },
+      { cx: 80, cy: 200, r: 6, number: 1 },
+      { cx: 120, cy: 160, r: 6, number: 2 },
+      { cx: 160, cy: 180, r: 6, number: 3 },
+      { cx: 200, cy: 140, r: 6, number: 4 },
+      { cx: 240, cy: 160, r: 6, number: 5 },
+      { cx: 280, cy: 120, r: 6, number: 6 },
+      { cx: 320, cy: 100, r: 6, number: 7 },
     ],
   },
   "connect-easy": {
@@ -168,12 +169,12 @@ export const drawingTemplates: Record<string, DrawingTemplate> = {
       { d: "M 200 80 A 60 60 0 1 1 200 200", dashed: true, color: "#1a1a1a", width: 3 },
     ],
     dots: [
-      { cx: 200, cy: 80, r: 6 },
-      { cx: 260, cy: 110, r: 6 },
-      { cx: 280, cy: 170, r: 6 },
-      { cx: 200, cy: 200, r: 6 },
-      { cx: 120, cy: 170, r: 6 },
-      { cx: 140, cy: 110, r: 6 },
+      { cx: 200, cy: 80, r: 6, number: 1 },
+      { cx: 260, cy: 110, r: 6, number: 2 },
+      { cx: 280, cy: 170, r: 6, number: 3 },
+      { cx: 200, cy: 200, r: 6, number: 4 },
+      { cx: 120, cy: 170, r: 6, number: 5 },
+      { cx: 140, cy: 110, r: 6, number: 6 },
     ],
   },
   "connect-hard": {
@@ -184,7 +185,7 @@ export const drawingTemplates: Record<string, DrawingTemplate> = {
     ],
     dots: Array.from({ length: 9 }).map((_, i) => {
       const a = (i / 9) * Math.PI * 2 - Math.PI / 2;
-      return { cx: 200 + Math.cos(a) * 80, cy: 140 + Math.sin(a) * 80, r: 5 };
+      return { cx: 200 + Math.cos(a) * 80, cy: 140 + Math.sin(a) * 80, r: 5, number: i + 1 };
     }),
   },
   "connect-learn": {

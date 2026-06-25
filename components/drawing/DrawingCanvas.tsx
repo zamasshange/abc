@@ -10,6 +10,7 @@ type DrawingCanvasProps = {
   isEraser: boolean;
   clearToken: number;
   disabled?: boolean;
+  onStroke?: (x: number, y: number, width: number, height: number) => void;
 };
 
 export function DrawingCanvas({
@@ -18,6 +19,7 @@ export function DrawingCanvas({
   isEraser,
   clearToken,
   disabled = false,
+  onStroke,
 }: DrawingCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawingRef = useRef(false);
@@ -111,9 +113,13 @@ export function DrawingCanvas({
           ctx.stroke();
         }
       }
+      if (!isEraser && onStroke) {
+        const canvas = canvasRef.current!;
+        onStroke(x, y, canvas.clientWidth, canvas.clientHeight);
+      }
       ctx.globalCompositeOperation = "source-over";
     },
-    [isEraser, strokeColor, strokeWidth]
+    [isEraser, strokeColor, strokeWidth, onStroke]
   );
 
   const onPointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {

@@ -1,16 +1,20 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import type { ActivityId } from "@/lib/navigation";
 import { getDrawingTemplate } from "@/lib/drawing/templates";
 import { getExercisePagesForTemplate } from "@/lib/drawing/exercises";
+import { createTraceScorer } from "@/lib/tracing/trace-score";
+import { playTapSound } from "@/lib/audio";
+import { markComplete } from "@/lib/progress";
 import { DrawingCanvas } from "@/components/drawing/DrawingCanvas";
 import { TemplateLayer } from "@/components/drawing/TemplateLayer";
 import { ExerciseGuide } from "@/components/drawing/ExerciseGuide";
 import { LeftToolbar, RightToolbar } from "@/components/drawing/DrawingToolbars";
 import { ExitDialog } from "@/components/modals/ExitDialog";
-import { AdBar } from "@/components/shared/AdBar";
+import { TraceProgressBar } from "@/components/learning/TraceProgressBar";
+import { RewardOverlay } from "@/components/learning/RewardOverlay";
 
 type TracingScreenProps = {
   templateId: ActivityId;
@@ -31,16 +35,45 @@ export function TracingScreen({ templateId, onBack }: TracingScreenProps) {
   const template = getDrawingTemplate(templateId);
   const exercisePages = getExercisePagesForTemplate(templateId);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const scorerRef = useRef(createTraceScorer({ cx: 0.55, cy: 0.5, w: 0.55, h: 0.55 }));
   const [pageIndex, setPageIndex] = useState(0);
   const [strokeColor, setStrokeColor] = useState("#F44336");
   const [isEraser, setIsEraser] = useState(false);
   const [clearToken, setClearToken] = useState(0);
   const [showExit, setShowExit] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [showReward, setShowReward] = useState(false);
+  const completedRef = useRef(false);
+
+  const resetTrace = useCallback(() => {
+    scorerRef.current.reset();
+    completedRef.current = false;
+    setProgress(0);
+  }, []);
+
+  useEffect(() => {
+    resetTrace();
+  }, [pageIndex, resetTrace]);
+
+  const onStroke = useCallback(
+    (x: number, y: number, w: number, h: number) => {
+      if (completedRef.current || isEraser) return;
+      const p = scorerRef.current.addPoint(x, y, w, h);
+      setProgress(p);
+      if (scorerRef.current.isComplete()) {
+        completedRef.current = true;
+        markComplete("lines", templateId);
+        setShowReward(true);
+      }
+    },
+    [isEraser, templateId],
+  );
 
   const scrollToPage = useCallback((index: number) => {
     const next = Math.max(0, Math.min(exercisePages.length - 1, index));
     setPageIndex(next);
     setClearToken((t) => t + 1);
+    resetTrace();
     const el = scrollRef.current;
     if (el) el.scrollTo({ left: next * el.clientWidth, behavior: "smooth" });
   }, [exercisePages.length]);
@@ -60,13 +93,14 @@ export function TracingScreen({ templateId, onBack }: TracingScreenProps) {
       <div className="relative flex min-h-0 flex-1 overflow-hidden">
         <LeftToolbar
           isEraser={isEraser}
-          onEraserToggle={() => setIsEraser((p) => !p)}
-          onPenSelect={() => setIsEraser(false)}
-          onClear={() => setClearToken((t) => t + 1)}
+          onEraserToggle={() => { playTapSound(); setIsEraser((p) => !p); }}
+          onPenSelect={() => { playTapSound(); setIsEraser(false); }}
+          onClear={() => { playTapSound(); setClearToken((t) => t + 1); resetTrace(); }}
           onBack={() => setShowExit(true)}
         />
 
         <div className="relative flex min-h-0 min-w-0 flex-1 flex-col bg-white">
+          <TraceProgressBar progress={progress} />
           <div className="flex shrink-0 items-center justify-between px-1 pt-1">
             <NavArrow direction="left" onClick={() => scrollToPage(pageIndex - 1)} />
             <span className="text-xs font-semibold text-gray-400">{pageIndex + 1} / {exercisePages.length}</span>
@@ -86,7 +120,8 @@ export function TracingScreen({ templateId, onBack }: TracingScreenProps) {
                   strokeWidth={16}
                   isEraser={isEraser}
                   clearToken={pageIndex === idx ? clearToken : -1}
-                  disabled={pageIndex !== idx}
+                  disabled={pageIndex !== idx || completedRef.current}
+                  onStroke={pageIndex === idx ? onStroke : undefined}
                 />
               </div>
             ))}
@@ -101,7 +136,13 @@ export function TracingScreen({ templateId, onBack }: TracingScreenProps) {
         />
       </div>
 
-      <AdBar />
+      <RewardOverlay
+        open={showReward}
+        onDone={() => {
+          setShowReward(false);
+          if (pageIndex < exercisePages.length - 1) scrollToPage(pageIndex + 1);
+        }}
+      />
       <ExitDialog open={showExit} onCancel={() => setShowExit(false)} onConfirm={onBack} />
     </div>
   );

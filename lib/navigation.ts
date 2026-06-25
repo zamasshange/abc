@@ -47,7 +47,21 @@ export type ActivityId =
   | "pixel-whale"
   | "colors-pair"
   | "colors-create"
-  | "colors-how-to-draw";
+  | "colors-how-to-draw"
+  | "connect-ditto"
+  | "connect-match"
+  | "connect-jigsaw"
+  | "connect-tracing"
+  | "alpha-practice"
+  | "alpha-worksheets"
+  | "alpha-cursive-upper"
+  | "alpha-cursive-lower"
+  | "alpha-letter-match"
+  | "alpha-match"
+  | "alpha-jigsaw"
+  | "num-worksheets"
+  | "num-match"
+  | "num-jigsaw";
 
 export type ScreenTarget = {
   screen: AppScreen;
@@ -67,23 +81,35 @@ const routes: Record<string, ScreenTarget> = {
   "alphabets:trace-lower": { screen: "letter-tracing", activityId: "alpha-trace-lower", categoryId: "alphabets" },
   "alphabets:uppercase": { screen: "gallery", galleryId: "alphabet-worksheets", categoryId: "alphabets" },
   "alphabets:lowercase": { screen: "letter-tracing", activityId: "alpha-trace-lower", categoryId: "alphabets" },
+  "alphabets:practice": { screen: "letter-tracing", activityId: "alpha-practice", categoryId: "alphabets" },
+  "alphabets:worksheets": { screen: "gallery", galleryId: "alphabet-worksheets", categoryId: "alphabets" },
+  "alphabets:cursive-upper": { screen: "letter-tracing", activityId: "alpha-cursive-upper", categoryId: "alphabets" },
+  "alphabets:cursive-lower": { screen: "letter-tracing", activityId: "alpha-cursive-lower", categoryId: "alphabets" },
+  "alphabets:letter-match": { screen: "matching", activityId: "alpha-letter-match", categoryId: "alphabets" },
+  "alphabets:match": { screen: "matching", activityId: "alpha-match", categoryId: "alphabets" },
+  "alphabets:jigsaw": { screen: "matching", activityId: "alpha-jigsaw", categoryId: "alphabets" },
 
   "numbers:tracing": { screen: "letter-tracing", activityId: "num-tracing", categoryId: "numbers" },
   "numbers:counting": { screen: "matching", activityId: "num-counting", categoryId: "numbers" },
   "numbers:practice": { screen: "line-tracing", activityId: "num-practice", categoryId: "numbers" },
   "numbers:spelling": { screen: "letter-tracing", activityId: "num-spelling", categoryId: "numbers" },
+  "numbers:worksheets": { screen: "gallery", galleryId: "numbers-worksheets", categoryId: "numbers" },
+  "numbers:match": { screen: "matching", activityId: "num-match", categoryId: "numbers" },
+  "numbers:jigsaw": { screen: "matching", activityId: "num-jigsaw", categoryId: "numbers" },
 
   "shapes:learn": { screen: "learn-to-draw", activityId: "shapes-learn", categoryId: "shapes" },
   "shapes:practice": { screen: "free-draw", activityId: "shapes-practice", categoryId: "shapes" },
   "shapes:drawings": { screen: "free-draw", activityId: "shapes-drawings", categoryId: "shapes" },
   "shapes:worksheets": { screen: "gallery", galleryId: "shapes-worksheets", categoryId: "shapes" },
 
-  "connect:practice": { screen: "gallery", galleryId: "connect-worksheets", categoryId: "connect" },
+  "connect:practice": { screen: "connect-dots", activityId: "connect-practice", categoryId: "connect" },
   "connect:easy": { screen: "connect-dots", activityId: "connect-easy", categoryId: "connect" },
   "connect:hard": { screen: "connect-dots", activityId: "connect-hard", categoryId: "connect" },
   "connect:learn": { screen: "learn-to-draw", activityId: "connect-learn", categoryId: "connect" },
-  "connect:shape-draw": { screen: "learn-to-draw", activityId: "shapes-learn", categoryId: "connect" },
-  "connect:number-draw": { screen: "letter-tracing", activityId: "num-tracing", categoryId: "connect" },
+  "connect:ditto": { screen: "line-tracing", activityId: "connect-ditto", categoryId: "connect" },
+  "connect:match": { screen: "matching", activityId: "connect-match", categoryId: "connect" },
+  "connect:jigsaw": { screen: "matching", activityId: "connect-jigsaw", categoryId: "connect" },
+  "connect:tracing": { screen: "line-tracing", activityId: "connect-tracing", categoryId: "connect" },
 
   "mazes:worksheets": { screen: "gallery", galleryId: "mazes-worksheets", categoryId: "mazes" },
   "mazes:numbers": { screen: "maze", activityId: "mazes-numbers", categoryId: "mazes" },
@@ -124,6 +150,9 @@ export function getScreenForGalleryCard(
   if (galleryId === "mazes-worksheets") return { screen: "maze", activityId, categoryId };
   if (galleryId === "alphabet-worksheets") {
     return { screen: "letter-tracing", activityId, categoryId, pageId: cardId };
+  }
+  if (galleryId === "numbers-worksheets" && !card.locked) {
+    return { screen: "letter-tracing", activityId, categoryId };
   }
   if (galleryId === "shapes-worksheets" && !card.locked) {
     return { screen: "learn-to-draw", activityId, categoryId };

@@ -3,6 +3,7 @@ import { UPPERCASE } from "./alphabet";
 export type GalleryId =
   | "lines-worksheets"
   | "alphabet-worksheets"
+  | "numbers-worksheets"
   | "shapes-worksheets"
   | "connect-worksheets"
   | "pixel-art-pick"
@@ -42,6 +43,15 @@ export const galleries: Record<GalleryId, GalleryConfig> = {
       label: letter,
       activityId: "alpha-trace-upper",
     })),
+  },
+  "numbers-worksheets": {
+    id: "numbers-worksheets",
+    showDownload: true,
+    cards: [
+      { id: "seq-1", label: "1 2 ___", activityId: "num-tracing" },
+      { id: "seq-2", label: "8 ___ 10", activityId: "num-tracing" },
+      { id: "seq-3", locked: true, activityId: "num-practice" },
+    ],
   },
   "shapes-worksheets": {
     id: "shapes-worksheets",
