@@ -79,7 +79,7 @@ const routes: Record<string, ScreenTarget> = {
   "lines:curve": { screen: "gallery", galleryId: "lines-curve", categoryId: "lines" },
   "lines:practice": { screen: "gallery", galleryId: "lines-practice", categoryId: "lines" },
 
-  "alphabets:trace-upper": { screen: "letter-tracing", activityId: "alpha-trace-upper", categoryId: "alphabets" },
+  "alphabets:trace-upper": { screen: "gallery", galleryId: "alphabet-trace-upper", categoryId: "alphabets" },
   "alphabets:trace-lower": { screen: "letter-tracing", activityId: "alpha-trace-lower", categoryId: "alphabets" },
   "alphabets:uppercase": { screen: "gallery", galleryId: "alphabet-worksheets", categoryId: "alphabets" },
   "alphabets:lowercase": { screen: "letter-tracing", activityId: "alpha-trace-lower", categoryId: "alphabets" },
@@ -150,7 +150,7 @@ export function getScreenForGalleryCard(
   }
   if (galleryId === "pixel-art-pick") return { screen: "pixel-art", activityId, categoryId };
   if (galleryId === "mazes-worksheets") return { screen: "maze", activityId, categoryId };
-  if (galleryId === "alphabet-worksheets") {
+  if (galleryId === "alphabet-trace-upper" || galleryId === "alphabet-worksheets") {
     return { screen: "letter-tracing", activityId, categoryId, pageId: cardId };
   }
   if (galleryId === "numbers-worksheets" && !card.locked) {

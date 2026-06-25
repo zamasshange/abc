@@ -2,6 +2,7 @@ import { DotsGalleryArt } from "@/components/illustrations/DotsGalleryArt";
 import { LineGalleryArt } from "@/components/illustrations/LineGalleryArt";
 import { CurveGalleryArt } from "@/components/illustrations/CurveGalleryArt";
 import { PracticeGalleryArt } from "@/components/illustrations/PracticeGalleryArt";
+import { AlphabetTraceGalleryArt } from "@/components/illustrations/AlphabetTraceGalleryArt";
 
 const GREEN_BORDER = "border-[3px] border-[#1B6B3A]";
 
@@ -17,6 +18,9 @@ export function GalleryCardArt({ galleryId, cardId, label }: { galleryId: string
   }
   if (galleryId === "lines-practice") {
     return <PracticeGalleryArt cardId={cardId} />;
+  }
+  if (galleryId === "alphabet-trace-upper") {
+    return <AlphabetTraceGalleryArt cardId={cardId} />;
   }
   const border = GREEN_BORDER;
   if (galleryId === "pixel-art-pick") return <div className={`flex aspect-square w-[26vw] max-w-[170px] min-w-[90px] items-center justify-center bg-white p-1 ${border}`}><PixelPreview id={cardId} /></div>;

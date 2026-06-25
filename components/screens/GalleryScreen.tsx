@@ -33,7 +33,8 @@ export function GalleryScreen({
     galleryId === "lines-dots" ||
     galleryId === "lines-line" ||
     galleryId === "lines-curve" ||
-    galleryId === "lines-practice";
+    galleryId === "lines-practice" ||
+    galleryId === "alphabet-trace-upper";
 
   const updateScrollHint = useCallback(() => {
     const el = scrollRef.current;

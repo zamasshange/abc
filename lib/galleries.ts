@@ -3,6 +3,7 @@ import { DOTS_GALLERY_CARD_IDS } from "./dots-gallery";
 import { LINE_GALLERY_CARD_IDS } from "./line-gallery";
 import { CURVE_GALLERY_CARDS } from "./curve-gallery";
 import { PRACTICE_GALLERY_CARDS } from "./practice-gallery";
+import { ALPHABET_TRACE_UPPER_CARD_IDS } from "./alphabet-trace-gallery";
 
 export type GalleryId =
   | "lines-dots"
@@ -10,6 +11,7 @@ export type GalleryId =
   | "lines-curve"
   | "lines-practice"
   | "lines-worksheets"
+  | "alphabet-trace-upper"
   | "alphabet-worksheets"
   | "numbers-worksheets"
   | "shapes-worksheets"
@@ -91,6 +93,16 @@ export const galleries: Record<GalleryId, GalleryConfig> = {
       { id: "slant", activityId: "lines-practice" },
       { id: "arrow", activityId: "lines-curve" },
     ],
+  },
+  "alphabet-trace-upper": {
+    id: "alphabet-trace-upper",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: ALPHABET_TRACE_UPPER_CARD_IDS.map((id) => ({
+      id,
+      label: id.toUpperCase(),
+      activityId: "alpha-trace-upper",
+    })),
   },
   "alphabet-worksheets": {
     id: "alphabet-worksheets",
