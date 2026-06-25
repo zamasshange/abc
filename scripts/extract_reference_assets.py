@@ -9,6 +9,20 @@ ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / "app" / "abc_preschool1"
 OUT_CARDS = ROOT / "public" / "assets" / "cards"
 OUT_SCREENS = ROOT / "public" / "assets" / "screens"
+OUT_NAV = ROOT / "public" / "assets" / "nav"
+
+# Nav strip height on reference 1600×720 screenshots
+NAV_BOTTOM_RATIO = 153 / 720
+
+NAV_SOURCES: dict[str, str] = {
+    "lines": "WhatsApp Image 2026-06-24 at 15.33.11 (2).jpeg",
+    "shapes": "WhatsApp Image 2026-06-24 at 15.33.03 (2).jpeg",
+    "connect": "WhatsApp Image 2026-06-24 at 15.33.02 (1).jpeg",
+    "mazes": "WhatsApp Image 2026-06-24 at 15.33.01 (3).jpeg",
+    "alphabets": "WhatsApp Image 2026-06-24 at 15.33.05.jpeg",
+    "numbers": "WhatsApp Image 2026-06-24 at 15.33.03 (3).jpeg",
+    "colors": "WhatsApp Image 2026-06-24 at 15.33.02 (2).jpeg",
+}
 
 # Normalized [x1, y1, x2, y2] for 1600×720 reference screenshots
 CARD_SLOTS = [
@@ -135,9 +149,30 @@ def crop_from_video_screen(category: str, indices: list[int]) -> int:
     return saved
 
 
+def extract_nav_strips() -> None:
+    OUT_NAV.mkdir(parents=True, exist_ok=True)
+    for category, fname in NAV_SOURCES.items():
+        src = REF / fname
+        if not src.exists():
+            print("MISSING nav", fname)
+            continue
+        im = Image.open(src).convert("RGB")
+        w, h = im.size
+        nav_h = int(h * NAV_BOTTOM_RATIO)
+        nav = im.crop((0, 0, w, nav_h))
+        dest = OUT_NAV / f"nav-full-{category}.jpg"
+        nav.save(dest, quality=96)
+        nav.resize((w * 2, nav_h * 2), Image.LANCZOS).save(
+            dest.with_name(f"nav-full-{category}@2x.jpg"),
+            quality=94,
+        )
+        print("saved nav", dest.name, nav.size)
+
+
 def main() -> None:
     OUT_CARDS.mkdir(parents=True, exist_ok=True)
     OUT_SCREENS.mkdir(parents=True, exist_ok=True)
+    extract_nav_strips()
 
     for category, batches in HOME_BATCHES.items():
         border_fn = BORDER_DETECTORS[category]

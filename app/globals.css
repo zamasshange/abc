@@ -27,7 +27,7 @@ body {
 }
 
 body {
-  background: #000;
+  background: var(--game-fill, #c6e06d);
   color: var(--foreground);
   font-family: var(--font-fredoka), "Fredoka", "Varela Round", sans-serif;
   user-select: none;
@@ -40,6 +40,7 @@ body {
   height: 100svh;
   width: 100vw;
   overflow: hidden;
+  background: var(--game-fill, #c6e06d);
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
     env(safe-area-inset-left);
 }
@@ -81,6 +82,17 @@ body {
   will-change: transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+
+.nav-strip {
+  object-fit: fill;
+  image-rendering: -webkit-optimize-contrast;
+  pointer-events: none;
+  user-select: none;
+}
+
+.nav-hit:active {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .card-image {

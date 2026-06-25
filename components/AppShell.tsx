@@ -55,7 +55,10 @@ export function AppShell() {
     screen === "splash" ? "#66e0f5" : theme.tabs[lastCategory].contentBg;
 
   return (
-    <div className="mobile-app-shell">
+    <div
+      className="mobile-app-shell"
+      style={{ "--game-fill": viewportFill } as React.CSSProperties}
+    >
       <div className="portrait-only-message">
         <p className="text-lg font-bold text-white">Rotate your device</p>
         <p className="mt-2 text-sm text-white/80">Please use landscape mode</p>
