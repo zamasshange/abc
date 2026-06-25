@@ -13,18 +13,18 @@ export type CategoryConfig = {
   cards: ActivityCard[];
 };
 
+/** Category/card layout from GunjanApps ABC Preschool (Play Store screenshots + abc_preschool1) */
 export const categories: CategoryConfig[] = [
   {
     id: "colors",
     label: "Colors",
     row: "top",
     cards: [
-      { id: "worksheets", title: "Worksheets", illustration: "colors-worksheets" },
-      { id: "matching", title: "Matching", illustration: "colors-matching" },
-      { id: "fill", title: "Fill", illustration: "colors-fill" },
       { id: "pixel-art", title: "Pixel Art", illustration: "colors-pixel" },
-      { id: "practice", title: "Practice", illustration: "connect-practice" },
-      { id: "learn", title: "Learn", illustration: "connect-learn" },
+      { id: "how-to-draw", title: "How to Draw", illustration: "connect-learn" },
+      { id: "create", title: "Create", illustration: "colors-fill" },
+      { id: "pair", title: "Pair", illustration: "colors-matching" },
+      { id: "worksheets", title: "Worksheets", illustration: "colors-worksheets" },
     ],
   },
   {
@@ -45,10 +45,10 @@ export const categories: CategoryConfig[] = [
     label: "Mazes",
     row: "top",
     cards: [
-      { id: "practice", title: "Practice", illustration: "mazes-practice" },
-      { id: "easy", title: "Easy", illustration: "mazes-easy" },
-      { id: "hard", title: "Hard", illustration: "mazes-hard" },
       { id: "worksheets", title: "Worksheets", illustration: "mazes-worksheets" },
+      { id: "numbers", title: "Numbers", illustration: "mazes-easy" },
+      { id: "match", title: "Match", illustration: "mazes-hard" },
+      { id: "shapes", title: "Shapes", illustration: "mazes-practice" },
     ],
   },
   {
@@ -89,10 +89,10 @@ export const categories: CategoryConfig[] = [
     label: "Shapes",
     row: "bottom",
     cards: [
+      { id: "learn", title: "Learn", illustration: "shapes-learn" },
       { id: "practice", title: "Practice", illustration: "shapes-practice" },
       { id: "drawings", title: "Drawings", illustration: "shapes-drawings" },
       { id: "worksheets", title: "Worksheets", illustration: "shapes-worksheets" },
-      { id: "learn", title: "Learn", illustration: "shapes-learn" },
     ],
   },
 ];
