@@ -1,11 +1,13 @@
 import type { CategoryId } from "./theme";
 import type { GalleryId } from "./galleries";
 import { getGallery } from "./galleries";
+import { getPracticeCardKind } from "./practice-gallery";
 
 /** Mirrors GunjanApps ABC Preschool: each activity opens its own screen type */
 export type AppScreen =
   | "splash"
   | "home"
+  | "my-world"
   | "gallery"
   | "line-tracing"
   | "letter-tracing"
@@ -72,10 +74,10 @@ export type ScreenTarget = {
 };
 
 const routes: Record<string, ScreenTarget> = {
-  "lines:dots": { screen: "line-tracing", activityId: "lines-dots", categoryId: "lines" },
-  "lines:line": { screen: "line-tracing", activityId: "lines-line", categoryId: "lines" },
-  "lines:curve": { screen: "line-tracing", activityId: "lines-curve", categoryId: "lines" },
-  "lines:practice": { screen: "line-tracing", activityId: "lines-practice", categoryId: "lines" },
+  "lines:dots": { screen: "gallery", galleryId: "lines-dots", categoryId: "lines" },
+  "lines:line": { screen: "gallery", galleryId: "lines-line", categoryId: "lines" },
+  "lines:curve": { screen: "gallery", galleryId: "lines-curve", categoryId: "lines" },
+  "lines:practice": { screen: "gallery", galleryId: "lines-practice", categoryId: "lines" },
 
   "alphabets:trace-upper": { screen: "letter-tracing", activityId: "alpha-trace-upper", categoryId: "alphabets" },
   "alphabets:trace-lower": { screen: "letter-tracing", activityId: "alpha-trace-lower", categoryId: "alphabets" },
@@ -157,7 +159,16 @@ export function getScreenForGalleryCard(
   if (galleryId === "shapes-worksheets" && !card.locked) {
     return { screen: "learn-to-draw", activityId, categoryId };
   }
-  if (galleryId === "lines-worksheets") return { screen: "line-tracing", activityId, categoryId };
+  if (galleryId === "lines-dots" || galleryId === "lines-line" || galleryId === "lines-curve" || galleryId === "lines-worksheets") {
+    return { screen: "line-tracing", activityId, categoryId, pageId: cardId };
+  }
+  if (galleryId === "lines-practice") {
+    const kind = getPracticeCardKind(cardId);
+    if (kind === "path") {
+      return { screen: "line-tracing", activityId, categoryId, pageId: cardId };
+    }
+    return { screen: "matching", activityId, categoryId, pageId: cardId };
+  }
   return null;
 }
 

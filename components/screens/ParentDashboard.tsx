@@ -67,7 +67,7 @@ export function ParentDashboard({ open, onClose }: ParentDashboardProps) {
           <StatCard label="Numbers" value={summary.numbers} color="#FFCC00" />
           <StatCard label="Lines" value={summary.lines} color="#B8E050" />
           <StatCard label="Shapes" value={summary.shapes} color="#FF8080" />
-          <StatCard label="Activities" value={summary.activitiesCompleted} color="#BA68C8" />
+          <StatCard label="Stars" value={summary.totalStars} color="#FF9800" />
         </div>
 
         <div className="mt-4 flex items-center justify-between rounded-xl bg-[#E8F5E9] px-4 py-3">

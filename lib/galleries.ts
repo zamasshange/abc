@@ -1,6 +1,14 @@
 import { UPPERCASE } from "./alphabet";
+import { DOTS_GALLERY_CARD_IDS } from "./dots-gallery";
+import { LINE_GALLERY_CARD_IDS } from "./line-gallery";
+import { CURVE_GALLERY_CARDS } from "./curve-gallery";
+import { PRACTICE_GALLERY_CARDS } from "./practice-gallery";
 
 export type GalleryId =
+  | "lines-dots"
+  | "lines-line"
+  | "lines-curve"
+  | "lines-practice"
   | "lines-worksheets"
   | "alphabet-worksheets"
   | "numbers-worksheets"
@@ -21,10 +29,59 @@ export type GalleryConfig = {
   id: GalleryId;
   showDownload?: boolean;
   showCenterTabs?: boolean;
+  /** Three cards per swipe page (Dots gallery) */
+  paged?: boolean;
   cards: GalleryCard[];
 };
 
+/** Free worksheets first, then locked — matches GunjanApps scroll order */
+function sortUnlockedFirst<T extends { locked?: boolean }>(cards: T[]): T[] {
+  return [...cards.filter((c) => !c.locked), ...cards.filter((c) => c.locked)];
+}
+
 export const galleries: Record<GalleryId, GalleryConfig> = {
+  "lines-dots": {
+    id: "lines-dots",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: DOTS_GALLERY_CARD_IDS.map((id) => ({
+      id,
+      activityId: "lines-dots",
+    })),
+  },
+  "lines-line": {
+    id: "lines-line",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: LINE_GALLERY_CARD_IDS.map((id) => ({
+      id,
+      activityId: "lines-line",
+    })),
+  },
+  "lines-curve": {
+    id: "lines-curve",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: sortUnlockedFirst(
+      CURVE_GALLERY_CARDS.map(({ id, locked }) => ({
+        id,
+        activityId: "lines-curve",
+        locked,
+      })),
+    ),
+  },
+  "lines-practice": {
+    id: "lines-practice",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: sortUnlockedFirst(
+      PRACTICE_GALLERY_CARDS.map(({ id, locked }) => ({
+        id,
+        activityId: "lines-practice",
+        locked,
+      })),
+    ),
+  },
   "lines-worksheets": {
     id: "lines-worksheets",
     showDownload: true,

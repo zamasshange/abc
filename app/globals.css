@@ -6,6 +6,42 @@
   --gunjan-nav-purple: #c49ae8;
   --gunjan-cyan: #55d8ea;
   --gunjan-toolbar-red: #d32f2f;
+
+  /* Preschool game button palette */
+  --game-pink: #ff4da6;
+  --game-pink-light: #ff80c4;
+  --game-pink-ring: #cc1a7a;
+  --game-pink-shadow: #a01460;
+
+  --game-purple: #b44dff;
+  --game-purple-light: #cc80ff;
+  --game-purple-ring: #7a1acc;
+  --game-purple-shadow: #5c0f99;
+
+  --game-orange: #ff9f1a;
+  --game-orange-light: #ffbf52;
+  --game-orange-ring: #cc6600;
+  --game-orange-shadow: #a35200;
+
+  --game-blue: #3db8ff;
+  --game-blue-light: #70ccff;
+  --game-blue-ring: #1565c0;
+  --game-blue-shadow: #0d4a8f;
+
+  --game-green: #5cd65c;
+  --game-green-light: #8ae68a;
+  --game-green-ring: #2e8b2e;
+  --game-green-shadow: #1f6b1f;
+
+  --game-yellow: #ffd633;
+  --game-yellow-light: #ffe566;
+  --game-yellow-ring: #cc9900;
+  --game-yellow-shadow: #a37a00;
+
+  --game-red: #ff5252;
+  --game-red-light: #ff8080;
+  --game-red-ring: #c62828;
+  --game-red-shadow: #9e1f1f;
 }
 
 @theme inline {
@@ -74,23 +110,15 @@ body {
 }
 
 /* GunjanApps worksheet / gallery cyan wave background */
-.worksheets-bg {
-  background-color: #55d8ea;
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent 14px,
-      rgba(255, 255, 255, 0.22) 14px,
-      rgba(255, 255, 255, 0.22) 18px
-    ),
-    repeating-linear-gradient(
-      180deg,
-      #4ecde0 0px,
-      #4ecde0 28px,
-      #55d8ea 28px,
-      #55d8ea 56px
-    );
+.worksheets-bg,
+.dots-gallery-bg {
+  background-color: #5ad4e8;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='48' viewBox='0 0 120 48'%3E%3Cpath d='M0 24 Q30 8 60 24 T120 24 V48 H0Z' fill='%234ec9dc'/%3E%3Cpath d='M0 36 Q30 20 60 36 T120 36 V48 H0Z' fill='%2355d0e3' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 120px 48px;
+}
+
+.dots-gallery-bg {
+  background-color: #58d2e6;
 }
 
 .gunjan-btn-3d {
@@ -98,8 +126,9 @@ body {
 }
 
 .gunjan-download-btn {
-  background: linear-gradient(180deg, #b8e986 0%, #9ccc65 100%);
+  background: linear-gradient(180deg, #aed581 0%, #8bc34a 55%, #7cb342 100%);
   border: 3px solid #689f38;
-  box-shadow: 0 5px 0 #558b2f;
-  text-shadow: 1px 1px 0 #558b2f;
+  box-shadow: 0 5px 0 #558b2f, inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  text-shadow: 1px 2px 0 #4a7c23;
+  letter-spacing: 0.02em;
 }

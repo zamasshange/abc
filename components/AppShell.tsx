@@ -13,6 +13,7 @@ import { LearnToDrawScreen } from "@/components/screens/LearnToDrawScreen";
 import { MatchingScreen } from "@/components/screens/MatchingScreen";
 import { PixelArtScreen } from "@/components/screens/PixelArtScreen";
 import { FreeDrawScreen } from "@/components/screens/FreeDrawScreen";
+import { MyWorldScreen } from "@/components/screens/MyWorldScreen";
 import type { AppScreen, ActivityId, ScreenTarget } from "@/lib/navigation";
 import { getScreenForGalleryCard } from "@/lib/navigation";
 import type { GalleryId } from "@/lib/galleries";
@@ -59,6 +60,7 @@ export function AppShell() {
         <AnimatePresence mode="wait">
           {screen === "splash" && <SplashScreen key="splash" onComplete={() => setScreen("home")} />}
           {screen === "home" && wrap("home", <HomeScreen initialCategory={lastCategory} onNavigate={navigate} />)}
+          {screen === "my-world" && wrap("my-world", <MyWorldScreen onBack={() => goHome()} />)}
           {screen === "gallery" && wrap(`gallery-${galleryId}`, <GalleryScreen galleryId={galleryId} onBack={() => goHome()} onSelectCard={handleGalleryCard} />)}
           {screen === "line-tracing" && wrap(`line-${activityId}`, <TracingScreen templateId={activityId} onBack={() => goHome(lastCategory)} />)}
           {screen === "letter-tracing" && wrap(`letter-${activityId}-${pageId}`, <LetterTracingScreen activityId={activityId} pageId={pageId} onBack={() => goHome(lastCategory)} />)}

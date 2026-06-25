@@ -1,5 +1,24 @@
+import { DotsGalleryArt } from "@/components/illustrations/DotsGalleryArt";
+import { LineGalleryArt } from "@/components/illustrations/LineGalleryArt";
+import { CurveGalleryArt } from "@/components/illustrations/CurveGalleryArt";
+import { PracticeGalleryArt } from "@/components/illustrations/PracticeGalleryArt";
+
+const GREEN_BORDER = "border-[3px] border-[#1B6B3A]";
+
 export function GalleryCardArt({ galleryId, cardId, label }: { galleryId: string; cardId: string; label?: string }) {
-  const border = "border-[4px] border-[#2D8B4E]";
+  if (galleryId === "lines-dots") {
+    return <DotsGalleryArt cardId={cardId} />;
+  }
+  if (galleryId === "lines-line") {
+    return <LineGalleryArt cardId={cardId} />;
+  }
+  if (galleryId === "lines-curve") {
+    return <CurveGalleryArt cardId={cardId} />;
+  }
+  if (galleryId === "lines-practice") {
+    return <PracticeGalleryArt cardId={cardId} />;
+  }
+  const border = GREEN_BORDER;
   if (galleryId === "pixel-art-pick") return <div className={`flex aspect-square w-[26vw] max-w-[170px] min-w-[90px] items-center justify-center bg-white p-1 ${border}`}><PixelPreview id={cardId} /></div>;
   if (galleryId === "connect-worksheets") return (
     <div className={`flex aspect-[4/5] w-[28vw] max-w-[180px] min-w-[100px] flex-col bg-[#BDBDBD] p-1 ${border}`}>
