@@ -21,9 +21,9 @@ export const categories: CategoryConfig[] = [
     row: "top",
     cards: [
       { id: "pixel-art", title: "Pixel Art", illustration: "colors-pixel" },
-      { id: "how-to-draw", title: "How to Draw", illustration: "connect-learn" },
-      { id: "create", title: "Create", illustration: "colors-fill" },
-      { id: "pair", title: "Pair", illustration: "colors-matching" },
+      { id: "how-to-draw", title: "How to Draw", illustration: "colors-how-to-draw" },
+      { id: "create", title: "Create", illustration: "colors-create" },
+      { id: "pair", title: "Pair", illustration: "colors-pair" },
       { id: "worksheets", title: "Worksheets", illustration: "colors-worksheets" },
     ],
   },
@@ -46,9 +46,9 @@ export const categories: CategoryConfig[] = [
     row: "top",
     cards: [
       { id: "worksheets", title: "Worksheets", illustration: "mazes-worksheets" },
-      { id: "numbers", title: "Numbers", illustration: "mazes-easy" },
-      { id: "match", title: "Match", illustration: "mazes-hard" },
-      { id: "shapes", title: "Shapes", illustration: "mazes-practice" },
+      { id: "numbers", title: "Numbers", illustration: "mazes-numbers" },
+      { id: "match", title: "Match", illustration: "mazes-match" },
+      { id: "shapes", title: "Shapes", illustration: "mazes-shapes" },
     ],
   },
   {

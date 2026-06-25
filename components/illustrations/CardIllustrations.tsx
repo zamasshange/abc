@@ -49,14 +49,56 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
     case "colors-pixel":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          {Array.from({ length: 8 }).map((_, row) =>
-            Array.from({ length: 8 }).map((_, col) => {
-              const colors = ["#1a1a1a", "#fff", "#FF99CC", "#1a1a1a", "#fff", "#FF99CC", "#1a1a1a", "#fff"];
-              const c = colors[(row + col) % colors.length];
-              return <rect key={`${row}-${col}`} x={30 + col * 8} y={20 + row * 8} width="7" height="7" fill={c} stroke="#ccc" strokeWidth="0.3" />;
-            })
+          {Array.from({ length: 10 }).map((_, row) =>
+            Array.from({ length: 10 }).map((_, col) => {
+              const isPenguin = (row > 2 && row < 8 && col > 2 && col < 8) || (row === 2 && col > 4 && col < 6);
+              const isBow = row === 2 && col === 6;
+              const fill = isBow ? "#FF99CC" : isPenguin ? "#1a1a1a" : row % 2 === col % 2 ? "#E8E8E8" : "#fff";
+              return <rect key={`${row}-${col}`} x={22 + col * 7.5} y={12 + row * 7.5} width="7" height="7" fill={fill} stroke="#ccc" strokeWidth="0.3" />;
+            }),
           )}
-          <ellipse cx="54" cy="28" rx="6" ry="4" fill="#FF99CC" />
+        </svg>
+      );
+    case "colors-how-to-draw":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <polygon points="55,22 78,58 32,58" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="42" cy="42" r="14" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="68" cy="42" r="14" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="48" cy="48" r="3" fill={stroke} />
+          <circle cx="62" cy="48" r="3" fill={stroke} />
+          <polygon points="55,56 50,64 60,64" fill={stroke} />
+          <line x1="38" y1="54" x2="28" y2="50" stroke={stroke} strokeWidth="1.5" />
+          <line x1="38" y1="58" x2="28" y2="62" stroke={stroke} strokeWidth="1.5" />
+          <line x1="72" y1="54" x2="82" y2="50" stroke={stroke} strokeWidth="1.5" />
+          <line x1="72" y1="58" x2="82" y2="62" stroke={stroke} strokeWidth="1.5" />
+          <circle cx="98" cy="18" r="10" fill="#4CAF50" stroke="#fff" strokeWidth="2" />
+          <path d="M95 18 L98 21 L103 15" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      );
+    case "colors-create":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M45 35 Q60 20 75 35 Q85 45 80 60 Q75 75 60 72 Q45 69 40 55 Q35 42 45 35" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M48 38 Q55 28 62 38" fill="none" stroke="#FF99CC" strokeWidth="2" strokeDasharray={dash} />
+          <path d="M42 58 Q35 72 30 82" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          <path d="M50 62 Q48 78 46 88" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          <path d="M60 64 Q60 80 58 90" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          <path d="M70 58 Q75 74 78 84" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          <path d="M78 55 Q88 68 92 78" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          <circle cx="52" cy="48" r="3" fill={stroke} />
+          <circle cx="68" cy="48" r="3" fill={stroke} />
+        </svg>
+      );
+    case "colors-pair":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M28 25 Q28 15 38 15 Q48 15 48 25 L48 75 Q48 88 38 88 Q28 88 28 75 Z" fill="#fff" stroke={stroke} strokeWidth="2" />
+          <path d="M72 25 Q72 15 82 15 Q92 15 92 25 L92 75 Q92 88 82 88 Q72 88 72 75 Z" fill="#fff" stroke={stroke} strokeWidth="2" />
+          <circle cx="38" cy="40" r="5" fill="#FF99CC" />
+          <circle cx="82" cy="40" r="5" fill="#FF99CC" />
+          <circle cx="38" cy="55" r="4" fill="#FF99CC" />
+          <circle cx="82" cy="55" r="4" fill="#FF99CC" />
         </svg>
       );
     case "connect-practice":
@@ -134,7 +176,38 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
           <rect x="25" y="20" width="70" height="60" fill="none" stroke={stroke} strokeWidth="2" />
           <polygon points="35,35 45,50 35,65" fill="none" stroke={stroke} strokeWidth="1.5" />
           <rect x="55" y="35" width="15" height="15" fill="none" stroke={stroke} strokeWidth="1.5" />
-          <text x="28" y="30" fontSize="10">🦀</text>
+          <circle cx="30" cy="28" r="6" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <path d="M28 30 L32 30 M30 28 L30 32" stroke={stroke} strokeWidth="1" />
+        </svg>
+      );
+    case "mazes-numbers":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M20 70 Q35 30 55 40 Q75 50 90 25 Q100 15 105 35" fill="none" stroke={stroke} strokeWidth="2" />
+          <text x="22" y="68" fontSize="10">🍒</text>
+          <text x="48" y="42" fontSize="10">🍌</text>
+          <text x="72" y="48" fontSize="10">🍎</text>
+          <text x="92" y="30" fontSize="14" fontWeight="bold" fill={stroke}>1</text>
+        </svg>
+      );
+    case "mazes-match":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M18 72 Q30 25 50 35 Q70 45 80 20 Q95 5 102 40 Q108 70 85 75 Q60 80 40 70 Q25 65 18 72" fill="none" stroke={stroke} strokeWidth="2" />
+          <text x="28" y="58" fontSize="12" fontWeight="bold" fill={stroke}>C</text>
+          <text x="52" y="42" fontSize="10">⭐</text>
+          <text x="72" y="55" fontSize="10">🐟</text>
+          <text x="88" y="38" fontSize="10">🐱</text>
+        </svg>
+      );
+    case "mazes-shapes":
+      return (
+        <svg viewBox="0 0 120 100" className={className} aria-hidden>
+          <path d="M15 75 Q25 20 45 30 Q65 40 75 15 Q90 0 100 35 Q108 65 90 72 Q70 80 50 70 Q30 60 15 75" fill="none" stroke={stroke} strokeWidth="2" />
+          <rect x="22" y="58" width="12" height="12" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <polygon points="50,48 58,62 42,62" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <circle cx="72" cy="45" r="7" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <text x="84" y="42" fontSize="10">☀️</text>
         </svg>
       );
     case "lines-dots":
@@ -289,9 +362,11 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
     case "shapes-drawings":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          <path d="M30 70 L50 50 L70 55 L90 40" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
-          <path d="M25 75 Q40 65 55 75 T85 75" fill="none" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
-          <circle cx="75" cy="25" r="8" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          <path d="M25 68 L55 38 L85 68 Z" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          <line x1="55" y1="38" x2="55" y2="22" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
+          <path d="M20 70 Q55 62 90 70" fill="none" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+          <path d="M20 74 Q55 66 90 74" fill="none" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+          <circle cx="88" cy="28" r="8" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray={dash} />
         </svg>
       );
     case "shapes-worksheets":
