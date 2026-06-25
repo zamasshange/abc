@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
-import type { ActivityId } from "@/lib/navigation";
+import type { DrawingTemplateId } from "@/lib/navigation";
 import { getExercisePagesForTemplate } from "@/lib/drawing/exercises";
 import { DrawingCanvas } from "@/components/drawing/DrawingCanvas";
 import { ExerciseGuide } from "@/components/drawing/ExerciseGuide";
@@ -10,7 +10,7 @@ import { LeftToolbar, RightToolbar } from "@/components/drawing/DrawingToolbars"
 import { ExitDialog } from "@/components/modals/ExitDialog";
 
 type TracingScreenProps = {
-  templateId: ActivityId;
+  templateId: DrawingTemplateId;
   onBack: () => void;
 };
 

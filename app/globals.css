@@ -13,7 +13,6 @@
 
 * {
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
 }
 
 html,
@@ -22,27 +21,19 @@ body {
   width: 100%;
   overflow: hidden;
   overscroll-behavior: none;
-  position: fixed;
-  inset: 0;
 }
 
 body {
-  background: var(--game-fill, #c6e06d);
+  background: #000;
   color: var(--foreground);
   font-family: var(--font-fredoka), "Fredoka", "Varela Round", sans-serif;
   user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
 }
 
 .mobile-app-shell {
   height: 100dvh;
-  height: 100svh;
   width: 100vw;
   overflow: hidden;
-  background: var(--game-fill, #c6e06d);
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
-    env(safe-area-inset-left);
 }
 
 .portrait-only-message {
@@ -59,69 +50,12 @@ body {
 }
 
 .mobile-viewport {
-  height: 100%;
-  width: 100%;
+  height: 100dvh;
+  width: 100vw;
   overflow: hidden;
 }
 
-/* Fixed logical game canvas — scales uniformly on phone/tablet landscape */
-.game-viewport-host {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  background: #c6e06d;
-}
-
-.game-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  transform-origin: top left;
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.nav-strip {
-  object-fit: fill;
-  image-rendering: -webkit-optimize-contrast;
-  pointer-events: none;
-  user-select: none;
-}
-
-.nav-hit:active {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.card-illustration {
-  object-fit: contain;
-  object-position: center center;
-  image-rendering: auto;
-  -webkit-user-drag: none;
-  pointer-events: none;
-}
-
-.activity-card {
-  -webkit-tap-highlight-color: transparent;
-}
-
-.touch-pan-x {
-  touch-action: pan-x;
-}
-
-.scrollbar-none {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-}
-
-/* Portrait phones & tablets — reference app is landscape only */
-@media (orientation: portrait) {
+@media (orientation: portrait) and (min-height: 501px) {
   .portrait-only-message {
     display: flex;
   }
@@ -137,10 +71,12 @@ body {
 }
 
 .worksheets-bg {
-  background-color: #6fd4e8;
-  background-image:
-    radial-gradient(ellipse 28px 14px at 14px 10px, rgba(255, 255, 255, 0.55) 60%, transparent 61%),
-    radial-gradient(ellipse 28px 14px at 42px 10px, rgba(255, 255, 255, 0.55) 60%, transparent 61%);
-  background-size: 56px 20px;
-  background-position: 0 0;
+  background-color: #7adce8;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 16px,
+    rgba(70, 170, 195, 0.45) 16px,
+    rgba(70, 170, 195, 0.45) 20px
+  );
 }

@@ -5,14 +5,6 @@ import type { CategoryId } from "@/lib/theme";
 import { categories } from "@/lib/categories";
 import { theme } from "@/lib/theme";
 import { TabIcon, ShopIcon } from "@/components/icons/TabIcons";
-import {
-  GAME_WIDTH,
-  NAV_H,
-  NAV_ROW1_PX,
-  NAV_ROW2_PX,
-  UI_SCALE,
-  UTIL_COL_W,
-} from "@/lib/device";
 
 type TopNavProps = {
   activeId: CategoryId;
@@ -20,61 +12,25 @@ type TopNavProps = {
   onLanguagePress?: () => void;
 };
 
-const utilColW = Math.round(GAME_WIDTH * UTIL_COL_W);
-const utilBtn = Math.round(52 * UI_SCALE);
-const utilRing = Math.max(3, Math.round(4 * UI_SCALE));
-const tabIconTop = Math.round(44 * UI_SCALE);
-const tabIconBottom = Math.round(40 * UI_SCALE);
-const topRadius = Math.round(18 * UI_SCALE);
-const ribbonH = Math.max(3, Math.round(5 * UI_SCALE));
-const bottomRibbonH = Math.max(5, Math.round(8 * UI_SCALE));
-const activeOverlap = Math.round(14 * UI_SCALE);
-const topLabelPx = Math.round(24 * UI_SCALE);
-const bottomLabelPx = Math.round(28 * UI_SCALE);
-const outlinePx = Math.max(2, Math.round(3 * UI_SCALE));
-
 function OutlinedLabel({
   children,
   outlineColor,
-  fontSize,
+  size = "sm",
 }: {
   children: string;
   outlineColor: string;
-  fontSize: number;
+  size?: "sm" | "md";
 }) {
-  const o = outlinePx;
+  const textSize = size === "md" ? "text-sm sm:text-base" : "text-xs sm:text-sm";
   return (
     <span
-      className="relative z-[1] font-extrabold leading-none tracking-tight text-white"
+      className={`font-extrabold leading-none text-white ${textSize}`}
       style={{
-        fontSize,
-        textShadow: `
-          ${o}px 0 0 ${outlineColor},
-          -${o}px 0 0 ${outlineColor},
-          0 ${o}px 0 ${outlineColor},
-          0 -${o}px 0 ${outlineColor},
-          ${o}px ${o}px 0 ${outlineColor},
-          -${o}px -${o}px 0 ${outlineColor},
-          ${o}px -${o}px 0 ${outlineColor},
-          -${o}px ${o}px 0 ${outlineColor}
-        `,
+        textShadow: `2px 2px 0 ${outlineColor}, -1px -1px 0 ${outlineColor}, 1px -1px 0 ${outlineColor}, -1px 1px 0 ${outlineColor}, 0 2px 0 ${outlineColor}`,
       }}
     >
       {children}
     </span>
-  );
-}
-
-function Ribbon({ color, position }: { color: string; position: "top" | "bottom" }) {
-  return (
-    <div
-      className="pointer-events-none absolute inset-x-0"
-      style={{
-        height: position === "top" ? ribbonH : bottomRibbonH,
-        [position]: 0,
-        backgroundColor: color,
-      }}
-    />
   );
 }
 
@@ -84,75 +40,73 @@ function CategoryTab({
   isActive,
   onSelect,
   row,
-  rowHeight,
 }: {
   id: CategoryId;
   label: string;
   isActive: boolean;
   onSelect: (id: CategoryId) => void;
   row: "top" | "bottom";
-  rowHeight: number;
 }) {
   const tab = theme.tabs[id];
+  const darker = tab.textOutline;
   const isBottomActive = row === "bottom" && isActive;
-  const iconSize = row === "top" ? tabIconTop : tabIconBottom;
+  const isTopActive = row === "top" && isActive;
 
   return (
     <motion.button
       type="button"
       onClick={() => onSelect(id)}
-      className="relative flex flex-1 items-center justify-center gap-2 border-0"
+      className="relative flex flex-1 items-center justify-center gap-1.5 px-1 sm:gap-2 sm:px-2"
       style={{
-        height: rowHeight,
         backgroundColor: tab.bg,
-        borderRadius: row === "top" ? `${topRadius}px ${topRadius}px 0 0` : 0,
-        marginBottom: isBottomActive ? -activeOverlap : 0,
-        paddingBottom: isBottomActive ? activeOverlap : 0,
-        zIndex: isBottomActive ? 20 : row === "bottom" ? 2 : 1,
+        borderRadius: row === "top" ? "14px 14px 0 0" : "0",
+        boxShadow: isActive ? "none" : `inset 0 -4px 0 ${darker}`,
+        paddingTop: row === "top" ? (isTopActive ? "8px" : "6px") : isBottomActive ? "10px" : "7px",
+        paddingBottom: isBottomActive ? "14px" : row === "top" && isTopActive ? "8px" : row === "bottom" ? "8px" : "6px",
+        marginBottom: isBottomActive ? "-6px" : 0,
+        zIndex: isActive ? 20 : 1,
       }}
-      whileTap={{ scale: 0.985 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 500, damping: 28 }}
       aria-pressed={isActive}
     >
-      <Ribbon color={tab.strip} position="top" />
-      {!isBottomActive && <Ribbon color={tab.strip} position="bottom" />}
-
-      {isBottomActive && (
-        <div
-          className="pointer-events-none absolute inset-x-0"
-          style={{
-            bottom: -activeOverlap,
-            height: activeOverlap + 2,
-            backgroundColor: tab.contentBg,
-          }}
-        />
-      )}
-
-      <OutlinedLabel
-        outlineColor={tab.textOutline}
-        fontSize={row === "bottom" ? bottomLabelPx : topLabelPx}
-      >
+      <OutlinedLabel outlineColor={darker} size={row === "bottom" ? "md" : "sm"}>
         {label}
       </OutlinedLabel>
-      <TabIcon id={id} className="relative z-[1] shrink-0" style={{ width: iconSize, height: iconSize }} />
+      <TabIcon id={id} className="h-6 w-6 shrink-0 sm:h-7 sm:w-7" />
     </motion.button>
   );
 }
 
-function UtilCell({
+function UtilityButton({
   children,
+  bg,
   label,
+  onClick,
 }: {
   children: React.ReactNode;
+  bg: string;
   label: string;
+  onClick?: () => void;
 }) {
   return (
-    <div
-      className="flex shrink-0 items-center justify-center"
-      style={{ width: utilColW, height: NAV_ROW1_PX, backgroundColor: theme.navPurple }}
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex w-[11%] min-w-[42px] max-w-[58px] shrink-0 items-center justify-center py-1"
+      style={{ backgroundColor: theme.navPurple }}
       aria-label={label}
     >
-      {children}
-    </div>
+      <div
+        className="flex h-9 w-9 items-center justify-center rounded-full sm:h-10 sm:w-10"
+        style={{
+          backgroundColor: bg,
+          boxShadow: "inset 0 -3px 0 rgba(0,0,0,0.18), 0 1px 0 rgba(255,255,255,0.25)",
+        }}
+      >
+        {children}
+      </div>
+    </button>
   );
 }
 
@@ -161,31 +115,13 @@ export function TopNav({ activeId, onSelect, onLanguagePress }: TopNavProps) {
   const bottomTabs = categories.filter((c) => c.row === "bottom");
 
   return (
-    <header className="relative z-10 shrink-0" style={{ width: GAME_WIDTH, height: NAV_H }}>
-      <div className="flex w-full" style={{ height: NAV_ROW1_PX, backgroundColor: theme.navPurple }}>
-        <UtilCell label="Language">
-          <button
-            type="button"
-            onClick={onLanguagePress}
-            className="flex items-center justify-center rounded-full border-0"
-            style={{
-              width: utilBtn,
-              height: utilBtn,
-              backgroundColor: theme.langBtn,
-              border: `${utilRing}px solid ${theme.langBtnRing}`,
-              boxShadow: `inset 0 -${Math.round(4 * UI_SCALE)}px 0 rgba(0,0,0,0.12)`,
-            }}
-          >
-            <span
-              className="font-extrabold text-white"
-              style={{ fontSize: Math.round(20 * UI_SCALE) }}
-            >
-              EN
-            </span>
-          </button>
-        </UtilCell>
+    <div className="shrink-0">
+      <div className="flex items-stretch">
+        <UtilityButton bg={theme.langBtn} label="Language" onClick={onLanguagePress}>
+          <span className="text-[10px] font-extrabold text-white sm:text-xs">EN</span>
+        </UtilityButton>
 
-        <div className="flex min-w-0 flex-1">
+        <div className="flex flex-1">
           {topTabs.map((tab) => (
             <CategoryTab
               key={tab.id}
@@ -194,34 +130,16 @@ export function TopNav({ activeId, onSelect, onLanguagePress }: TopNavProps) {
               isActive={activeId === tab.id}
               onSelect={onSelect}
               row="top"
-              rowHeight={NAV_ROW1_PX}
             />
           ))}
         </div>
 
-        <UtilCell label="Shop">
-          <button
-            type="button"
-            className="flex items-center justify-center rounded-full border-0"
-            style={{
-              width: utilBtn,
-              height: utilBtn,
-              backgroundColor: theme.shopBtn,
-              border: `${utilRing}px solid ${theme.shopBtnRing}`,
-              boxShadow: `inset 0 -${Math.round(4 * UI_SCALE)}px 0 rgba(0,0,0,0.12)`,
-            }}
-          >
-            <ShopIcon
-              style={{
-                width: Math.round(26 * UI_SCALE),
-                height: Math.round(26 * UI_SCALE),
-              }}
-            />
-          </button>
-        </UtilCell>
+        <UtilityButton bg={theme.shopBtn} label="Shop">
+          <ShopIcon className="h-4 w-4" />
+        </UtilityButton>
       </div>
 
-      <div className="flex w-full" style={{ height: NAV_ROW2_PX }}>
+      <div className="flex">
         {bottomTabs.map((tab) => (
           <CategoryTab
             key={tab.id}
@@ -230,10 +148,9 @@ export function TopNav({ activeId, onSelect, onLanguagePress }: TopNavProps) {
             isActive={activeId === tab.id}
             onSelect={onSelect}
             row="bottom"
-            rowHeight={NAV_ROW2_PX}
           />
         ))}
       </div>
-    </header>
+    </div>
   );
 }

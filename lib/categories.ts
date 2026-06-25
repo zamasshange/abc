@@ -23,9 +23,8 @@ export const categories: CategoryConfig[] = [
       { id: "matching", title: "Matching", illustration: "colors-matching" },
       { id: "fill", title: "Fill", illustration: "colors-fill" },
       { id: "pixel-art", title: "Pixel Art", illustration: "colors-pixel" },
-      { id: "how-to-draw", title: "How to Draw", illustration: "colors-how-to-draw" },
-      { id: "create", title: "Create", illustration: "colors-create" },
-      { id: "pair", title: "Pair", illustration: "colors-pair" },
+      { id: "practice", title: "Practice", illustration: "connect-practice" },
+      { id: "learn", title: "Learn", illustration: "connect-learn" },
     ],
   },
   {
@@ -37,8 +36,8 @@ export const categories: CategoryConfig[] = [
       { id: "easy", title: "Easy", illustration: "connect-easy" },
       { id: "hard", title: "Hard", illustration: "connect-hard" },
       { id: "learn", title: "Learn to draw", illustration: "connect-learn" },
-      { id: "shape-draw", title: "Shape Draw", illustration: "connect-shape-draw" },
-      { id: "number-draw", title: "Number Draw", illustration: "connect-number-draw" },
+      { id: "shape-draw", title: "Shape Draw", illustration: "shapes-learn" },
+      { id: "number-draw", title: "Number Draw", illustration: "num-tracing" },
     ],
   },
   {
@@ -50,9 +49,6 @@ export const categories: CategoryConfig[] = [
       { id: "easy", title: "Easy", illustration: "mazes-easy" },
       { id: "hard", title: "Hard", illustration: "mazes-hard" },
       { id: "worksheets", title: "Worksheets", illustration: "mazes-worksheets" },
-      { id: "numbers", title: "Numbers", illustration: "mazes-numbers" },
-      { id: "match", title: "Match", illustration: "mazes-match" },
-      { id: "shapes", title: "Shapes", illustration: "mazes-shapes" },
     ],
   },
   {
@@ -71,10 +67,10 @@ export const categories: CategoryConfig[] = [
     label: "Alphabets",
     row: "bottom",
     cards: [
-      { id: "cursive", title: "Cursive a - z", illustration: "alpha-cursive" },
-      { id: "letter-match", title: "Letter Match", illustration: "alpha-letter-match" },
-      { id: "match", title: "Match", illustration: "alpha-match" },
-      { id: "jigsaw", title: "Jigsaw", illustration: "alpha-jigsaw" },
+      { id: "trace-upper", title: "Trace A - Z", illustration: "alpha-trace-upper" },
+      { id: "trace-lower", title: "Trace A - Z", illustration: "alpha-trace-lower" },
+      { id: "uppercase", title: "Uppercase", illustration: "alpha-upper" },
+      { id: "lowercase", title: "Lowercase", illustration: "alpha-lower" },
     ],
   },
   {
@@ -82,10 +78,10 @@ export const categories: CategoryConfig[] = [
     label: "Numbers",
     row: "bottom",
     cards: [
+      { id: "tracing", title: "Tracing", illustration: "num-tracing" },
+      { id: "counting", title: "Counting", illustration: "num-counting" },
+      { id: "practice", title: "Practice", illustration: "num-practice" },
       { id: "spelling", title: "Spelling", illustration: "num-spelling" },
-      { id: "worksheets", title: "Worksheets", illustration: "num-worksheets" },
-      { id: "match", title: "Match", illustration: "num-match" },
-      { id: "jigsaw", title: "Jigsaw", illustration: "num-jigsaw" },
     ],
   },
   {
@@ -93,10 +89,10 @@ export const categories: CategoryConfig[] = [
     label: "Shapes",
     row: "bottom",
     cards: [
-      { id: "learn", title: "Learn", illustration: "shapes-learn" },
       { id: "practice", title: "Practice", illustration: "shapes-practice" },
       { id: "drawings", title: "Drawings", illustration: "shapes-drawings" },
       { id: "worksheets", title: "Worksheets", illustration: "shapes-worksheets" },
+      { id: "learn", title: "Learn", illustration: "shapes-learn" },
     ],
   },
 ];

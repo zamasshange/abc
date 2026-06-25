@@ -1,83 +1,52 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CARD_BORDER, CARD_FOOTER_H, CARD_H, CARD_RADIUS, CARD_W } from "@/lib/device";
-import { getCardImagePath, getCardImageSrcSet } from "@/lib/cardArt";
-import { theme, type CategoryId } from "@/lib/theme";
+import type { ActivityCard } from "@/lib/categories";
+import type { CategoryId } from "@/lib/theme";
+import { theme } from "@/lib/theme";
+import { CardIllustration } from "@/components/illustrations/CardIllustrations";
 
 type ActivityCardProps = {
+  card: ActivityCard;
   categoryId: CategoryId;
   cardIndex: number;
-  title: string;
-  style?: React.CSSProperties;
   onSelect: () => void;
 };
 
-export function ActivityCard({
-  categoryId,
-  cardIndex,
-  title,
-  style,
-  onSelect,
-}: ActivityCardProps) {
-  const colors = theme.cards[categoryId];
-  const src = getCardImagePath(categoryId, cardIndex);
-  const artH = CARD_H - CARD_FOOTER_H - CARD_BORDER * 2;
-  const footerFont = Math.round(36 * (CARD_W / 338));
+export function ActivityCardItem({ card, categoryId, cardIndex, onSelect }: ActivityCardProps) {
+  const { border, footer, textOutline } = theme.cards[categoryId];
 
   return (
     <motion.button
       type="button"
-      aria-label={title}
-      className="activity-card shrink-0 border-0 bg-transparent p-0 active:scale-[0.98]"
-      style={{ width: CARD_W, height: CARD_H, ...style }}
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2, delay: cardIndex * 0.03 }}
       onClick={onSelect}
+      className="flex h-full w-[22vw] min-w-[130px] max-w-[200px] shrink-0 flex-col overflow-hidden"
+      style={{
+        border: `9px solid ${border}`,
+        borderRadius: "18px",
+        boxShadow: "0 4px 0 rgba(0,0,0,0.14)",
+      }}
+      initial={{ opacity: 0, y: 16, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ type: "spring", stiffness: 340, damping: 24, delay: cardIndex * 0.04 }}
+      whileTap={{ scale: 0.94 }}
+      aria-label={card.title}
     >
+      <div className="flex min-h-0 flex-[7] items-center justify-center bg-white p-[6%]">
+        <CardIllustration id={card.illustration} className="h-full w-full max-h-full" />
+      </div>
       <div
-        className="flex h-full w-full flex-col overflow-hidden"
-        style={{
-          borderRadius: CARD_RADIUS,
-          border: `${CARD_BORDER}px solid ${colors.border}`,
-          backgroundColor: "#ffffff",
-          boxSizing: "border-box",
-        }}
+        className="flex shrink-0 items-center justify-center py-[5%]"
+        style={{ backgroundColor: footer, minHeight: "22%" }}
       >
-        <div
-          className="relative shrink-0 overflow-hidden bg-white"
-          style={{ height: artH, width: "100%" }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={src}
-            srcSet={getCardImageSrcSet(categoryId, cardIndex)}
-            alt=""
-            width={CARD_W - CARD_BORDER * 2}
-            height={artH}
-            draggable={false}
-            className="card-illustration block"
-            style={{ width: "100%", height: "100%" }}
-          />
-        </div>
-        <div
-          className="flex shrink-0 items-center justify-center"
+        <span
+          className="px-1 text-center text-[clamp(10px,2.5vw,14px)] font-extrabold leading-tight text-white"
           style={{
-            height: CARD_FOOTER_H,
-            backgroundColor: colors.footer,
+            textShadow: `2px 2px 0 ${textOutline}, -1px -1px 0 ${textOutline}`,
           }}
         >
-          <span
-            className="font-extrabold leading-none text-white"
-            style={{
-              fontSize: footerFont,
-              textShadow: `2px 2px 0 ${colors.textOutline}, -1px -1px 0 ${colors.textOutline}`,
-            }}
-          >
-            {title}
-          </span>
-        </div>
+          {card.title}
+        </span>
       </div>
     </motion.button>
   );
