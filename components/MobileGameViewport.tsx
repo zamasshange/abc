@@ -5,9 +5,11 @@ import { GAME_HEIGHT, GAME_WIDTH } from "@/lib/device";
 
 type MobileGameViewportProps = {
   children: React.ReactNode;
+  /** Letterbox fill — matches active screen background */
+  fillColor?: string;
 };
 
-export function MobileGameViewport({ children }: MobileGameViewportProps) {
+export function MobileGameViewport({ children, fillColor = "#c6e06d" }: MobileGameViewportProps) {
   const [layout, setLayout] = useState({ scale: 1, offsetX: 0, offsetY: 0 });
 
   const fit = useCallback(() => {
@@ -16,8 +18,8 @@ export function MobileGameViewport({ children }: MobileGameViewportProps) {
     const vh = vv?.height ?? window.innerHeight;
     const sx = vw / GAME_WIDTH;
     const sy = vh / GAME_HEIGHT;
-    // Cover: fill the screen — no black letterbox bars
-    const scale = Math.max(sx, sy);
+    // Contain: show the full UI (both nav rows + cards) — never crop the top bar
+    const scale = Math.min(sx, sy);
     const scaledW = GAME_WIDTH * scale;
     const scaledH = GAME_HEIGHT * scale;
     setLayout({
@@ -45,7 +47,7 @@ export function MobileGameViewport({ children }: MobileGameViewportProps) {
   const { scale, offsetX, offsetY } = layout;
 
   return (
-    <div className="game-viewport-host">
+    <div className="game-viewport-host" style={{ backgroundColor: fillColor }}>
       <div
         className="game-canvas"
         style={{

@@ -22,6 +22,7 @@ import type { AppScreen, ActivityId, ScreenTarget } from "@/lib/navigation";
 import { getScreenForGalleryCard } from "@/lib/navigation";
 import type { GalleryId } from "@/lib/galleries";
 import type { CategoryId } from "@/lib/theme";
+import { theme } from "@/lib/theme";
 
 export function AppShell() {
   const [screen, setScreen] = useState<AppScreen>("splash");
@@ -50,6 +51,8 @@ export function AppShell() {
   );
 
   const back = () => goHome(lastCategory);
+  const viewportFill =
+    screen === "splash" ? "#66e0f5" : theme.tabs[lastCategory].contentBg;
 
   return (
     <div className="mobile-app-shell">
@@ -59,7 +62,7 @@ export function AppShell() {
       </div>
 
       <div className="mobile-viewport">
-        <MobileGameViewport>
+        <MobileGameViewport fillColor={viewportFill}>
           <AnimatePresence mode="wait">
           {screen === "splash" && (
             <SplashScreen key="splash" onComplete={() => setScreen("home")} />

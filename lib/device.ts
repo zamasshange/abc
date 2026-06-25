@@ -15,11 +15,10 @@ export const UTIL_COL_W = 0.11;
 export const CARD_SLOT_X = [0.049, 0.29, 0.531, 0.771] as const;
 export const CARD_SLOT_W = 0.211; // (0.260 - 0.049) slot width ratio
 export const CARD_W = Math.round(CARD_SLOT_W * GAME_WIDTH);
-export const CARD_IMG_H = 347; // native extracted art height (header stripped)
-/** Cards sit just below nav — column headers were stripped from card art */
-export const CARD_TOP = NAV_H + Math.round(8);
+/** Cards fill content area to reference bottom edge (y≈695 on 720p) */
+export const CARD_TOP = NAV_H + Math.round(16);
 export const CARD_BOTTOM = Math.round((695 / 720) * GAME_HEIGHT);
-export const CARD_H = CARD_IMG_H;
+export const CARD_H = CARD_BOTTOM - CARD_TOP;
 export const CARD_GAP = Math.round(0.013 * GAME_WIDTH);
 
 export const UI_SCALE = GAME_HEIGHT / 720;

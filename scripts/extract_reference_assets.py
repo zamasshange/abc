@@ -42,10 +42,16 @@ ABCDOC_COLORS_HOME = ROOT / "app" / "abcdoc_pages" / "page_02.png"
 CARD_ART_TOP = 0.367
 
 
+# Display size at 1600×720 reference canvas (matches lib/device.ts CARD_W × CARD_H)
+TARGET_CARD_W = 338
+TARGET_CARD_H = 526
+
+
 def crop_card_art(slot_im: Image.Image) -> Image.Image:
     w, h = slot_im.size
     top = int(h * CARD_ART_TOP)
-    return slot_im.crop((0, top, w, h))
+    art = slot_im.crop((0, top, w, h))
+    return art.resize((TARGET_CARD_W, TARGET_CARD_H), Image.LANCZOS)
 
 
 def save_card(card: Image.Image, dest: Path) -> None:
