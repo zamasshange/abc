@@ -5,6 +5,7 @@ export const LOWERCASE = "abcdefghijklmnopqrstuvwxyz".split("");
 export const NUMBERS = Array.from({ length: 20 }, (_, i) => String(i + 1));
 
 export function getTracingPages(activityId: string, startPageId?: string): string[] {
+  if (activityId === "alpha-practice") return UPPERCASE;
   if (activityId === "alpha-trace-upper" || activityId === "alpha-upper" || activityId === "alpha-cursive-upper") return UPPERCASE;
   if (activityId === "alpha-trace-lower" || activityId === "alpha-lower" || activityId === "alpha-cursive-lower") return LOWERCASE;
   if (activityId.startsWith("num-")) return NUMBERS;

@@ -1,4 +1,4 @@
-/** Trace A–Z gallery thumbnails — handwriting lines + hollow uppercase letters */
+/** Trace A–Z gallery thumbnails — handwriting lines + hollow letters */
 
 function WritingLines() {
   return (
@@ -10,7 +10,7 @@ function WritingLines() {
   );
 }
 
-const LETTER_SIZE: Partial<Record<string, number>> = {
+const UPPER_SIZE: Partial<Record<string, number>> = {
   i: 52,
   j: 52,
   l: 52,
@@ -18,16 +18,39 @@ const LETTER_SIZE: Partial<Record<string, number>> = {
   w: 42,
 };
 
-export function AlphabetTraceGalleryArt({ cardId }: { cardId: string }) {
-  const letter = cardId.toUpperCase();
-  const size = LETTER_SIZE[cardId] ?? 48;
+const LOWER_SIZE: Partial<Record<string, number>> = {
+  a: 46,
+  b: 46,
+  c: 46,
+  g: 46,
+  i: 50,
+  j: 50,
+  l: 50,
+  m: 42,
+  w: 40,
+  y: 46,
+};
+
+export function AlphabetTraceGalleryArt({
+  cardId,
+  letterCase = "upper",
+}: {
+  cardId: string;
+  letterCase?: "upper" | "lower";
+}) {
+  const letter = letterCase === "lower" ? cardId.toLowerCase() : cardId.toUpperCase();
+  const size =
+    letterCase === "lower"
+      ? (LOWER_SIZE[cardId.toLowerCase()] ?? 44)
+      : (UPPER_SIZE[cardId.toLowerCase()] ?? 48);
+  const y = letterCase === "lower" ? 68 : 64;
 
   return (
     <svg viewBox="0 0 100 100" className="h-full w-full" aria-hidden>
       <WritingLines />
       <text
         x="50"
-        y="64"
+        y={y}
         textAnchor="middle"
         fontSize={size}
         fontFamily="var(--font-fredoka), Fredoka, sans-serif"

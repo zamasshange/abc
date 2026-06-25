@@ -3,6 +3,13 @@ import { LineGalleryArt } from "@/components/illustrations/LineGalleryArt";
 import { CurveGalleryArt } from "@/components/illustrations/CurveGalleryArt";
 import { PracticeGalleryArt } from "@/components/illustrations/PracticeGalleryArt";
 import { AlphabetTraceGalleryArt } from "@/components/illustrations/AlphabetTraceGalleryArt";
+import { AlphabetLowerGalleryArt, AlphabetUpperGalleryArt } from "@/components/illustrations/AlphabetUpperGalleryArt";
+import { AlphabetPracticeGalleryArt } from "@/components/illustrations/AlphabetPracticeGalleryArt";
+import { AlphabetWorksheetsGalleryArt } from "@/components/illustrations/AlphabetWorksheetsGalleryArt";
+import { AlphabetCursiveGalleryArt } from "@/components/illustrations/AlphabetCursiveGalleryArt";
+import { NumbersPracticeGalleryArt } from "@/components/illustrations/NumbersPracticeGalleryArt";
+import { NumbersTraceGalleryArt } from "@/components/illustrations/NumbersTraceGalleryArt";
+import { NumbersCountingGalleryArt } from "@/components/illustrations/NumbersCountingGalleryArt";
 
 const GREEN_BORDER = "border-[3px] border-[#1B6B3A]";
 
@@ -20,7 +27,37 @@ export function GalleryCardArt({ galleryId, cardId, label }: { galleryId: string
     return <PracticeGalleryArt cardId={cardId} />;
   }
   if (galleryId === "alphabet-trace-upper") {
-    return <AlphabetTraceGalleryArt cardId={cardId} />;
+    return <AlphabetTraceGalleryArt cardId={cardId} letterCase="upper" />;
+  }
+  if (galleryId === "alphabet-trace-lower") {
+    return <AlphabetTraceGalleryArt cardId={cardId} letterCase="lower" />;
+  }
+  if (galleryId === "alphabet-upper") {
+    return <AlphabetUpperGalleryArt cardId={cardId} />;
+  }
+  if (galleryId === "alphabet-lower") {
+    return <AlphabetLowerGalleryArt cardId={cardId} />;
+  }
+  if (galleryId === "alphabet-practice") {
+    return <AlphabetPracticeGalleryArt cardId={cardId} />;
+  }
+  if (galleryId === "alphabet-worksheets") {
+    return <AlphabetWorksheetsGalleryArt cardId={cardId} />;
+  }
+  if (galleryId === "alphabet-cursive-upper") {
+    return <AlphabetCursiveGalleryArt cardId={cardId} letterCase="upper" />;
+  }
+  if (galleryId === "alphabet-cursive-lower") {
+    return <AlphabetCursiveGalleryArt cardId={cardId} letterCase="lower" />;
+  }
+  if (galleryId === "numbers-trace") {
+    return <NumbersTraceGalleryArt cardId={cardId} />;
+  }
+  if (galleryId === "numbers-counting") {
+    return <NumbersCountingGalleryArt cardId={cardId} />;
+  }
+  if (galleryId === "numbers-practice") {
+    return <NumbersPracticeGalleryArt cardId={cardId} />;
   }
   const border = GREEN_BORDER;
   if (galleryId === "pixel-art-pick") return <div className={`flex aspect-square w-[26vw] max-w-[170px] min-w-[90px] items-center justify-center bg-white p-1 ${border}`}><PixelPreview id={cardId} /></div>;
@@ -30,23 +67,6 @@ export function GalleryCardArt({ galleryId, cardId, label }: { galleryId: string
       <div className="flex flex-1 items-center justify-center bg-white"><ConnectPreview id={cardId} /></div>
     </div>
   );
-  if (galleryId === "alphabet-worksheets") {
-    return (
-      <div className={`flex aspect-square w-[22vw] max-w-[150px] min-w-[80px] flex-col items-center bg-white p-2 ${border}`}>
-        <div className="flex items-center gap-2">
-          <span className="text-2xl font-black">{label ?? "A"}</span>
-          <span className="text-xl">{({ A: "🍎", B: "⚽", C: "🚗" } as Record<string, string>)[label ?? "A"] ?? "⭐"}</span>
-        </div>
-        <div className="mt-2 w-full border-t border-gray-300 pt-1">
-          <div className="flex justify-around">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <span key={i} className="text-sm font-bold text-gray-400" style={{ fontFamily: "cursive" }}>{label ?? "A"}</span>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
   if (galleryId === "shapes-worksheets") return <div className={`flex aspect-square w-[26vw] max-w-[170px] min-w-[90px] items-center justify-center bg-[#9E9E9E] p-2 ${border}`}><ShapePreview id={cardId} /></div>;
   if (galleryId === "printables") return <div className={`flex aspect-square w-[26vw] max-w-[170px] min-w-[90px] items-center justify-center bg-white p-2 ${border}`}><PrintablePreview id={cardId} /></div>;
   return <div className={`flex aspect-square w-[26vw] max-w-[170px] min-w-[90px] items-center justify-center bg-white p-3 ${border}`}><LinesPreview id={cardId} /></div>;

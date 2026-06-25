@@ -368,38 +368,44 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
           <line x1="15" y1="30" x2="105" y2="30" stroke="#5599DD" strokeWidth="1.5" />
           <line x1="15" y1="50" x2="105" y2="50" stroke="#FF8888" strokeWidth="1.5" strokeDasharray="4 3" />
           <line x1="15" y1="70" x2="105" y2="70" stroke="#5599DD" strokeWidth="1.5" />
-          <text x="42" y="68" fontSize="36" fontStyle="italic" fontWeight="bold" fill={stroke}>a</text>
-          <text x="68" y="68" fontSize="36" fontStyle="italic" fill="none" stroke="#999" strokeWidth="2" strokeDasharray={dash}>a</text>
+          <text x="38" y="66" fontSize="34" fontFamily='var(--font-cursive), Caveat, cursive' fontWeight="700" fill={stroke}>A</text>
+          <text x="68" y="66" fontSize="30" fontFamily='var(--font-cursive), Caveat, cursive' fontWeight="700" fill="none" stroke="#999" strokeWidth="1.5" strokeDasharray={dash}>A</text>
         </svg>
       );
     case "alpha-cursive-lower":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          {[30,45,60,75].map(y => <line key={y} x1="15" y1={y} x2="105" y2={y} stroke="#FFCCCC" strokeWidth="1" strokeDasharray="3 3" />)}
-          <text x="42" y="72" fontSize="36" fontStyle="italic" fontWeight="bold" fill={stroke}>a</text>
-          <text x="72" y="72" fontSize="36" fontStyle="italic" fill="none" stroke="#999" strokeWidth="2" strokeDasharray={dash}>a</text>
+          <line x1="15" y1="30" x2="105" y2="30" stroke="#5599DD" strokeWidth="1.5" />
+          <line x1="15" y1="50" x2="105" y2="50" stroke="#FF8888" strokeWidth="1.5" strokeDasharray="4 3" />
+          <line x1="15" y1="70" x2="105" y2="70" stroke="#5599DD" strokeWidth="1.5" />
+          <text x="38" y="68" fontSize="34" fontFamily='var(--font-cursive), Caveat, cursive' fontWeight="700" fill={stroke}>a</text>
+          <text x="72" y="68" fontSize="30" fontFamily='var(--font-cursive), Caveat, cursive' fontWeight="700" fill="none" stroke="#999" strokeWidth="1.5" strokeDasharray={dash}>a</text>
         </svg>
       );
     case "alpha-letter-match":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          <text x="28" y="42" fontSize="22" fontWeight="bold" fill={stroke}>B</text>
-          <text x="28" y="72" fontSize="22" fontWeight="bold" fill={stroke}>A</text>
-          <text x="78" y="42" fontSize="22" fill={stroke}>a</text>
-          <text x="78" y="72" fontSize="22" fill={stroke}>b</text>
-          <path d="M38 68 L72 44" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
-          <path d="M38 38 L72 68" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+          <text x="28" y="36" fontSize="22" fontWeight="bold" fill={stroke}>H</text>
+          <text x="28" y="58" fontSize="22" fontWeight="bold" fill={stroke}>J</text>
+          <text x="28" y="80" fontSize="22" fontWeight="bold" fill={stroke}>B</text>
+          <text x="82" y="36" fontSize="22" fill={stroke}>j</text>
+          <text x="82" y="58" fontSize="22" fill={stroke}>b</text>
+          <text x="82" y="80" fontSize="22" fill={stroke}>h</text>
         </svg>
       );
     case "alpha-match":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          <text x="28" y="42" fontSize="22" fontWeight="bold" fill={stroke}>A</text>
-          <text x="28" y="72" fontSize="22" fontWeight="bold" fill={stroke}>B</text>
-          <circle cx="82" cy="38" r="12" fill="none" stroke={stroke} strokeWidth="2" />
-          <path d="M72 68 Q78 58 88 62" fill="none" stroke={stroke} strokeWidth="2" />
-          <path d="M38 42 L72 38" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
-          <path d="M38 68 L72 62" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
+          <text x="28" y="36" fontSize="22" fontWeight="bold" fill={stroke}>A</text>
+          <text x="28" y="58" fontSize="22" fontWeight="bold" fill={stroke}>R</text>
+          <text x="28" y="80" fontSize="22" fontWeight="bold" fill={stroke}>F</text>
+          <path d="M72 28 Q88 20 96 28" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <path d="M76 32 Q88 26 92 32" fill="none" stroke={stroke} strokeWidth="1" />
+          <circle cx="82" cy="58" r="10" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <path d="M80 52 Q82 48 84 52" fill="none" stroke={stroke} strokeWidth="1" />
+          <line x1="84" y1="50" x2="88" y2="46" stroke={stroke} strokeWidth="0.8" />
+          <line x1="74" y1="78" x2="74" y2="64" stroke={stroke} strokeWidth="1.5" />
+          <path d="M74 66 L92 70 L92 78 L74 74 Z" fill="none" stroke={stroke} strokeWidth="1.2" />
         </svg>
       );
     case "alpha-jigsaw":
@@ -413,21 +419,35 @@ export function CardIllustration({ id, className = "h-full w-full" }: CardIllust
     case "num-tracing":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          {[22,36,50,64,78].map(y => <line key={y} x1="12" y1={y} x2="108" y2={y} stroke="#FFAAAA" strokeWidth="1" strokeDasharray="4 3" />)}
-          <text x="55" y="72" textAnchor="middle" fontSize="50" fontWeight="bold" fill="none" stroke={stroke} strokeWidth="3">1</text>
-          {[[55,28],[55,45],[55,62],[55,78]].map(([cx,cy],i) => (
-            <circle key={i} cx={cx} cy={cy} r="2.5" fill="#FF3333" />
-          ))}
+          <line x1="12" y1="28" x2="108" y2="28" stroke="#6BB6FF" strokeWidth="1.5" />
+          <line x1="12" y1="50" x2="108" y2="50" stroke="#E53935" strokeWidth="1.2" strokeDasharray="4 3" />
+          <line x1="12" y1="72" x2="108" y2="72" stroke="#6BB6FF" strokeWidth="1.5" />
+          <text
+            x="60"
+            y="68"
+            textAnchor="middle"
+            fontSize="52"
+            fontFamily="var(--font-fredoka), Fredoka, sans-serif"
+            fontWeight="700"
+            fill="#fff"
+            stroke={stroke}
+            strokeWidth="2.5"
+            paintOrder="stroke fill"
+          >
+            1
+          </text>
         </svg>
       );
     case "num-counting":
       return (
         <svg viewBox="0 0 120 100" className={className} aria-hidden>
-          <text x="30" y="68" textAnchor="middle" fontSize="52" fontWeight="bold" fill={stroke}>2</text>
-          <circle cx="75" cy="50" r="8" fill="none" stroke={stroke} strokeWidth="2" />
-          <line x1="75" y1="42" x2="75" y2="35" stroke={stroke} strokeWidth="2" />
-          <circle cx="90" cy="55" r="8" fill="none" stroke={stroke} strokeWidth="2" />
-          <line x1="90" y1="47" x2="90" y2="40" stroke={stroke} strokeWidth="2" />
+          <text x="22" y="58" textAnchor="middle" fontSize="40" fontWeight="bold" fill={stroke}>1</text>
+          <circle cx="72" cy="42" r="10" fill="none" stroke={stroke} strokeWidth="2" />
+          <path d="M72 32 Q74 28 76 32" fill="none" stroke={stroke} strokeWidth="1.5" />
+          <line x1="74" y1="27" x2="76" y2="24" stroke={stroke} strokeWidth="1.5" />
+          <text x="30" y="88" fontSize="14" fontWeight="bold" fill="none" stroke="#999" strokeWidth="1.5" strokeDasharray={dash}>1</text>
+          <text x="55" y="88" fontSize="14" fontWeight="bold" fill="none" stroke="#999" strokeWidth="1.5" strokeDasharray={dash}>1</text>
+          <text x="80" y="88" fontSize="14" fontWeight="bold" fill="none" stroke="#999" strokeWidth="1.5" strokeDasharray={dash}>1</text>
         </svg>
       );
     case "num-practice":

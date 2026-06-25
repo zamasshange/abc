@@ -2,6 +2,7 @@ import type { CategoryId } from "./theme";
 import type { GalleryId } from "./galleries";
 import { getGallery } from "./galleries";
 import { getPracticeCardKind } from "./practice-gallery";
+import { getNumPracticeCard } from "./numbers-practice-gallery";
 
 /** Mirrors GunjanApps ABC Preschool: each activity opens its own screen type */
 export type AppScreen =
@@ -80,20 +81,20 @@ const routes: Record<string, ScreenTarget> = {
   "lines:practice": { screen: "gallery", galleryId: "lines-practice", categoryId: "lines" },
 
   "alphabets:trace-upper": { screen: "gallery", galleryId: "alphabet-trace-upper", categoryId: "alphabets" },
-  "alphabets:trace-lower": { screen: "letter-tracing", activityId: "alpha-trace-lower", categoryId: "alphabets" },
-  "alphabets:uppercase": { screen: "gallery", galleryId: "alphabet-worksheets", categoryId: "alphabets" },
-  "alphabets:lowercase": { screen: "letter-tracing", activityId: "alpha-trace-lower", categoryId: "alphabets" },
-  "alphabets:practice": { screen: "letter-tracing", activityId: "alpha-practice", categoryId: "alphabets" },
+  "alphabets:trace-lower": { screen: "gallery", galleryId: "alphabet-trace-lower", categoryId: "alphabets" },
+  "alphabets:uppercase": { screen: "gallery", galleryId: "alphabet-upper", categoryId: "alphabets" },
+  "alphabets:lowercase": { screen: "gallery", galleryId: "alphabet-lower", categoryId: "alphabets" },
+  "alphabets:practice": { screen: "gallery", galleryId: "alphabet-practice", categoryId: "alphabets" },
   "alphabets:worksheets": { screen: "gallery", galleryId: "alphabet-worksheets", categoryId: "alphabets" },
-  "alphabets:cursive-upper": { screen: "letter-tracing", activityId: "alpha-cursive-upper", categoryId: "alphabets" },
-  "alphabets:cursive-lower": { screen: "letter-tracing", activityId: "alpha-cursive-lower", categoryId: "alphabets" },
+  "alphabets:cursive-upper": { screen: "gallery", galleryId: "alphabet-cursive-upper", categoryId: "alphabets" },
+  "alphabets:cursive-lower": { screen: "gallery", galleryId: "alphabet-cursive-lower", categoryId: "alphabets" },
   "alphabets:letter-match": { screen: "matching", activityId: "alpha-letter-match", categoryId: "alphabets" },
   "alphabets:match": { screen: "matching", activityId: "alpha-match", categoryId: "alphabets" },
   "alphabets:jigsaw": { screen: "matching", activityId: "alpha-jigsaw", categoryId: "alphabets" },
 
-  "numbers:tracing": { screen: "letter-tracing", activityId: "num-tracing", categoryId: "numbers" },
-  "numbers:counting": { screen: "matching", activityId: "num-counting", categoryId: "numbers" },
-  "numbers:practice": { screen: "line-tracing", activityId: "num-practice", categoryId: "numbers" },
+  "numbers:tracing": { screen: "gallery", galleryId: "numbers-trace", categoryId: "numbers" },
+  "numbers:counting": { screen: "gallery", galleryId: "numbers-counting", categoryId: "numbers" },
+  "numbers:practice": { screen: "gallery", galleryId: "numbers-practice", categoryId: "numbers" },
   "numbers:spelling": { screen: "letter-tracing", activityId: "num-spelling", categoryId: "numbers" },
   "numbers:worksheets": { screen: "gallery", galleryId: "numbers-worksheets", categoryId: "numbers" },
   "numbers:match": { screen: "matching", activityId: "num-match", categoryId: "numbers" },
@@ -150,8 +151,31 @@ export function getScreenForGalleryCard(
   }
   if (galleryId === "pixel-art-pick") return { screen: "pixel-art", activityId, categoryId };
   if (galleryId === "mazes-worksheets") return { screen: "maze", activityId, categoryId };
-  if (galleryId === "alphabet-trace-upper" || galleryId === "alphabet-worksheets") {
+  if (
+    galleryId === "alphabet-trace-upper" ||
+    galleryId === "alphabet-trace-lower" ||
+    galleryId === "alphabet-upper" ||
+    galleryId === "alphabet-lower" ||
+    galleryId === "alphabet-practice" ||
+    galleryId === "alphabet-worksheets" ||
+    galleryId === "alphabet-cursive-upper" ||
+    galleryId === "alphabet-cursive-lower"
+  ) {
+    if (galleryId === "alphabet-worksheets") {
+      return { screen: "matching", activityId, categoryId, pageId: cardId };
+    }
     return { screen: "letter-tracing", activityId, categoryId, pageId: cardId };
+  }
+  if (galleryId === "numbers-trace") {
+    return { screen: "letter-tracing", activityId, categoryId, pageId: cardId };
+  }
+  if (galleryId === "numbers-counting" && !card.locked) {
+    return { screen: "letter-tracing", activityId: "num-counting", categoryId, pageId: cardId };
+  }
+  if (galleryId === "numbers-practice" && !card.locked) {
+    const practice = getNumPracticeCard(cardId);
+    const pageId = practice ? String(practice.exercises[0].count) : undefined;
+    return { screen: "letter-tracing", activityId, categoryId, pageId };
   }
   if (galleryId === "numbers-worksheets" && !card.locked) {
     return { screen: "letter-tracing", activityId, categoryId };

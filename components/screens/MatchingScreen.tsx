@@ -7,6 +7,9 @@ import { playTapSound, playSuccessSound, speak } from "@/lib/audio";
 import { markComplete } from "@/lib/progress";
 import { RewardOverlay } from "@/components/learning/RewardOverlay";
 import { ExitDialog } from "@/components/modals/ExitDialog";
+import { LetterMatchScreen } from "@/components/screens/LetterMatchScreen";
+import { AlphaMatchScreen } from "@/components/screens/AlphaMatchScreen";
+import { AlphaJigsawScreen } from "@/components/screens/AlphaJigsawScreen";
 
 type Card = { id: string; emoji: string; pair: string };
 
@@ -23,7 +26,7 @@ function getCards(activityId: ActivityId): { title: string; cards: Card[]; categ
       ],
     };
   }
-  if (activityId.includes("alpha")) {
+  if (activityId.includes("alpha") && activityId !== "alpha-letter-match" && activityId !== "alpha-match" && activityId !== "alpha-jigsaw") {
     return {
       title: "Letter Match",
       category: "alphabets",
@@ -60,6 +63,19 @@ function getCards(activityId: ActivityId): { title: string; cards: Card[]; categ
 }
 
 export function MatchingScreen({ activityId, onBack }: { activityId: ActivityId; onBack: () => void }) {
+  if (activityId === "alpha-letter-match") {
+    return <LetterMatchScreen onBack={onBack} />;
+  }
+  if (activityId === "alpha-match") {
+    return <AlphaMatchScreen onBack={onBack} />;
+  }
+  if (activityId === "alpha-jigsaw") {
+    return <AlphaJigsawScreen onBack={onBack} />;
+  }
+  return <GenericMatchingScreen activityId={activityId} onBack={onBack} />;
+}
+
+function GenericMatchingScreen({ activityId, onBack }: { activityId: ActivityId; onBack: () => void }) {
   const { title, cards, category } = getCards(activityId);
   const [selected, setSelected] = useState<string[]>([]);
   const [matched, setMatched] = useState<Set<string>>(new Set());

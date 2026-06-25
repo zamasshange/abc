@@ -1,9 +1,16 @@
-import { UPPERCASE } from "./alphabet";
 import { DOTS_GALLERY_CARD_IDS } from "./dots-gallery";
 import { LINE_GALLERY_CARD_IDS } from "./line-gallery";
 import { CURVE_GALLERY_CARDS } from "./curve-gallery";
 import { PRACTICE_GALLERY_CARDS } from "./practice-gallery";
-import { ALPHABET_TRACE_UPPER_CARD_IDS } from "./alphabet-trace-gallery";
+import { ALPHABET_TRACE_LOWER_CARD_IDS, ALPHABET_TRACE_UPPER_CARD_IDS } from "./alphabet-trace-gallery";
+import { ALPHABET_UPPER_CARD_IDS } from "./alphabet-upper-gallery";
+import { ALPHABET_LOWER_CARD_IDS } from "./alphabet-lower-gallery";
+import { ALPHABET_PRACTICE_CARD_IDS } from "./alphabet-practice-gallery";
+import { ALPHABET_WORKSHEET_CARDS } from "./alphabet-worksheets-gallery";
+import { ALPHABET_CURSIVE_LOWER_CARDS, ALPHABET_CURSIVE_UPPER_CARDS } from "./alphabet-cursive-gallery";
+import { NUMBERS_PRACTICE_CARDS } from "./numbers-practice-gallery";
+import { NUMBERS_TRACE_CARD_IDS } from "./numbers-trace-gallery";
+import { NUMBERS_COUNTING_CARDS } from "./numbers-counting-gallery";
 
 export type GalleryId =
   | "lines-dots"
@@ -12,7 +19,16 @@ export type GalleryId =
   | "lines-practice"
   | "lines-worksheets"
   | "alphabet-trace-upper"
+  | "alphabet-trace-lower"
+  | "alphabet-upper"
+  | "alphabet-lower"
+  | "alphabet-practice"
   | "alphabet-worksheets"
+  | "alphabet-cursive-upper"
+  | "alphabet-cursive-lower"
+  | "numbers-trace"
+  | "numbers-counting"
+  | "numbers-practice"
   | "numbers-worksheets"
   | "shapes-worksheets"
   | "connect-worksheets"
@@ -104,14 +120,119 @@ export const galleries: Record<GalleryId, GalleryConfig> = {
       activityId: "alpha-trace-upper",
     })),
   },
+  "alphabet-trace-lower": {
+    id: "alphabet-trace-lower",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: ALPHABET_TRACE_LOWER_CARD_IDS.map((id) => ({
+      id,
+      label: id,
+      activityId: "alpha-trace-lower",
+    })),
+  },
+  "alphabet-upper": {
+    id: "alphabet-upper",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: ALPHABET_UPPER_CARD_IDS.map((id) => ({
+      id,
+      label: id.toUpperCase(),
+      activityId: "alpha-upper",
+    })),
+  },
+  "alphabet-lower": {
+    id: "alphabet-lower",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: ALPHABET_LOWER_CARD_IDS.map((id) => ({
+      id,
+      label: id,
+      activityId: "alpha-lower",
+    })),
+  },
+  "alphabet-practice": {
+    id: "alphabet-practice",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: ALPHABET_PRACTICE_CARD_IDS.map((id) => ({
+      id,
+      label: id.toUpperCase(),
+      activityId: "alpha-practice",
+    })),
+  },
   "alphabet-worksheets": {
     id: "alphabet-worksheets",
     showDownload: true,
-    cards: UPPERCASE.map((letter) => ({
-      id: letter.toLowerCase(),
-      label: letter,
-      activityId: "alpha-trace-upper",
+    showCenterTabs: true,
+    cards: sortUnlockedFirst(
+      ALPHABET_WORKSHEET_CARDS.map(({ id, locked }) => ({
+        id,
+        activityId: "alpha-worksheets",
+        locked,
+      })),
+    ),
+  },
+  "alphabet-cursive-upper": {
+    id: "alphabet-cursive-upper",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: sortUnlockedFirst(
+      ALPHABET_CURSIVE_UPPER_CARDS.map(({ id, locked }) => ({
+        id,
+        label: id.toUpperCase(),
+        activityId: "alpha-cursive-upper",
+        locked,
+      })),
+    ),
+  },
+  "alphabet-cursive-lower": {
+    id: "alphabet-cursive-lower",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: sortUnlockedFirst(
+      ALPHABET_CURSIVE_LOWER_CARDS.map(({ id, locked }) => ({
+        id,
+        label: id,
+        activityId: "alpha-cursive-lower",
+        locked,
+      })),
+    ),
+  },
+  "numbers-trace": {
+    id: "numbers-trace",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: NUMBERS_TRACE_CARD_IDS.map((id) => ({
+      id,
+      label: id,
+      activityId: "num-tracing",
     })),
+  },
+  "numbers-counting": {
+    id: "numbers-counting",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: sortUnlockedFirst(
+      NUMBERS_COUNTING_CARDS.map(({ id, locked }) => ({
+        id,
+        label: id,
+        activityId: "num-counting",
+        locked,
+      })),
+    ),
+  },
+  "numbers-practice": {
+    id: "numbers-practice",
+    showDownload: true,
+    showCenterTabs: true,
+    cards: sortUnlockedFirst(
+      NUMBERS_PRACTICE_CARDS.map(({ id, locked, exercises }) => ({
+        id,
+        label: exercises.map((e) => String(e.count)).join(" · "),
+        activityId: "num-practice",
+        locked,
+      })),
+    ),
   },
   "numbers-worksheets": {
     id: "numbers-worksheets",

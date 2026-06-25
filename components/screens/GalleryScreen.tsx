@@ -34,7 +34,17 @@ export function GalleryScreen({
     galleryId === "lines-line" ||
     galleryId === "lines-curve" ||
     galleryId === "lines-practice" ||
-    galleryId === "alphabet-trace-upper";
+    galleryId === "alphabet-trace-upper" ||
+    galleryId === "alphabet-trace-lower" ||
+    galleryId === "alphabet-upper" ||
+    galleryId === "alphabet-lower" ||
+    galleryId === "alphabet-practice" ||
+    galleryId === "alphabet-worksheets" ||
+    galleryId === "alphabet-cursive-upper" ||
+    galleryId === "alphabet-cursive-lower" ||
+    galleryId === "numbers-trace" ||
+    galleryId === "numbers-counting" ||
+    galleryId === "numbers-practice";
 
   const updateScrollHint = useCallback(() => {
     const el = scrollRef.current;
