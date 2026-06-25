@@ -56,16 +56,29 @@ ABCDOC_COLORS_HOME = ROOT / "app" / "abcdoc_pages" / "page_02.png"
 CARD_ART_TOP = 0.367
 
 
-# Display size at 1600×720 reference canvas (matches lib/device.ts CARD_W × CARD_H)
+# Display size at 1600×720 reference canvas
 TARGET_CARD_W = 338
 TARGET_CARD_H = 526
+FOOTER_RATIO = 0.22
+TARGET_ART_H = TARGET_CARD_H - round(TARGET_CARD_W * FOOTER_RATIO)
+
+
+def crop_card_raw(slot_im: Image.Image) -> Image.Image:
+    w, h = slot_im.size
+    top = int(h * CARD_ART_TOP)
+    return slot_im.crop((0, top, w, h))
 
 
 def crop_card_art(slot_im: Image.Image) -> Image.Image:
-    w, h = slot_im.size
-    top = int(h * CARD_ART_TOP)
-    art = slot_im.crop((0, top, w, h))
-    return art.resize((TARGET_CARD_W, TARGET_CARD_H), Image.LANCZOS)
+    raw = crop_card_raw(slot_im)
+    return raw.resize((TARGET_CARD_W, TARGET_CARD_H), Image.LANCZOS)
+
+
+def extract_art_only(raw: Image.Image) -> Image.Image:
+    w, h = raw.size
+    footer_h = max(1, int(h * FOOTER_RATIO))
+    art = raw.crop((0, 0, w, h - footer_h))
+    return art.resize((TARGET_CARD_W, TARGET_ART_H), Image.LANCZOS)
 
 
 def save_card(card: Image.Image, dest: Path) -> None:
@@ -75,6 +88,13 @@ def save_card(card: Image.Image, dest: Path) -> None:
         dest.with_name(f"{dest.stem}@2x{dest.suffix}"),
         quality=94,
     )
+
+
+def save_card_bundle(raw: Image.Image, category: str, idx: int) -> None:
+    full = raw.resize((TARGET_CARD_W, TARGET_CARD_H), Image.LANCZOS)
+    art = extract_art_only(raw)
+    save_card(full, OUT_CARDS / f"{category}-{idx}.jpg")
+    save_card(art, OUT_CARDS / f"{category}-{idx}-art.jpg")
 
 
 def normalize_card(im: Image.Image) -> Image.Image:
@@ -143,8 +163,8 @@ def crop_from_video_screen(category: str, indices: list[int]) -> int:
     for out_idx, slot in enumerate(indices):
         if slot >= len(CARD_SLOTS):
             break
-        card = crop_card_art(crop_slot(im, slot))
-        save_card(card, OUT_CARDS / f"{category}-{out_idx}.jpg")
+        raw = crop_card_raw(crop_slot(im, slot))
+        save_card_bundle(raw, category, out_idx)
         saved += 1
     return saved
 
@@ -188,9 +208,8 @@ def main() -> None:
             for out_idx, slot in mappings:
                 if slot >= len(CARD_SLOTS):
                     continue
-                card = crop_card_art(crop_slot(im, slot))
-                dest = OUT_CARDS / f"{category}-{out_idx}.jpg"
-                save_card(card, dest)
+                raw = crop_card_raw(crop_slot(im, slot))
+                save_card_bundle(raw, category, out_idx)
                 print("saved", dest.name, card.size)
 
         if category == "colors":
@@ -229,8 +248,8 @@ def extract_colors_first_batch(border_fn) -> None:
 
     panel.save(OUT_SCREENS / "home-colors.jpg", quality=92)
     for out_idx, slot in enumerate(range(4)):
-        card = crop_card_art(crop_slot(panel, slot))
-        save_card(card, OUT_CARDS / f"colors-{out_idx}.jpg")
+        raw = crop_card_raw(crop_slot(panel, slot))
+        save_card_bundle(raw, "colors", out_idx)
         print("saved colors-", out_idx, card.size, "from abcdoc panel")
 
 

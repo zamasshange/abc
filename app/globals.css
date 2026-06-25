@@ -95,11 +95,15 @@ body {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.card-image {
-  object-fit: fill;
-  object-position: center;
-  image-rendering: -webkit-optimize-contrast;
+.card-art {
+  object-fit: contain;
+  object-position: center center;
+  image-rendering: auto;
   -webkit-user-drag: none;
+}
+
+.activity-card {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .touch-pan-x {
